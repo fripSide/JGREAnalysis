@@ -1,0 +1,1 @@
+{"service_name": "NfcManager", "ctx_str": "Context.NFC_SERVICE", "api_list": [{"packages": ["android.nfc.NfcManager"], "permissions": [], "method_ref": {"method_name": "getDefaultAdapter", "params": [], "return_type": {"param_name": "", "param_type": "NfcAdapter", "param_ref": null}}}]}

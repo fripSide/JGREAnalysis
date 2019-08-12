@@ -1,0 +1,1 @@
+{"service_name": "RcsManager", "ctx_str": "Context.TELEPHONY_RCS_SERVICE", "api_list": [{"packages": ["android.telephony.ims.RcsManager"], "permissions": [], "method_ref": {"method_name": "getRcsMessageStore", "params": [], "return_type": {"param_name": "", "param_type": "RcsMessageStore", "param_ref": null}}}]}

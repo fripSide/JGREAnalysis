@@ -1,0 +1,1 @@
+{"service_name": "TimeDetector", "ctx_str": "Context.TIME_DETECTOR_SERVICE", "api_list": [{"packages": ["android.app.timedetector.TimeDetector", "android.app.timedetector.TimeSignal"], "permissions": [], "method_ref": {"method_name": "suggestTime", "params": [{"param_name": "timeSignal", "param_type": "TimeSignal", "param_ref": null}], "return_type": null}}]}

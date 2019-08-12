@@ -1,0 +1,1 @@
+{"service_name": "NetworkWatchlistManager", "ctx_str": "Context.NETWORK_WATCHLIST_SERVICE", "api_list": [{"packages": ["android.net.NetworkWatchlistManager"], "permissions": [], "method_ref": {"method_name": "getWatchlistConfigHash", "params": [], "return_type": {"param_name": "", "param_type": "byte", "param_ref": null}}}]}

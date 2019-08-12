@@ -1,0 +1,1 @@
+{"service_name": "IncidentManager", "ctx_str": "Context.INCIDENT_SERVICE", "api_list": [{"packages": ["android.os.IncidentManager", "android.os.IncidentReportArgs"], "permissions": [], "method_ref": {"method_name": "reportIncident", "params": [{"param_name": "args", "param_type": "IncidentReportArgs", "param_ref": null}], "return_type": null}}]}

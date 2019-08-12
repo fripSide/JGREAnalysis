@@ -1,0 +1,137 @@
+secure_element android.se.omapi.ISecureElementService
+carrier_config com.android.internal.telephony.ICarrierConfigLoader
+phone com.android.internal.telephony.ITelephony
+isms com.android.internal.telephony.ISms
+iphonesubinfo com.android.internal.telephony.IPhoneSubInfo
+simphonebook com.android.internal.telephony.IIccPhoneBook
+isub com.android.internal.telephony.ISub
+telecom com.android.internal.telecom.ITelecomService
+contexthub android.hardware.location.IContextHubService
+netd_listener android.net.metrics.INetdEventListener
+connmetrics android.net.IIpConnectivityMetrics
+autofill android.view.autofill.IAutoFillManager
+imms com.android.internal.telephony.IMms
+statscompanion android.os.IStatsCompanionService
+media.camera.proxy android.hardware.ICameraServiceProxy
+slice android.app.slice.ISliceManager
+media_projection android.media.projection.IMediaProjectionManager
+crossprofileapps android.content.pm.ICrossProfileApps
+launcherapps android.content.pm.ILauncherApps
+shortcut android.content.pm.IShortcutService
+fingerprint android.hardware.fingerprint.IFingerprintService
+media_router android.media.IMediaRouterService
+media_resource_monitor android.media.IMediaResourceMonitor
+media_session android.media.session.ISessionManager
+restrictions android.content.IRestrictionsManager
+print android.print.IPrintManager
+graphicsstats android.view.IGraphicsStats
+dreams android.service.dreams.IDreamManager
+commontime_management 
+network_time_update_service 
+diskstats 
+voiceinteraction com.android.internal.app.IVoiceInteractionManagerService
+appwidget com.android.internal.appwidget.IAppWidgetService
+backup android.app.backup.IBackupManager
+trust android.app.trust.ITrustManager
+soundtrigger com.android.internal.app.ISoundTriggerService
+jobscheduler android.app.job.IJobScheduler
+hardware_properties android.os.IHardwarePropertiesManager
+serial android.hardware.ISerialManager
+usb android.hardware.usb.IUsbManager
+midi android.media.midi.IMidiManager
+DockObserver 
+audio android.media.IAudioService
+wallpaper android.app.IWallpaperManager
+search android.app.ISearchManager
+country_detector android.location.ICountryDetector
+location android.location.ILocationManager
+devicestoragemonitor 
+notification android.app.INotificationManager
+updatelock android.os.IUpdateLock
+system_update android.os.ISystemUpdateManager
+servicediscovery android.net.nsd.INsdManager
+connectivity android.net.IConnectivityManager
+wifip2p android.net.wifi.p2p.IWifiP2pManager
+wifiscanner android.net.wifi.IWifiScanner
+wifi android.net.wifi.IWifiManager
+netpolicy android.net.INetworkPolicyManager
+netstats android.net.INetworkStatsService
+network_score android.net.INetworkScoreService
+textclassification android.service.textclassifier.ITextClassifierService
+textservices com.android.internal.textservice.ITextServicesManager
+ipsec android.net.IIpSecService
+network_management android.os.INetworkManagementService
+clipboard android.content.IClipboard
+statusbar com.android.internal.statusbar.IStatusBarService
+device_policy android.app.admin.IDevicePolicyManager
+deviceidle android.os.IDeviceIdleController
+lock_settings com.android.internal.widget.ILockSettings
+uimode android.app.IUiModeManager
+storagestats android.app.usage.IStorageStatsManager
+mount android.os.storage.IStorageManager
+accessibility android.view.accessibility.IAccessibilityManager
+input_method com.android.internal.view.IInputMethodManager
+pinner 
+network_watchlist com.android.internal.net.INetworkWatchlistManager
+vrmanager android.service.vr.IVrManager
+input android.hardware.input.IInputManager
+window android.view.IWindowManager
+alarm android.app.IAlarmManager
+consumer_ir android.hardware.IConsumerIrService
+vibrator android.os.IVibratorService
+dropbox com.android.internal.os.IDropBoxManagerService
+settings 
+overlay android.content.om.IOverlayManager
+content android.content.IContentService
+account android.accounts.IAccountManager
+telephony.registry com.android.internal.telephony.ITelephonyRegistry
+scheduling_policy android.os.ISchedulingPolicyService
+sec_key_att_app_id_provider android.security.keymaster.IKeyAttestationApplicationIdProvider
+binder_calls_stats 
+webviewupdate android.webkit.IWebViewUpdateService
+usagestats android.app.usage.IUsageStatsManager
+batteryproperties android.os.IBatteryPropertiesRegistrar
+battery 
+sensorservice android.gui.SensorServer
+media.camera android.hardware.ICameraService
+media.sound_trigger_hw android.hardware.ISoundTriggerHwService
+media.audio_policy android.media.IAudioPolicyService
+processinfo android.os.IProcessInfoService
+permission android.os.IPermissionController
+cpuinfo 
+dbinfo 
+gfxinfo 
+meminfo 
+procstats com.android.internal.app.procstats.IProcessStats
+activity android.app.IActivityManager
+user android.os.IUserManager
+otadexopt android.content.pm.IOtaDexopt
+package_native android.content.pm.IPackageManagerNative
+package android.content.pm.IPackageManager
+display android.hardware.display.IDisplayManager
+recovery android.os.IRecoverySystem
+power android.os.IPowerManager
+appops com.android.internal.app.IAppOpsService
+batterystats com.android.internal.app.IBatteryStats
+device_identifiers android.os.IDeviceIdentifiersPolicyService
+media.resource_manager android.media.IResourceManagerService
+media.player android.media.IMediaPlayerService
+netd 
+android.security.keystore android.security.IKeystoreService
+media.extractor android.media.IMediaExtractorService
+media.drm android.media.IMediaDrmService
+drm.drmManager drm.IDrmManagerService
+stats android.os.IStatsManager
+android.service.gatekeeper.IGateKeeperService 
+incident 
+wificond 
+storaged_pri android.os.storaged.IStoragedPrivate
+storaged android.os.IStoraged
+installd 
+media.metrics android.media.IMediaAnalyticsService
+media.audio_flinger android.media.IAudioFlinger
+gpu android.ui.IGpuService
+SurfaceFlinger android.ui.ISurfaceComposer
+vr_hwc 
+thermalservice android.os.IThermalService
+vold 

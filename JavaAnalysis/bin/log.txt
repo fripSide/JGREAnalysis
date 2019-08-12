@@ -1,0 +1,71 @@
+03-11 00:59:38.749  1574 12185 F libc    : Fatal signal 6 (SIGABRT), code -6 (SI_TKILL) in tid 12185 (Binder:1574_1E), pid 1574 (system_server)
+03-11 00:59:39.009  2814  2814 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+03-11 00:59:39.009  2814  2814 F DEBUG   : Build fingerprint: 'Xiaomi/cepheus/cepheus:9/PKQ1.181121.001/V10.2.11.0.PFACNXM:user/release-keys'
+03-11 00:59:39.009  2814  2814 F DEBUG   : Revision: '0'
+03-11 00:59:39.009  2814  2814 F DEBUG   : ABI: 'arm64'
+03-11 00:59:39.009  2814  2814 F DEBUG   : pid: 1574, tid: 12185, name: Binder:1574_1E  >>> system_server <<<
+03-11 00:59:39.009  2814  2814 F DEBUG   : signal 6 (SIGABRT), code -6 (SI_TKILL), fault addr --------
+03-11 00:59:39.009  2814  2814 F DEBUG   : Abort message: 'java_vm_ext.cc:638] JNI ERROR (app bug): global reference table overflow (max=51200)global reference table dump:'
+03-11 00:59:39.009  2814  2814 F DEBUG   :     x0  0000000000000000  x1  0000000000002f99  x2  0000000000000006  x3  0000000000000008
+03-11 00:59:39.009  2814  2814 F DEBUG   :     x4  fefeff7642aa6667  x5  fefeff7642aa6667  x6  fefeff7642aa6667  x7  7f7f7f7f7fff7f7f
+03-11 00:59:39.009  2814  2814 F DEBUG   :     x8  0000000000000083  x9  171ccc74122bc780  x10 0000000000000000  x11 fffffffc7ffffbdf
+03-11 00:59:39.009  2814  2814 F DEBUG   :     x12 0000000000000001  x13 ffffffffffffffff  x14 ffffffffff000000  x15 ffffffffffffffff
+03-11 00:59:39.009  2814  2814 F DEBUG   :     x16 0000007741d212b8  x17 0000007741c40ee0  x18 0000000000000010  x19 0000000000000626
+03-11 00:59:39.009  2814  2814 F DEBUG   :     x20 0000000000002f99  x21 00000076b9f23500  x22 0000000000000058  x23 00000076c030c608
+03-11 00:59:39.009  2814  2814 F DEBUG   :     x24 0000000000000058  x25 000000769a22b699  x26 0000000000000043  x27 000000769a22c588
+03-11 00:59:39.009  2814  2814 F DEBUG   :     x28 000000000000005b  x29 000000769a22b600
+03-11 00:59:39.009  2814  2814 F DEBUG   :     sp  000000769a22b5c0  lr  0000007741c34354  pc  0000007741c3437c
+03-11 00:59:39.163  2814  2814 F DEBUG   : 
+03-11 00:59:39.163  2814  2814 F DEBUG   : backtrace:
+03-11 00:59:39.163  2814  2814 F DEBUG   :     #00 pc 000000000002237c  /system/lib64/libc.so (abort+116)
+03-11 00:59:39.163  2814  2814 F DEBUG   :     #01 pc 0000000000465618  /system/lib64/libart.so (art::Runtime::Abort(char const*)+1196)
+03-11 00:59:39.163  2814  2814 F DEBUG   :     #02 pc 0000000000008ce0  /system/lib64/libbase.so (android::base::LogMessage::~LogMessage()+724)
+03-11 00:59:39.163  2814  2814 F DEBUG   :     #03 pc 00000000002e7434  /system/lib64/libart.so (art::JavaVMExt::AddGlobalRef(art::Thread*, art::ObjPtr<art::mirror::Object>)+304)
+03-11 00:59:39.163  2814  2814 F DEBUG   :     #04 pc 000000000032ee68  /system/lib64/libart.so (art::JNI::NewGlobalRef(_JNIEnv*, _jobject*)+612)
+03-11 00:59:39.163  2814  2814 F DEBUG   :     #05 pc 0000000000138480  /system/lib64/libandroid_runtime.so (JavaDeathRecipient::JavaDeathRecipient(_JNIEnv*, _jobject*, android::sp<DeathRecipientList> const&)+136)
+03-11 00:59:39.163  2814  2814 F DEBUG   :     #06 pc 0000000000138000  /system/lib64/libandroid_runtime.so (android_os_BinderProxy_linkToDeath(_JNIEnv*, _jobject*, _jobject*, int)+160)
+03-11 00:59:39.163  2814  2814 F DEBUG   :     #07 pc 0000000000c51910  /system/framework/arm64/boot-framework.oat (offset 0xa1e000) (android.hardware.Camera._addCallbackBuffer [DEDUPED]+160)
+03-11 00:59:39.164  2814  2814 F DEBUG   :     #08 pc 000000000023e3d0  /system/framework/oat/arm64/wifi-service.odex (offset 0x117000) (com.android.server.wifi.WifiLockManager$WifiLock.<init>+224)
+03-11 00:59:39.164  2814  2814 F DEBUG   :     #09 pc 000000000023f444  /system/framework/oat/arm64/wifi-service.odex (offset 0x117000) (com.android.server.wifi.WifiLockManager.acquireWifiLock+580)
+03-11 00:59:39.164  2814  2814 F DEBUG   :     #10 pc 00000000002809dc  /system/framework/oat/arm64/wifi-service.odex (offset 0x117000) (com.android.server.wifi.WifiServiceImpl.acquireWifiLock+284)
+03-11 00:59:39.164  2814  2814 F DEBUG   :     #11 pc 00000000015e1a34  /system/framework/arm64/boot-framework.oat (offset 0xa1e000) (android.net.wifi.IWifiManager$Stub.onTransact+8452)
+03-11 00:59:39.164  2814  2814 F DEBUG   :     #12 pc 0000000001bd5350  /system/framework/arm64/boot-framework.oat (offset 0xa1e000) (android.os.Binder.execTransact+608)
+03-11 00:59:39.164  2814  2814 F DEBUG   :     #13 pc 0000000000557388  /system/lib64/libart.so (art_quick_invoke_stub+584)
+03-11 00:59:39.164  2814  2814 F DEBUG   :     #14 pc 00000000000cfcc8  /system/lib64/libart.so (art::ArtMethod::Invoke(art::Thread*, unsigned int*, unsigned int, art::JValue*, char const*)+200)
+03-11 00:59:39.164  2814  2814 F DEBUG   :     #15 pc 000000000045dd10  /system/lib64/libart.so (art::(anonymous namespace)::InvokeWithArgArray(art::ScopedObjectAccessAlreadyRunnable const&, art::ArtMethod*, art::(anonymous namespace)::ArgArray*, art::JValue*, char const*)+104)
+03-11 00:59:39.164  2814  2814 F DEBUG   :     #16 pc 000000000045f0a4  /system/lib64/libart.so (art::InvokeVirtualOrInterfaceWithVarArgs(art::ScopedObjectAccessAlreadyRunnable const&, _jobject*, _jmethodID*, std::__va_list)+440)
+03-11 00:59:39.164  2814  2814 F DEBUG   :     #17 pc 0000000000334f60  /system/lib64/libart.so (art::JNI::CallBooleanMethodV(_JNIEnv*, _jobject*, _jmethodID*, std::__va_list)+656)
+03-11 00:59:39.164  2814  2814 F DEBUG   :     #18 pc 00000000000c57b8  /system/lib64/libandroid_runtime.so (_JNIEnv::CallBooleanMethod(_jobject*, _jmethodID*, ...)+116)
+03-11 00:59:39.164  2814  2814 F DEBUG   :     #19 pc 0000000000136b88  /system/lib64/libandroid_runtime.so (JavaBBinder::onTransact(unsigned int, android::Parcel const&, android::Parcel*, unsigned int)+156)
+03-11 00:59:39.164  2814  2814 F DEBUG   :     #20 pc 000000000004fb1c  /system/lib64/libbinder.so (android::BBinder::transact(unsigned int, android::Parcel const&, android::Parcel*, unsigned int)+136)
+03-11 00:59:39.164  2814  2814 F DEBUG   :     #21 pc 000000000005d1cc  /system/lib64/libbinder.so (android::IPCThreadState::executeCommand(int)+520)
+03-11 00:59:39.164  2814  2814 F DEBUG   :     #22 pc 000000000005cf10  /system/lib64/libbinder.so (android::IPCThreadState::getAndExecuteCommand()+156)
+03-11 00:59:39.164  2814  2814 F DEBUG   :     #23 pc 000000000005d600  /system/lib64/libbinder.so (android::IPCThreadState::joinThreadPool(bool)+108)
+03-11 00:59:39.164  2814  2814 F DEBUG   :     #24 pc 000000000007fae8  /system/lib64/libbinder.so (android::PoolThread::threadLoop()+24)
+03-11 00:59:39.164  2814  2814 F DEBUG   :     #25 pc 00000000000100dc  /system/lib64/libutils.so (android::Thread::_threadLoop(void*)+284)
+03-11 00:59:39.164  2814  2814 F DEBUG   :     #26 pc 00000000000b530c  /system/lib64/libandroid_runtime.so (android::AndroidRuntime::javaThreadShell(void*)+140)
+03-11 00:59:39.164  2814  2814 F DEBUG   :     #27 pc 000000000009043c  /system/lib64/libc.so (__pthread_start(void*)+36)
+03-11 00:59:39.164  2814  2814 F DEBUG   :     #28 pc 0000000000023c38  /system/lib64/libc.so (__start_thread+68)
+03-11 00:59:46.619  3157  3431 E AndroidRuntime: FATAL EXCEPTION: AsyncTask #1
+03-11 00:59:46.619  3157  3431 E AndroidRuntime: Process: com.android.systemui, PID: 3157
+03-11 00:59:46.619  3157  3431 E AndroidRuntime: java.lang.RuntimeException: An error occurred while executing doInBackground()
+03-11 00:59:46.619  3157  3431 E AndroidRuntime: 	at android.os.AsyncTask$3.done(AsyncTask.java:354)
+03-11 00:59:46.619  3157  3431 E AndroidRuntime: 	at java.util.concurrent.FutureTask.finishCompletion(FutureTask.java:383)
+03-11 00:59:46.619  3157  3431 E AndroidRuntime: 	at java.util.concurrent.FutureTask.setException(FutureTask.java:252)
+03-11 00:59:46.619  3157  3431 E AndroidRuntime: 	at java.util.concurrent.FutureTask.run(FutureTask.java:271)
+03-11 00:59:46.619  3157  3431 E AndroidRuntime: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+03-11 00:59:46.619  3157  3431 E AndroidRuntime: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+03-11 00:59:46.619  3157  3431 E AndroidRuntime: 	at java.lang.Thread.run(Thread.java:764)
+03-11 00:59:46.619  3157  3431 E AndroidRuntime: Caused by: java.lang.RuntimeException: Can't create handler inside thread Thread[AsyncTask #1,5,main] that has not called Looper.prepare()
+03-11 00:59:46.619  3157  3431 E AndroidRuntime: 	at android.os.Handler.<init>(Handler.java:205)
+03-11 00:59:46.619  3157  3431 E AndroidRuntime: 	at android.os.Handler.<init>(Handler.java:118)
+03-11 00:59:46.619  3157  3431 E AndroidRuntime: 	at com.android.keyguard.KeyguardUpdateMonitor.<init>(KeyguardUpdateMonitor.java:312)
+03-11 00:59:46.619  3157  3431 E AndroidRuntime: 	at com.android.keyguard.KeyguardUpdateMonitor.getInstance(KeyguardUpdateMonitor.java:1286)
+03-11 00:59:46.619  3157  3431 E AndroidRuntime: 	at com.android.keyguard.wallpaper.KeyguardWallpaperUtils.getLockWallpaperPreview(KeyguardWallpaperUtils.java:93)
+03-11 00:59:46.619  3157  3431 E AndroidRuntime: 	at com.android.keyguard.KeyguardUpdateMonitor.processKeyguardWallpaper(KeyguardUpdateMonitor.java:1649)
+03-11 00:59:46.619  3157  3431 E AndroidRuntime: 	at com.android.keyguard.KeyguardUpdateMonitor.access$3700(KeyguardUpdateMonitor.java:151)
+03-11 00:59:46.619  3157  3431 E AndroidRuntime: 	at com.android.keyguard.KeyguardUpdateMonitor$16.doInBackground(KeyguardUpdateMonitor.java:1550)
+03-11 00:59:46.619  3157  3431 E AndroidRuntime: 	at com.android.keyguard.KeyguardUpdateMonitor$16.doInBackground(KeyguardUpdateMonitor.java:1545)
+03-11 00:59:46.619  3157  3431 E AndroidRuntime: 	at android.os.AsyncTask$2.call(AsyncTask.java:333)
+03-11 00:59:46.619  3157  3431 E AndroidRuntime: 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+03-11 00:59:46.619  3157  3431 E AndroidRuntime: 	... 3 more
