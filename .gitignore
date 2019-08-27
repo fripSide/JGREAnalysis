@@ -1,2 +1,5 @@
 .idea/
 *.pyc
+.vs/
+Debug/
+x64/
