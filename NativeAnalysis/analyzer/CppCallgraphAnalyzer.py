@@ -12,6 +12,8 @@ https://github.com/XrXr/libclang-callgraph/blob/master/callgraph.c
 
 """
 
+Config.set_library_path(r"D:\Dev\LLVM\bin")
+
 
 class MethodLocation:
 
@@ -79,7 +81,7 @@ class CppCallgraph:
 		self.__extract_method_call(root, fi)
 
 
-def build_callgraph_test():
+def build_callgraph_run():
 	pt = CONFIG.local_path("data/jni.json")
 	with open(pt, "r") as fp:
 		entry_points = json.load(fp)
@@ -133,4 +135,4 @@ def parse_methods_in_file(fi):
 
 
 if __name__ == "__main__":
-	build_callgraph_test()
+	build_callgraph_run()

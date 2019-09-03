@@ -5,7 +5,7 @@ __author__ = "fripSide"
 
 class Conf:
     DEFAULT_AOSP_PATH = r"F:\Android_9.0\aosp"
-    DEPLOY_DIR = r"E:\PaperWork\JGRE\JGRAnalyzer\SourceAudit"
+    DEPLOY_DIR = r"E:\PaperWork\JGRE\JGREAnalyzer\NativeAnalysis"
     APPGEN_PATH = r"E:\PaperWork\JGRE\JGRAnalyzer\AppGen"
     CONTEXT_CLS = r"frameworks\base\core\java\android\content\Context.java"
     SERVICE_REGISTER_CLS = r"frameworks\base\core\java\android\app\SystemServiceRegistry.java"
