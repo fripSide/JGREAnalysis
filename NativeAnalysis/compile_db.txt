@@ -1,0 +1,34 @@
+  -I\"/home/techie/android_build/frameworks/base/core/jni -Iframeworks/base/core/jni/include\"
+  -I/home/techie/android_build/frameworks/base/core/jni/android/graphics 
+  -I\"/home/techie/android_build/bionic/libc/private
+  -Iexternal/skia/include/private 
+  -Iexternal/skia/src/codec 
+  -Iexternal/skia/src/core 
+  -Iexternal/skia/src/effects -
+  Iexternal/skia/src/image 
+  -Iexternal/skia/src/images 
+  -Iframeworks/base/media/jni 
+  -Ilibcore/include 
+  -Isystem/media/camera/include 
+  -Isystem/media/private/camera/include\" 
+  -I/home/techie/android_build/frameworks/base/core/jni 
+  -I/home/techie/android_build/external/giflib 
+  -I/home/techie/android_build/bionic/libc/seccomp/include 
+  -I/home/techie/android_build/external/selinux/libselinux/include 
+  -I/home/techie/android_build/external/pcre/include -I/home/techie/android_build/system/core/libpackagelistparser/include 
+  -I/home/techie/android_build/system/core/libgrallocusage/include -I/home/techie/android_build/external/scrypt/lib/crypto 
+  -I/home/techie/android_build/system/netd/libbpf/include -I/home/techie/android_build/system/netd/libnetdutils/include 
+  -I/home/techie/android_build/system/core/base/include -I/home/techie/android_build/system/core/libmemtrack/include 
+  -I/home/techie/android_build/frameworks/base/libs/androidfw/include -I/home/techie/android_build/system/core/libappfuse/include 
+  -I/home/techie/android_build/external/boringssl/src/include -I/home/techie/android_build/libnativehelper/include 
+  -I/home/techie/android_build/libnativehelper/include_jni -I/home/techie/android_build/libnativehelper/header_only_include
+  -I/home/techie/android_build/libnativehelper/platform_include -I/home/techie/android_build/system/core/liblog/include 
+  -I/home/techie/android_build/system/core/libcutils/include -I/home/techie/android_build/system/core/debuggerd/include 
+  -I/home/techie/android_build/system/core/debuggerd/common/include -I/home/techie/android_build/system/core/libutils/include
+  -I/home/techie/android_build/system/core/libbacktrace/include -I/home/techie/android_build/system/core/libsystem/include 
+  -I/home/techie/android_build/out/soong/.intermediates/frameworks/native/libs/binder/libbinder/android_arm_armv7-a-neon_core_static/gen/aidl
+  -I/home/techie/android_build/frameworks/native/libs/binder/include -I/home/techie/android_build/frameworks/native/libs/nativebase/include 
+  -I/home/techie/android_build/hardware/libhardware/include -I/home/techie/android_build/system/media/audio/include -I/home/techie/android_build/system/bt/types 
+  -I/home/techie/android_build/frameworks/native/libs/ui/include -I/home/techie/android_build/frameworks/native/libs/arect/include 
+  -I/home/techie/android_build/frameworks/native/libs/math/include -I/home/techie/android_build/system/libhidl/base/include 
+  -I/home/techie/android_build/system/libhidl/transport/include
