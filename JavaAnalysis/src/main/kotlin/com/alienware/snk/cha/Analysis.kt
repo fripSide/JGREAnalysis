@@ -1,5 +1,6 @@
 package com.alienware.snk.cha
 
+import com.alienware.snk.utils.DebugTool
 import soot.*
 import soot.jimple.toolkits.callgraph.CHATransformer
 import soot.jimple.toolkits.callgraph.Targets
@@ -103,7 +104,6 @@ class SootAnalysis {
 //        loadClass("CallGraphs", true)
 //        dumpMethods("CallGraphs")
         testCallGraph()
-        DebugTool.printSootClasses()
         testDispath()
 
         val testWords = "CheckGroupOwner"

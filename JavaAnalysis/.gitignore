@@ -1,0 +1,8 @@
+.idea/
+*.pyc
+.vs/
+Debug/
+x64/
+*.iml
+target/
+bin/dev.json

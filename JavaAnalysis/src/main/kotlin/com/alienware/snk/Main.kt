@@ -3,6 +3,10 @@ import com.alienware.snk.cha.SootAnalysis
 import com.alienware.snk.cha.runLiveVarAnalysis
 import com.alienware.snk.cha.startSootAnalysis
 import com.alienware.snk.services.runIPCTest
+import com.alienware.snk.utils.DebugTool
+import com.alienware.snk.utils.LogNow
+import com.beust.klaxon.Klaxon
+import java.io.File
 
 /*
 * soot 读入class
@@ -17,18 +21,28 @@ fun testJavapoet() {
 
 fun runAnalysis() {
     val st = SootAnalysis()
-    st.run()
+//    st.run()
 //    startSootAnalysis()
 //    runIPCTest()
 //    runLiveVarAnalysis()
 }
 
-lateinit var Args: Array<String>
-
 open class Main {
     companion object {
         @JvmStatic fun main(args: Array<String>) {
-            Args = args
+            if (args.isEmpty()) {
+                println("Usage: JavaAnalyzer.jar conf.json")
+                return
+            }
+            val confPath = args[0]
+            val txt = File(confPath)
+            try {
+                CONFIG = Klaxon().parse<Conf>(txt)!!
+            } catch (ex: Exception) {
+                CONFIG = Conf()
+                DebugTool.fatalError("Failed to parse Conf file: $confPath!", ex)
+            }
+            LogNow.setLogLevel()
 //            testJavapoet()
             runAnalysis()
         }
