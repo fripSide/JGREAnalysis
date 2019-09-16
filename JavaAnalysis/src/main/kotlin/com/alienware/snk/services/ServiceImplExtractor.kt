@@ -36,6 +36,14 @@ object ServiceImplExtractor {
         return remainList
     }
 
+    fun isBinderInterface(sc: SootClass): Boolean {
+        val supList =  sc.interfaces
+        supList.forEach { sup ->
+            if (sup.name == kServiceImplInterface) return true
+        }
+        return false
+    }
+
     private fun searchServiceImplRegister() {
         val clsList = findAddServiceList()
         for (cls in clsList) {

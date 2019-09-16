@@ -1,13 +1,18 @@
 package com.alienware.snk.services
 
 import ServiceApiList
+import com.alienware.snk.CONFIG
 import com.alienware.snk.utils.LogNow
+import com.alienware.snk.utils.SootTool
+import soot.Scene
 import soot.SootClass
 import soot.SootMethod
 
 object VulnerabilitiesDetecting {
 
     private val vulSet = HashSet<SootMethod>()
+
+    private val vulMap = HashMap<SootMethod, VulnerableApiDesc>()
 
     /*
     1. appos
@@ -36,7 +41,6 @@ object VulnerabilitiesDetecting {
         }
         sc.methods.forEach { mtd ->
             if (mtd.subSignature in methods) {
-                LogNow.info("Analysis native method: ${mtd.subSignature}")
                 if (analysisOneFunction(mtd)) {
                     vulSet.add(mtd)
                 }
@@ -55,13 +59,31 @@ object VulnerabilitiesDetecting {
     }
 
     private fun analysisOneFunction(mtd: SootMethod): Boolean {
+        val focus = "addClient"
+        if (mtd.name != focus) return false
+        LogNow.info("Analysis native method: ${mtd.subSignature}")
         val cg = CallGraphAnalysis()
-        cg.analysisEntryPoint(mtd)
-        return cg.findExitPoint
+        val vul = cg.analysisEntryPoint(mtd)
+        if (vul != null) {
+            LogNow.info("Find Vulnerable Method: $mtd")
+            vulMap[mtd] = vul
+            return true
+        }
+        return false
     }
 
+}
 
-
+fun quickAnalysis() {
+    var clsPath = CONFIG.ANDROID_JAR
+    clsPath = "cls/"
+    SootTool.initSootSimply("", clsPath)
+    val focusCls = "com.android.server.accessibility.AccessibilityManagerService"
+    val cls = Scene.v().getSootClass(focusCls)
+    val mtd = cls.getMethodByName("addAccessibilityInteractionConnection")
+    val cg = CallGraphAnalysis()
+    val vul = cg.analysisEntryPoint(mtd)
+    println(vul)
 }
 
 fun runDetecting(apiList: ServiceApiList) {

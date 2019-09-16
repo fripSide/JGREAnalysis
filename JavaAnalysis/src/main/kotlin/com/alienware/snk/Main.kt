@@ -1,4 +1,5 @@
 package com.alienware.snk
+import com.alienware.snk.services.quickAnalysis
 import com.alienware.snk.services.runDetecting
 import com.alienware.snk.services.runIPCExtractor
 import com.alienware.snk.utils.DebugTool
@@ -14,8 +15,9 @@ import java.io.File
 
 fun runAnalysis() {
     LogNow.show("Start to run JGREAnalyzer:")
-    val apiList = runIPCExtractor()
-    runDetecting(apiList)
+    quickAnalysis()
+//    val apiList = runIPCExtractor()
+//    runDetecting(apiList)
 }
 
 open class Main {
