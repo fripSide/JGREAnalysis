@@ -1,0 +1,61 @@
+class android.app.SystemServiceRegistry$30 extends android.app.SystemServiceRegistry$CachedServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$30 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$30;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$CachedServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.os.PowerManager createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$30 l0;
+        android.app.ContextImpl l1;
+        android.os.IPowerManager l2;
+        android.os.IBinder $stack3;
+        android.os.PowerManager $stack5;
+        android.content.Context $stack6;
+        android.app.ActivityThread $stack7;
+        android.os.Handler $stack8;
+
+        l0 := @this: android.app.SystemServiceRegistry$30;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack3 = staticinvoke <android.os.ServiceManager: android.os.IBinder getServiceOrThrow(java.lang.String)>("power");
+
+        l2 = staticinvoke <android.os.IPowerManager$Stub: android.os.IPowerManager asInterface(android.os.IBinder)>($stack3);
+
+        $stack5 = new android.os.PowerManager;
+
+        $stack6 = virtualinvoke l1.<android.app.ContextImpl: android.content.Context getOuterContext()>();
+
+        $stack7 = l1.<android.app.ContextImpl: android.app.ActivityThread mMainThread>;
+
+        $stack8 = virtualinvoke $stack7.<android.app.ActivityThread: android.os.Handler getHandler()>();
+
+        specialinvoke $stack5.<android.os.PowerManager: void <init>(android.content.Context,android.os.IPowerManager,android.os.Handler)>($stack6, l2, $stack8);
+
+        return $stack5;
+    }
+
+    public volatile java.lang.Object createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$30 l0;
+        android.app.ContextImpl l1;
+        android.os.PowerManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$30;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = virtualinvoke l0.<android.app.SystemServiceRegistry$30: android.os.PowerManager createService(android.app.ContextImpl)>(l1);
+
+        return $stack2;
+    }
+}

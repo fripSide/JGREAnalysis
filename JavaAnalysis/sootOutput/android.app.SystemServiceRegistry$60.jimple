@@ -1,0 +1,52 @@
+class android.app.SystemServiceRegistry$60 extends android.app.SystemServiceRegistry$CachedServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$60 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$60;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$CachedServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.app.AppOpsManager createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$60 l0;
+        android.app.ContextImpl l1;
+        android.app.AppOpsManager $stack2;
+        android.os.IBinder $stack3;
+        com.android.internal.app.IAppOpsService $stack4;
+
+        l0 := @this: android.app.SystemServiceRegistry$60;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = new android.app.AppOpsManager;
+
+        $stack3 = staticinvoke <android.os.ServiceManager: android.os.IBinder getServiceOrThrow(java.lang.String)>("appops");
+
+        $stack4 = staticinvoke <com.android.internal.app.IAppOpsService$Stub: com.android.internal.app.IAppOpsService asInterface(android.os.IBinder)>($stack3);
+
+        specialinvoke $stack2.<android.app.AppOpsManager: void <init>(android.content.Context,com.android.internal.app.IAppOpsService)>(l1, $stack4);
+
+        return $stack2;
+    }
+
+    public volatile java.lang.Object createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$60 l0;
+        android.app.ContextImpl l1;
+        android.app.AppOpsManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$60;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = virtualinvoke l0.<android.app.SystemServiceRegistry$60: android.app.AppOpsManager createService(android.app.ContextImpl)>(l1);
+
+        return $stack2;
+    }
+}

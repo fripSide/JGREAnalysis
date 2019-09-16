@@ -1,0 +1,46 @@
+class android.app.SystemServiceRegistry$9 extends android.app.SystemServiceRegistry$StaticServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$9 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$9;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$StaticServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.hardware.hdmi.HdmiControlManager createService() throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$9 l0;
+        android.hardware.hdmi.HdmiControlManager $stack1;
+        android.os.IBinder $stack2;
+        android.hardware.hdmi.IHdmiControlService $stack3;
+
+        l0 := @this: android.app.SystemServiceRegistry$9;
+
+        $stack1 = new android.hardware.hdmi.HdmiControlManager;
+
+        $stack2 = staticinvoke <android.os.ServiceManager: android.os.IBinder getServiceOrThrow(java.lang.String)>("hdmi_control");
+
+        $stack3 = staticinvoke <android.hardware.hdmi.IHdmiControlService$Stub: android.hardware.hdmi.IHdmiControlService asInterface(android.os.IBinder)>($stack2);
+
+        specialinvoke $stack1.<android.hardware.hdmi.HdmiControlManager: void <init>(android.hardware.hdmi.IHdmiControlService)>($stack3);
+
+        return $stack1;
+    }
+
+    public volatile java.lang.Object createService() throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$9 l0;
+        android.hardware.hdmi.HdmiControlManager $stack1;
+
+        l0 := @this: android.app.SystemServiceRegistry$9;
+
+        $stack1 = virtualinvoke l0.<android.app.SystemServiceRegistry$9: android.hardware.hdmi.HdmiControlManager createService()>();
+
+        return $stack1;
+    }
+}

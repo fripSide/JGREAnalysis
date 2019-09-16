@@ -1,0 +1,55 @@
+class android.app.SystemServiceRegistry$57 extends android.app.SystemServiceRegistry$CachedServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$57 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$57;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$CachedServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.net.EthernetManager createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$57 l0;
+        android.app.ContextImpl l1;
+        android.net.IEthernetManager l2;
+        android.os.IBinder $stack3;
+        android.net.EthernetManager $stack5;
+        android.content.Context $stack6;
+
+        l0 := @this: android.app.SystemServiceRegistry$57;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack3 = staticinvoke <android.os.ServiceManager: android.os.IBinder getServiceOrThrow(java.lang.String)>("ethernet");
+
+        l2 = staticinvoke <android.net.IEthernetManager$Stub: android.net.IEthernetManager asInterface(android.os.IBinder)>($stack3);
+
+        $stack5 = new android.net.EthernetManager;
+
+        $stack6 = virtualinvoke l1.<android.app.ContextImpl: android.content.Context getOuterContext()>();
+
+        specialinvoke $stack5.<android.net.EthernetManager: void <init>(android.content.Context,android.net.IEthernetManager)>($stack6, l2);
+
+        return $stack5;
+    }
+
+    public volatile java.lang.Object createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$57 l0;
+        android.app.ContextImpl l1;
+        android.net.EthernetManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$57;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = virtualinvoke l0.<android.app.SystemServiceRegistry$57: android.net.EthernetManager createService(android.app.ContextImpl)>(l1);
+
+        return $stack2;
+    }
+}

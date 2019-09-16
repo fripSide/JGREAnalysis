@@ -1,0 +1,66 @@
+class android.app.SystemServiceRegistry$65 extends android.app.SystemServiceRegistry$CachedServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$65 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$65;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$CachedServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.companion.CompanionDeviceManager createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$65 l0;
+        android.app.ContextImpl l1;
+        android.content.pm.PackageManager $stack3;
+        boolean $stack4;
+        android.companion.CompanionDeviceManager $stack5;
+        android.content.Context $stack6;
+        android.os.IBinder $stack7;
+        android.companion.ICompanionDeviceManager l2;
+
+        l0 := @this: android.app.SystemServiceRegistry$65;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        l2 = null;
+
+        $stack3 = virtualinvoke l1.<android.app.ContextImpl: android.content.pm.PackageManager getPackageManager()>();
+
+        $stack4 = virtualinvoke $stack3.<android.content.pm.PackageManager: boolean hasSystemFeature(java.lang.String)>("android.software.companion_device_setup");
+
+        if $stack4 == 0 goto label1;
+
+        $stack7 = staticinvoke <android.os.ServiceManager: android.os.IBinder getServiceOrThrow(java.lang.String)>("companiondevice");
+
+        l2 = staticinvoke <android.companion.ICompanionDeviceManager$Stub: android.companion.ICompanionDeviceManager asInterface(android.os.IBinder)>($stack7);
+
+     label1:
+        $stack5 = new android.companion.CompanionDeviceManager;
+
+        $stack6 = virtualinvoke l1.<android.app.ContextImpl: android.content.Context getOuterContext()>();
+
+        specialinvoke $stack5.<android.companion.CompanionDeviceManager: void <init>(android.companion.ICompanionDeviceManager,android.content.Context)>(l2, $stack6);
+
+        return $stack5;
+    }
+
+    public volatile java.lang.Object createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$65 l0;
+        android.app.ContextImpl l1;
+        android.companion.CompanionDeviceManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$65;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = virtualinvoke l0.<android.app.SystemServiceRegistry$65: android.companion.CompanionDeviceManager createService(android.app.ContextImpl)>(l1);
+
+        return $stack2;
+    }
+}

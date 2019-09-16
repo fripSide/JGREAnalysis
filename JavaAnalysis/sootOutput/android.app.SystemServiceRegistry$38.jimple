@@ -1,0 +1,52 @@
+class android.app.SystemServiceRegistry$38 extends android.app.SystemServiceRegistry$CachedServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$38 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$38;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$CachedServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.os.SystemUpdateManager createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$38 l0;
+        android.app.ContextImpl l1;
+        android.os.SystemUpdateManager $stack2;
+        android.os.IBinder $stack3;
+        android.os.ISystemUpdateManager $stack4;
+
+        l0 := @this: android.app.SystemServiceRegistry$38;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = new android.os.SystemUpdateManager;
+
+        $stack3 = staticinvoke <android.os.ServiceManager: android.os.IBinder getServiceOrThrow(java.lang.String)>("system_update");
+
+        $stack4 = staticinvoke <android.os.ISystemUpdateManager$Stub: android.os.ISystemUpdateManager asInterface(android.os.IBinder)>($stack3);
+
+        specialinvoke $stack2.<android.os.SystemUpdateManager: void <init>(android.os.ISystemUpdateManager)>($stack4);
+
+        return $stack2;
+    }
+
+    public volatile java.lang.Object createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$38 l0;
+        android.app.ContextImpl l1;
+        android.os.SystemUpdateManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$38;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = virtualinvoke l0.<android.app.SystemServiceRegistry$38: android.os.SystemUpdateManager createService(android.app.ContextImpl)>(l1);
+
+        return $stack2;
+    }
+}

@@ -1,0 +1,95 @@
+abstract class android.app.SystemServiceRegistry$StaticApplicationContextServiceFetcher extends java.lang.Object implements android.app.SystemServiceRegistry$ServiceFetcher
+{
+    private java.lang.Object mCachedInstance;
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$StaticApplicationContextServiceFetcher l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$StaticApplicationContextServiceFetcher;
+
+        specialinvoke l0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public abstract java.lang.Object createService(android.content.Context) throws android.os.ServiceManager$ServiceNotFoundException;
+
+    public final java.lang.Object getService(android.app.ContextImpl)
+    {
+        android.app.SystemServiceRegistry$StaticApplicationContextServiceFetcher l0;
+        android.content.Context l2, tmp$1133484499;
+        java.lang.Object $stack4, $stack7, l1, l1#7;
+        java.lang.Throwable $stack14, $stack16, l1#2;
+        android.app.ContextImpl tmp$424598285;
+        android.os.ServiceManager$ServiceNotFoundException tmp$2005387437;
+
+        l0 := @this: android.app.SystemServiceRegistry$StaticApplicationContextServiceFetcher;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        entermonitor l0;
+
+     label01:
+        $stack4 = l0.<android.app.SystemServiceRegistry$StaticApplicationContextServiceFetcher: java.lang.Object mCachedInstance>;
+
+        if $stack4 != null goto label07;
+
+        tmp$424598285 = (android.app.ContextImpl) l1;
+
+        l2 = virtualinvoke tmp$424598285.<android.app.ContextImpl: android.content.Context getApplicationContext()>();
+
+     label02:
+        if l2 == null goto label03;
+
+        l1 = l2;
+
+        goto label03;
+
+     label03:
+        tmp$1133484499 = (android.content.Context) l1;
+
+        $stack7 = virtualinvoke l0.<android.app.SystemServiceRegistry$StaticApplicationContextServiceFetcher: java.lang.Object createService(android.content.Context)>(tmp$1133484499);
+
+        l0.<android.app.SystemServiceRegistry$StaticApplicationContextServiceFetcher: java.lang.Object mCachedInstance> = $stack7;
+
+     label04:
+        goto label07;
+
+     label05:
+        $stack16 := @caughtexception;
+
+        l1#2 = $stack16;
+
+     label06:
+        tmp$2005387437 = (android.os.ServiceManager$ServiceNotFoundException) l1#2;
+
+        staticinvoke <android.app.SystemServiceRegistry: void onServiceNotFound(android.os.ServiceManager$ServiceNotFoundException)>(tmp$2005387437);
+
+     label07:
+        l1#7 = l0.<android.app.SystemServiceRegistry$StaticApplicationContextServiceFetcher: java.lang.Object mCachedInstance>;
+
+        exitmonitor l0;
+
+     label08:
+        return l1#7;
+
+     label09:
+        $stack14 := @caughtexception;
+
+        l1#2 = $stack14;
+
+     label10:
+        exitmonitor l0;
+
+     label11:
+        throw l1#2;
+
+        catch java.lang.Throwable from label01 to label02 with label09;
+        catch android.os.ServiceManager$ServiceNotFoundException from label03 to label04 with label05;
+        catch java.lang.Throwable from label03 to label04 with label09;
+        catch java.lang.Throwable from label06 to label07 with label09;
+        catch java.lang.Throwable from label07 to label08 with label09;
+        catch java.lang.Throwable from label10 to label11 with label09;
+    }
+}

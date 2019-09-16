@@ -1,0 +1,52 @@
+class android.app.SystemServiceRegistry$85 extends android.app.SystemServiceRegistry$CachedServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$85 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$85;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$CachedServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.os.health.SystemHealthManager createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$85 l0;
+        android.app.ContextImpl l1;
+        android.os.health.SystemHealthManager $stack2;
+        android.os.IBinder $stack3;
+        com.android.internal.app.IBatteryStats $stack4;
+
+        l0 := @this: android.app.SystemServiceRegistry$85;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = new android.os.health.SystemHealthManager;
+
+        $stack3 = staticinvoke <android.os.ServiceManager: android.os.IBinder getServiceOrThrow(java.lang.String)>("batterystats");
+
+        $stack4 = staticinvoke <com.android.internal.app.IBatteryStats$Stub: com.android.internal.app.IBatteryStats asInterface(android.os.IBinder)>($stack3);
+
+        specialinvoke $stack2.<android.os.health.SystemHealthManager: void <init>(com.android.internal.app.IBatteryStats)>($stack4);
+
+        return $stack2;
+    }
+
+    public volatile java.lang.Object createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$85 l0;
+        android.app.ContextImpl l1;
+        android.os.health.SystemHealthManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$85;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = virtualinvoke l0.<android.app.SystemServiceRegistry$85: android.os.health.SystemHealthManager createService(android.app.ContextImpl)>(l1);
+
+        return $stack2;
+    }
+}

@@ -1,0 +1,69 @@
+class android.app.SystemServiceRegistry$69 extends android.app.SystemServiceRegistry$CachedServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$69 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$69;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$CachedServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.hardware.fingerprint.FingerprintManager createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$69 l0;
+        android.app.ContextImpl l1;
+        android.content.pm.ApplicationInfo $stack3;
+        int $stack4;
+        android.hardware.fingerprint.FingerprintManager $stack7;
+        android.content.Context $stack8;
+        android.os.IBinder l2;
+        android.hardware.fingerprint.IFingerprintService l2#2;
+
+        l0 := @this: android.app.SystemServiceRegistry$69;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack3 = virtualinvoke l1.<android.app.ContextImpl: android.content.pm.ApplicationInfo getApplicationInfo()>();
+
+        $stack4 = $stack3.<android.content.pm.ApplicationInfo: int targetSdkVersion>;
+
+        if $stack4 < 26 goto label1;
+
+        l2 = staticinvoke <android.os.ServiceManager: android.os.IBinder getServiceOrThrow(java.lang.String)>("fingerprint");
+
+        goto label2;
+
+     label1:
+        l2 = staticinvoke <android.os.ServiceManager: android.os.IBinder getService(java.lang.String)>("fingerprint");
+
+     label2:
+        l2#2 = staticinvoke <android.hardware.fingerprint.IFingerprintService$Stub: android.hardware.fingerprint.IFingerprintService asInterface(android.os.IBinder)>(l2);
+
+        $stack7 = new android.hardware.fingerprint.FingerprintManager;
+
+        $stack8 = virtualinvoke l1.<android.app.ContextImpl: android.content.Context getOuterContext()>();
+
+        specialinvoke $stack7.<android.hardware.fingerprint.FingerprintManager: void <init>(android.content.Context,android.hardware.fingerprint.IFingerprintService)>($stack8, l2#2);
+
+        return $stack7;
+    }
+
+    public volatile java.lang.Object createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$69 l0;
+        android.app.ContextImpl l1;
+        android.hardware.fingerprint.FingerprintManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$69;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = virtualinvoke l0.<android.app.SystemServiceRegistry$69: android.hardware.fingerprint.FingerprintManager createService(android.app.ContextImpl)>(l1);
+
+        return $stack2;
+    }
+}

@@ -1,0 +1,52 @@
+class android.app.SystemServiceRegistry$3 extends android.app.SystemServiceRegistry$CachedServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$3 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$3;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$CachedServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.accounts.AccountManager createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$3 l0;
+        android.app.ContextImpl l1;
+        android.accounts.AccountManager $stack2;
+        android.os.IBinder $stack3;
+        android.accounts.IAccountManager $stack4;
+
+        l0 := @this: android.app.SystemServiceRegistry$3;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = new android.accounts.AccountManager;
+
+        $stack3 = staticinvoke <android.os.ServiceManager: android.os.IBinder getServiceOrThrow(java.lang.String)>("account");
+
+        $stack4 = staticinvoke <android.accounts.IAccountManager$Stub: android.accounts.IAccountManager asInterface(android.os.IBinder)>($stack3);
+
+        specialinvoke $stack2.<android.accounts.AccountManager: void <init>(android.content.Context,android.accounts.IAccountManager)>(l1, $stack4);
+
+        return $stack2;
+    }
+
+    public volatile java.lang.Object createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$3 l0;
+        android.app.ContextImpl l1;
+        android.accounts.AccountManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$3;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = virtualinvoke l0.<android.app.SystemServiceRegistry$3: android.accounts.AccountManager createService(android.app.ContextImpl)>(l1);
+
+        return $stack2;
+    }
+}

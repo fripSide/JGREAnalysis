@@ -1,0 +1,46 @@
+class android.app.SystemServiceRegistry$18 extends android.app.SystemServiceRegistry$CachedServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$18 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$18;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$CachedServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.nfc.NfcManager createService(android.app.ContextImpl)
+    {
+        android.app.SystemServiceRegistry$18 l0;
+        android.app.ContextImpl l1;
+        android.nfc.NfcManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$18;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = new android.nfc.NfcManager;
+
+        specialinvoke $stack2.<android.nfc.NfcManager: void <init>(android.content.Context)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile java.lang.Object createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$18 l0;
+        android.app.ContextImpl l1;
+        android.nfc.NfcManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$18;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = virtualinvoke l0.<android.app.SystemServiceRegistry$18: android.nfc.NfcManager createService(android.app.ContextImpl)>(l1);
+
+        return $stack2;
+    }
+}

@@ -1,0 +1,62 @@
+class android.app.SystemServiceRegistry$55 extends android.app.SystemServiceRegistry$CachedServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$55 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$55;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$CachedServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.net.wifi.RttManager createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$55 l0;
+        android.app.ContextImpl l1;
+        android.net.wifi.rtt.IWifiRttManager l2;
+        android.os.IBinder $stack3;
+        android.net.wifi.RttManager $stack5;
+        android.content.Context $stack6, $stack8;
+        android.net.wifi.rtt.WifiRttManager $stack7;
+
+        l0 := @this: android.app.SystemServiceRegistry$55;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack3 = staticinvoke <android.os.ServiceManager: android.os.IBinder getServiceOrThrow(java.lang.String)>("wifirtt");
+
+        l2 = staticinvoke <android.net.wifi.rtt.IWifiRttManager$Stub: android.net.wifi.rtt.IWifiRttManager asInterface(android.os.IBinder)>($stack3);
+
+        $stack5 = new android.net.wifi.RttManager;
+
+        $stack6 = virtualinvoke l1.<android.app.ContextImpl: android.content.Context getOuterContext()>();
+
+        $stack7 = new android.net.wifi.rtt.WifiRttManager;
+
+        $stack8 = virtualinvoke l1.<android.app.ContextImpl: android.content.Context getOuterContext()>();
+
+        specialinvoke $stack7.<android.net.wifi.rtt.WifiRttManager: void <init>(android.content.Context,android.net.wifi.rtt.IWifiRttManager)>($stack8, l2);
+
+        specialinvoke $stack5.<android.net.wifi.RttManager: void <init>(android.content.Context,android.net.wifi.rtt.WifiRttManager)>($stack6, $stack7);
+
+        return $stack5;
+    }
+
+    public volatile java.lang.Object createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$55 l0;
+        android.app.ContextImpl l1;
+        android.net.wifi.RttManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$55;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = virtualinvoke l0.<android.app.SystemServiceRegistry$55: android.net.wifi.RttManager createService(android.app.ContextImpl)>(l1);
+
+        return $stack2;
+    }
+}

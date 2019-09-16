@@ -1,0 +1,75 @@
+class android.app.SystemServiceRegistry$49 extends android.app.SystemServiceRegistry$CachedServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$49 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$49;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$CachedServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.app.WallpaperManager createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$49 l0;
+        android.app.ContextImpl l1;
+        android.content.pm.ApplicationInfo $stack3;
+        int $stack4;
+        android.app.WallpaperManager $stack6;
+        android.app.IWallpaperManager $stack7;
+        android.content.Context $stack8;
+        android.app.ActivityThread $stack9;
+        android.os.Handler $stack10;
+        android.os.IBinder l2;
+
+        l0 := @this: android.app.SystemServiceRegistry$49;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack3 = virtualinvoke l1.<android.app.ContextImpl: android.content.pm.ApplicationInfo getApplicationInfo()>();
+
+        $stack4 = $stack3.<android.content.pm.ApplicationInfo: int targetSdkVersion>;
+
+        if $stack4 < 28 goto label1;
+
+        l2 = staticinvoke <android.os.ServiceManager: android.os.IBinder getServiceOrThrow(java.lang.String)>("wallpaper");
+
+        goto label2;
+
+     label1:
+        l2 = staticinvoke <android.os.ServiceManager: android.os.IBinder getService(java.lang.String)>("wallpaper");
+
+     label2:
+        $stack6 = new android.app.WallpaperManager;
+
+        $stack7 = staticinvoke <android.app.IWallpaperManager$Stub: android.app.IWallpaperManager asInterface(android.os.IBinder)>(l2);
+
+        $stack8 = virtualinvoke l1.<android.app.ContextImpl: android.content.Context getOuterContext()>();
+
+        $stack9 = l1.<android.app.ContextImpl: android.app.ActivityThread mMainThread>;
+
+        $stack10 = virtualinvoke $stack9.<android.app.ActivityThread: android.os.Handler getHandler()>();
+
+        specialinvoke $stack6.<android.app.WallpaperManager: void <init>(android.app.IWallpaperManager,android.content.Context,android.os.Handler)>($stack7, $stack8, $stack10);
+
+        return $stack6;
+    }
+
+    public volatile java.lang.Object createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$49 l0;
+        android.app.ContextImpl l1;
+        android.app.WallpaperManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$49;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = virtualinvoke l0.<android.app.SystemServiceRegistry$49: android.app.WallpaperManager createService(android.app.ContextImpl)>(l1);
+
+        return $stack2;
+    }
+}

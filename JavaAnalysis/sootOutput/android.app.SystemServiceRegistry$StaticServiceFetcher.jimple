@@ -1,0 +1,82 @@
+abstract class android.app.SystemServiceRegistry$StaticServiceFetcher extends java.lang.Object implements android.app.SystemServiceRegistry$ServiceFetcher
+{
+    private java.lang.Object mCachedInstance;
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$StaticServiceFetcher l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$StaticServiceFetcher;
+
+        specialinvoke l0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public abstract java.lang.Object createService() throws android.os.ServiceManager$ServiceNotFoundException;
+
+    public final java.lang.Object getService(android.app.ContextImpl)
+    {
+        android.app.SystemServiceRegistry$StaticServiceFetcher l0;
+        java.lang.Object $stack4, l1#2;
+        java.lang.Throwable $stack8, $stack9, l1#3;
+        android.app.ContextImpl l1;
+        android.os.ServiceManager$ServiceNotFoundException tmp$181596486;
+
+        l0 := @this: android.app.SystemServiceRegistry$StaticServiceFetcher;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        entermonitor l0;
+
+     label01:
+        l1#2 = l0.<android.app.SystemServiceRegistry$StaticServiceFetcher: java.lang.Object mCachedInstance>;
+
+     label02:
+        if l1#2 != null goto label07;
+
+     label03:
+        $stack4 = virtualinvoke l0.<android.app.SystemServiceRegistry$StaticServiceFetcher: java.lang.Object createService()>();
+
+        l0.<android.app.SystemServiceRegistry$StaticServiceFetcher: java.lang.Object mCachedInstance> = $stack4;
+
+     label04:
+        goto label07;
+
+     label05:
+        $stack8 := @caughtexception;
+
+        l1#3 = $stack8;
+
+     label06:
+        tmp$181596486 = (android.os.ServiceManager$ServiceNotFoundException) l1#3;
+
+        staticinvoke <android.app.SystemServiceRegistry: void onServiceNotFound(android.os.ServiceManager$ServiceNotFoundException)>(tmp$181596486);
+
+     label07:
+        l1#2 = l0.<android.app.SystemServiceRegistry$StaticServiceFetcher: java.lang.Object mCachedInstance>;
+
+        exitmonitor l0;
+
+     label08:
+        return l1#2;
+
+     label09:
+        $stack9 := @caughtexception;
+
+        l1#3 = $stack9;
+
+     label10:
+        exitmonitor l0;
+
+     label11:
+        throw l1#3;
+
+        catch java.lang.Throwable from label01 to label02 with label09;
+        catch android.os.ServiceManager$ServiceNotFoundException from label03 to label04 with label05;
+        catch java.lang.Throwable from label03 to label04 with label09;
+        catch java.lang.Throwable from label06 to label07 with label09;
+        catch java.lang.Throwable from label07 to label08 with label09;
+        catch java.lang.Throwable from label10 to label11 with label09;
+    }
+}

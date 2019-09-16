@@ -1,0 +1,52 @@
+class android.app.SystemServiceRegistry$47 extends android.app.SystemServiceRegistry$CachedServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$47 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$47;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$CachedServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.hardware.SerialManager createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$47 l0;
+        android.app.ContextImpl l1;
+        android.hardware.SerialManager $stack2;
+        android.os.IBinder $stack3;
+        android.hardware.ISerialManager $stack4;
+
+        l0 := @this: android.app.SystemServiceRegistry$47;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = new android.hardware.SerialManager;
+
+        $stack3 = staticinvoke <android.os.ServiceManager: android.os.IBinder getServiceOrThrow(java.lang.String)>("serial");
+
+        $stack4 = staticinvoke <android.hardware.ISerialManager$Stub: android.hardware.ISerialManager asInterface(android.os.IBinder)>($stack3);
+
+        specialinvoke $stack2.<android.hardware.SerialManager: void <init>(android.content.Context,android.hardware.ISerialManager)>(l1, $stack4);
+
+        return $stack2;
+    }
+
+    public volatile java.lang.Object createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$47 l0;
+        android.app.ContextImpl l1;
+        android.hardware.SerialManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$47;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = virtualinvoke l0.<android.app.SystemServiceRegistry$47: android.hardware.SerialManager createService(android.app.ContextImpl)>(l1);
+
+        return $stack2;
+    }
+}

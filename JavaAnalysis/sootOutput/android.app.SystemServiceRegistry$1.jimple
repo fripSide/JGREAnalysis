@@ -1,0 +1,44 @@
+class android.app.SystemServiceRegistry$1 extends android.app.SystemServiceRegistry$CachedServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$1 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$1;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$CachedServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.view.accessibility.AccessibilityManager createService(android.app.ContextImpl)
+    {
+        android.app.SystemServiceRegistry$1 l0;
+        android.app.ContextImpl l1;
+        android.view.accessibility.AccessibilityManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$1;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = staticinvoke <android.view.accessibility.AccessibilityManager: android.view.accessibility.AccessibilityManager getInstance(android.content.Context)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile java.lang.Object createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$1 l0;
+        android.app.ContextImpl l1;
+        android.view.accessibility.AccessibilityManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$1;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = virtualinvoke l0.<android.app.SystemServiceRegistry$1: android.view.accessibility.AccessibilityManager createService(android.app.ContextImpl)>(l1);
+
+        return $stack2;
+    }
+}

@@ -1,8 +1,6 @@
 package com.alienware.snk
-import com.alienware.snk.cha.SootAnalysis
-import com.alienware.snk.cha.runLiveVarAnalysis
-import com.alienware.snk.cha.startSootAnalysis
-import com.alienware.snk.services.runIPCTest
+import com.alienware.snk.services.runDetecting
+import com.alienware.snk.services.runIPCExtractor
 import com.alienware.snk.utils.DebugTool
 import com.alienware.snk.utils.LogNow
 import com.beust.klaxon.Klaxon
@@ -14,17 +12,10 @@ import java.io.File
 * */
 //
 
-fun testJavapoet() {
-    val pt = Poet()
-    pt.processAPIDesc()
-}
-
 fun runAnalysis() {
-    val st = SootAnalysis()
-//    st.run()
-//    startSootAnalysis()
-//    runIPCTest()
-//    runLiveVarAnalysis()
+    LogNow.show("Start to run JGREAnalyzer:")
+    val apiList = runIPCExtractor()
+    runDetecting(apiList)
 }
 
 open class Main {
@@ -43,7 +34,6 @@ open class Main {
                 DebugTool.fatalError("Failed to parse Conf file: $confPath!", ex)
             }
             LogNow.setLogLevel()
-//            testJavapoet()
             runAnalysis()
         }
     }

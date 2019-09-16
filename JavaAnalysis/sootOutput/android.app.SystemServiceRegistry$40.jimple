@@ -1,0 +1,49 @@
+class android.app.SystemServiceRegistry$40 extends android.app.SystemServiceRegistry$CachedServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$40 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$40;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$CachedServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.telephony.SubscriptionManager createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$40 l0;
+        android.app.ContextImpl l1;
+        android.telephony.SubscriptionManager $stack2;
+        android.content.Context $stack3;
+
+        l0 := @this: android.app.SystemServiceRegistry$40;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = new android.telephony.SubscriptionManager;
+
+        $stack3 = virtualinvoke l1.<android.app.ContextImpl: android.content.Context getOuterContext()>();
+
+        specialinvoke $stack2.<android.telephony.SubscriptionManager: void <init>(android.content.Context)>($stack3);
+
+        return $stack2;
+    }
+
+    public volatile java.lang.Object createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$40 l0;
+        android.app.ContextImpl l1;
+        android.telephony.SubscriptionManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$40;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = virtualinvoke l0.<android.app.SystemServiceRegistry$40: android.telephony.SubscriptionManager createService(android.app.ContextImpl)>(l1);
+
+        return $stack2;
+    }
+}

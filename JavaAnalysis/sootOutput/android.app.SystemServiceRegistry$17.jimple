@@ -1,0 +1,57 @@
+class android.app.SystemServiceRegistry$17 extends android.app.SystemServiceRegistry$CachedServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$17 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$17;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$CachedServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.os.BatteryManager createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$17 l0;
+        android.app.ContextImpl l1;
+        android.os.BatteryManager $stack2;
+        android.os.IBinder $stack3, $stack5;
+        com.android.internal.app.IBatteryStats $stack4;
+        android.os.IBatteryPropertiesRegistrar $stack6;
+
+        l0 := @this: android.app.SystemServiceRegistry$17;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = new android.os.BatteryManager;
+
+        $stack3 = staticinvoke <android.os.ServiceManager: android.os.IBinder getServiceOrThrow(java.lang.String)>("batterystats");
+
+        $stack4 = staticinvoke <com.android.internal.app.IBatteryStats$Stub: com.android.internal.app.IBatteryStats asInterface(android.os.IBinder)>($stack3);
+
+        $stack5 = staticinvoke <android.os.ServiceManager: android.os.IBinder getServiceOrThrow(java.lang.String)>("batteryproperties");
+
+        $stack6 = staticinvoke <android.os.IBatteryPropertiesRegistrar$Stub: android.os.IBatteryPropertiesRegistrar asInterface(android.os.IBinder)>($stack5);
+
+        specialinvoke $stack2.<android.os.BatteryManager: void <init>(android.content.Context,com.android.internal.app.IBatteryStats,android.os.IBatteryPropertiesRegistrar)>(l1, $stack4, $stack6);
+
+        return $stack2;
+    }
+
+    public volatile java.lang.Object createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$17 l0;
+        android.app.ContextImpl l1;
+        android.os.BatteryManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$17;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = virtualinvoke l0.<android.app.SystemServiceRegistry$17: android.os.BatteryManager createService(android.app.ContextImpl)>(l1);
+
+        return $stack2;
+    }
+}

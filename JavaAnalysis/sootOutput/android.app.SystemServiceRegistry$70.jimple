@@ -1,0 +1,55 @@
+class android.app.SystemServiceRegistry$70 extends android.app.SystemServiceRegistry$CachedServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$70 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$70;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$CachedServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.media.tv.TvInputManager createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$70 l0;
+        android.app.ContextImpl l1;
+        android.media.tv.TvInputManager $stack2;
+        android.os.IBinder $stack3;
+        android.media.tv.ITvInputManager $stack4;
+        int $stack5;
+
+        l0 := @this: android.app.SystemServiceRegistry$70;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = new android.media.tv.TvInputManager;
+
+        $stack3 = staticinvoke <android.os.ServiceManager: android.os.IBinder getServiceOrThrow(java.lang.String)>("tv_input");
+
+        $stack4 = staticinvoke <android.media.tv.ITvInputManager$Stub: android.media.tv.ITvInputManager asInterface(android.os.IBinder)>($stack3);
+
+        $stack5 = virtualinvoke l1.<android.app.ContextImpl: int getUserId()>();
+
+        specialinvoke $stack2.<android.media.tv.TvInputManager: void <init>(android.media.tv.ITvInputManager,int)>($stack4, $stack5);
+
+        return $stack2;
+    }
+
+    public volatile java.lang.Object createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$70 l0;
+        android.app.ContextImpl l1;
+        android.media.tv.TvInputManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$70;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = virtualinvoke l0.<android.app.SystemServiceRegistry$70: android.media.tv.TvInputManager createService(android.app.ContextImpl)>(l1);
+
+        return $stack2;
+    }
+}

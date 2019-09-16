@@ -1,0 +1,55 @@
+class android.app.SystemServiceRegistry$4 extends android.app.SystemServiceRegistry$CachedServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$4 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$4;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$CachedServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.app.ActivityManager createService(android.app.ContextImpl)
+    {
+        android.app.SystemServiceRegistry$4 l0;
+        android.app.ContextImpl l1;
+        android.app.ActivityManager $stack2;
+        android.content.Context $stack3;
+        android.app.ActivityThread $stack4;
+        android.os.Handler $stack5;
+
+        l0 := @this: android.app.SystemServiceRegistry$4;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = new android.app.ActivityManager;
+
+        $stack3 = virtualinvoke l1.<android.app.ContextImpl: android.content.Context getOuterContext()>();
+
+        $stack4 = l1.<android.app.ContextImpl: android.app.ActivityThread mMainThread>;
+
+        $stack5 = virtualinvoke $stack4.<android.app.ActivityThread: android.os.Handler getHandler()>();
+
+        specialinvoke $stack2.<android.app.ActivityManager: void <init>(android.content.Context,android.os.Handler)>($stack3, $stack5);
+
+        return $stack2;
+    }
+
+    public volatile java.lang.Object createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$4 l0;
+        android.app.ContextImpl l1;
+        android.app.ActivityManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$4;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = virtualinvoke l0.<android.app.SystemServiceRegistry$4: android.app.ActivityManager createService(android.app.ContextImpl)>(l1);
+
+        return $stack2;
+    }
+}

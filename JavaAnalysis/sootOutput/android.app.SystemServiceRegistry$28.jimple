@@ -1,0 +1,68 @@
+class android.app.SystemServiceRegistry$28 extends android.app.SystemServiceRegistry$CachedServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$28 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$28;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$CachedServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.app.NotificationManager createService(android.app.ContextImpl)
+    {
+        android.app.SystemServiceRegistry$28 l0;
+        android.app.ContextImpl l1;
+        android.content.Context l2;
+        android.app.NotificationManager $stack4;
+        android.view.ContextThemeWrapper $stack5;
+        android.content.pm.ApplicationInfo $stack7;
+        int $stack8, $stack9;
+        android.app.ActivityThread $stack10;
+        android.os.Handler $stack11;
+
+        l0 := @this: android.app.SystemServiceRegistry$28;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        l2 = virtualinvoke l1.<android.app.ContextImpl: android.content.Context getOuterContext()>();
+
+        $stack4 = new android.app.NotificationManager;
+
+        $stack5 = new android.view.ContextThemeWrapper;
+
+        $stack7 = virtualinvoke l2.<android.content.Context: android.content.pm.ApplicationInfo getApplicationInfo()>();
+
+        $stack8 = $stack7.<android.content.pm.ApplicationInfo: int targetSdkVersion>;
+
+        $stack9 = staticinvoke <android.content.res.Resources: int selectSystemTheme(int,int,int,int,int,int)>(0, $stack8, 16973835, 16973935, 16974126, 16974130);
+
+        specialinvoke $stack5.<android.view.ContextThemeWrapper: void <init>(android.content.Context,int)>(l2, $stack9);
+
+        $stack10 = l1.<android.app.ContextImpl: android.app.ActivityThread mMainThread>;
+
+        $stack11 = virtualinvoke $stack10.<android.app.ActivityThread: android.os.Handler getHandler()>();
+
+        specialinvoke $stack4.<android.app.NotificationManager: void <init>(android.content.Context,android.os.Handler)>($stack5, $stack11);
+
+        return $stack4;
+    }
+
+    public volatile java.lang.Object createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$28 l0;
+        android.app.ContextImpl l1;
+        android.app.NotificationManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$28;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = virtualinvoke l0.<android.app.SystemServiceRegistry$28: android.app.NotificationManager createService(android.app.ContextImpl)>(l1);
+
+        return $stack2;
+    }
+}

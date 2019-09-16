@@ -1,0 +1,46 @@
+class android.app.SystemServiceRegistry$87 extends android.app.SystemServiceRegistry$CachedServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$87 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$87;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$CachedServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.os.IncidentManager createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$87 l0;
+        android.app.ContextImpl l1;
+        android.os.IncidentManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$87;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = new android.os.IncidentManager;
+
+        specialinvoke $stack2.<android.os.IncidentManager: void <init>(android.content.Context)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile java.lang.Object createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$87 l0;
+        android.app.ContextImpl l1;
+        android.os.IncidentManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$87;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = virtualinvoke l0.<android.app.SystemServiceRegistry$87: android.os.IncidentManager createService(android.app.ContextImpl)>(l1);
+
+        return $stack2;
+    }
+}

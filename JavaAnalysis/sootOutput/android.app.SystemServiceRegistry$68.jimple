@@ -1,0 +1,43 @@
+class android.app.SystemServiceRegistry$68 extends android.app.SystemServiceRegistry$StaticServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$68 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$68;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$StaticServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.app.trust.TrustManager createService() throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$68 l0;
+        android.app.trust.TrustManager $stack1;
+        android.os.IBinder $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$68;
+
+        $stack1 = new android.app.trust.TrustManager;
+
+        $stack2 = staticinvoke <android.os.ServiceManager: android.os.IBinder getServiceOrThrow(java.lang.String)>("trust");
+
+        specialinvoke $stack1.<android.app.trust.TrustManager: void <init>(android.os.IBinder)>($stack2);
+
+        return $stack1;
+    }
+
+    public volatile java.lang.Object createService() throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$68 l0;
+        android.app.trust.TrustManager $stack1;
+
+        l0 := @this: android.app.SystemServiceRegistry$68;
+
+        $stack1 = virtualinvoke l0.<android.app.SystemServiceRegistry$68: android.app.trust.TrustManager createService()>();
+
+        return $stack1;
+    }
+}

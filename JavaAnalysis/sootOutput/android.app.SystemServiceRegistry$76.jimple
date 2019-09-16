@@ -1,0 +1,51 @@
+class android.app.SystemServiceRegistry$76 extends android.app.SystemServiceRegistry$StaticServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$76 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$76;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$StaticServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.service.oemlock.OemLockManager createService() throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$76 l0;
+        android.service.oemlock.IOemLockService l1;
+        android.os.IBinder $stack2;
+        android.service.oemlock.OemLockManager $stack4;
+
+        l0 := @this: android.app.SystemServiceRegistry$76;
+
+        $stack2 = staticinvoke <android.os.ServiceManager: android.os.IBinder getServiceOrThrow(java.lang.String)>("oem_lock");
+
+        l1 = staticinvoke <android.service.oemlock.IOemLockService$Stub: android.service.oemlock.IOemLockService asInterface(android.os.IBinder)>($stack2);
+
+        if l1 == null goto label1;
+
+        $stack4 = new android.service.oemlock.OemLockManager;
+
+        specialinvoke $stack4.<android.service.oemlock.OemLockManager: void <init>(android.service.oemlock.IOemLockService)>(l1);
+
+        return $stack4;
+
+     label1:
+        return null;
+    }
+
+    public volatile java.lang.Object createService() throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$76 l0;
+        android.service.oemlock.OemLockManager $stack1;
+
+        l0 := @this: android.app.SystemServiceRegistry$76;
+
+        $stack1 = virtualinvoke l0.<android.app.SystemServiceRegistry$76: android.service.oemlock.OemLockManager createService()>();
+
+        return $stack1;
+    }
+}

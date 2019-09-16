@@ -1,0 +1,822 @@
+final class android.app.SystemServiceRegistry extends java.lang.Object
+{
+    private static final java.util.HashMap SYSTEM_SERVICE_FETCHERS;
+    private static final java.util.HashMap SYSTEM_SERVICE_NAMES;
+    private static final java.lang.String TAG;
+    private static int sServiceCacheSize;
+
+    static void <clinit>()
+    {
+        java.util.HashMap $stack0, $stack1, $stack35;
+        android.app.SystemServiceRegistry$1 $stack2;
+        android.app.SystemServiceRegistry$2 $stack5;
+        android.app.SystemServiceRegistry$3 $stack8;
+        android.app.SystemServiceRegistry$4 $stack11;
+        android.app.SystemServiceRegistry$5 $stack14;
+        android.app.SystemServiceRegistry$6 $stack17;
+        android.app.SystemServiceRegistry$7 $stack20;
+        android.app.SystemServiceRegistry$8 $stack23;
+        android.app.SystemServiceRegistry$9 $stack26;
+        android.app.SystemServiceRegistry$10 $stack29;
+        android.app.SystemServiceRegistry$11 $stack32;
+        android.app.SystemServiceRegistry$12 $stack37;
+        android.app.SystemServiceRegistry$13 $stack40;
+        android.app.SystemServiceRegistry$14 $stack43;
+        android.app.SystemServiceRegistry$15 $stack46;
+        android.app.SystemServiceRegistry$16 $stack49;
+        android.app.SystemServiceRegistry$17 $stack52;
+        android.app.SystemServiceRegistry$18 $stack55;
+        android.app.SystemServiceRegistry$19 $stack58;
+        android.app.SystemServiceRegistry$20 $stack61;
+        android.app.SystemServiceRegistry$21 $stack64;
+        android.app.SystemServiceRegistry$22 $stack67;
+        android.app.SystemServiceRegistry$23 $stack70;
+        android.app.SystemServiceRegistry$24 $stack73;
+        android.app.SystemServiceRegistry$25 $stack76;
+        android.app.SystemServiceRegistry$26 $stack79;
+        android.app.SystemServiceRegistry$27 $stack82;
+        android.app.SystemServiceRegistry$28 $stack85;
+        android.app.SystemServiceRegistry$29 $stack88;
+        android.app.SystemServiceRegistry$30 $stack91;
+        android.app.SystemServiceRegistry$31 $stack94;
+        android.app.SystemServiceRegistry$32 $stack97;
+        android.app.SystemServiceRegistry$33 $stack100;
+        android.app.SystemServiceRegistry$34 $stack103;
+        android.app.SystemServiceRegistry$35 $stack106;
+        android.app.SystemServiceRegistry$36 $stack109;
+        android.app.SystemServiceRegistry$37 $stack112;
+        android.app.SystemServiceRegistry$38 $stack115;
+        android.app.SystemServiceRegistry$39 $stack118;
+        android.app.SystemServiceRegistry$40 $stack121;
+        android.app.SystemServiceRegistry$41 $stack124;
+        android.app.SystemServiceRegistry$42 $stack127;
+        android.app.SystemServiceRegistry$43 $stack130;
+        android.app.SystemServiceRegistry$44 $stack133;
+        android.app.SystemServiceRegistry$45 $stack136;
+        android.app.SystemServiceRegistry$46 $stack139;
+        android.app.SystemServiceRegistry$47 $stack142;
+        android.app.SystemServiceRegistry$48 $stack145;
+        android.app.SystemServiceRegistry$49 $stack148;
+        android.app.SystemServiceRegistry$50 $stack151;
+        android.app.SystemServiceRegistry$51 $stack154;
+        android.app.SystemServiceRegistry$52 $stack157;
+        android.app.SystemServiceRegistry$53 $stack160;
+        android.app.SystemServiceRegistry$54 $stack163;
+        android.app.SystemServiceRegistry$55 $stack166;
+        android.app.SystemServiceRegistry$56 $stack169;
+        android.app.SystemServiceRegistry$57 $stack172;
+        android.app.SystemServiceRegistry$58 $stack175;
+        android.app.SystemServiceRegistry$59 $stack178;
+        android.app.SystemServiceRegistry$60 $stack181;
+        android.app.SystemServiceRegistry$61 $stack184;
+        android.app.SystemServiceRegistry$62 $stack187;
+        android.app.SystemServiceRegistry$63 $stack190;
+        android.app.SystemServiceRegistry$64 $stack193;
+        android.app.SystemServiceRegistry$65 $stack196;
+        android.app.SystemServiceRegistry$66 $stack199;
+        android.app.SystemServiceRegistry$67 $stack202;
+        android.app.SystemServiceRegistry$68 $stack205;
+        android.app.SystemServiceRegistry$69 $stack208;
+        android.app.SystemServiceRegistry$70 $stack211;
+        android.app.SystemServiceRegistry$71 $stack214;
+        android.app.SystemServiceRegistry$72 $stack217;
+        android.app.SystemServiceRegistry$73 $stack220;
+        android.app.SystemServiceRegistry$74 $stack223;
+        android.app.SystemServiceRegistry$75 $stack226;
+        android.app.SystemServiceRegistry$76 $stack229;
+        android.app.SystemServiceRegistry$77 $stack232;
+        android.app.SystemServiceRegistry$78 $stack235;
+        android.app.SystemServiceRegistry$79 $stack238;
+        android.app.SystemServiceRegistry$80 $stack241;
+        android.app.SystemServiceRegistry$81 $stack244;
+        android.app.SystemServiceRegistry$82 $stack247;
+        android.app.SystemServiceRegistry$83 $stack250;
+        android.app.SystemServiceRegistry$84 $stack253;
+        android.app.SystemServiceRegistry$85 $stack256;
+        android.app.SystemServiceRegistry$86 $stack259;
+        android.app.SystemServiceRegistry$87 $stack262;
+        android.app.SystemServiceRegistry$88 $stack265;
+        android.app.SystemServiceRegistry$89 $stack268;
+        android.app.SystemServiceRegistry$90 $stack271;
+        android.app.SystemServiceRegistry$91 $stack274;
+        android.app.SystemServiceRegistry$92 $stack277;
+        android.app.SystemServiceRegistry$93 $stack280;
+
+        <android.app.SystemServiceRegistry: java.lang.String TAG> = "SystemServiceRegistry";
+
+        $stack0 = new java.util.HashMap;
+
+        specialinvoke $stack0.<java.util.HashMap: void <init>()>();
+
+        <android.app.SystemServiceRegistry: java.util.HashMap SYSTEM_SERVICE_NAMES> = $stack0;
+
+        $stack1 = new java.util.HashMap;
+
+        specialinvoke $stack1.<java.util.HashMap: void <init>()>();
+
+        <android.app.SystemServiceRegistry: java.util.HashMap SYSTEM_SERVICE_FETCHERS> = $stack1;
+
+        $stack2 = new android.app.SystemServiceRegistry$1;
+
+        specialinvoke $stack2.<android.app.SystemServiceRegistry$1: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("accessibility", class "Landroid/view/accessibility/AccessibilityManager;", $stack2);
+
+        $stack5 = new android.app.SystemServiceRegistry$2;
+
+        specialinvoke $stack5.<android.app.SystemServiceRegistry$2: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("captioning", class "Landroid/view/accessibility/CaptioningManager;", $stack5);
+
+        $stack8 = new android.app.SystemServiceRegistry$3;
+
+        specialinvoke $stack8.<android.app.SystemServiceRegistry$3: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("account", class "Landroid/accounts/AccountManager;", $stack8);
+
+        $stack11 = new android.app.SystemServiceRegistry$4;
+
+        specialinvoke $stack11.<android.app.SystemServiceRegistry$4: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("activity", class "Landroid/app/ActivityManager;", $stack11);
+
+        $stack14 = new android.app.SystemServiceRegistry$5;
+
+        specialinvoke $stack14.<android.app.SystemServiceRegistry$5: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("alarm", class "Landroid/app/AlarmManager;", $stack14);
+
+        $stack17 = new android.app.SystemServiceRegistry$6;
+
+        specialinvoke $stack17.<android.app.SystemServiceRegistry$6: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("audio", class "Landroid/media/AudioManager;", $stack17);
+
+        $stack20 = new android.app.SystemServiceRegistry$7;
+
+        specialinvoke $stack20.<android.app.SystemServiceRegistry$7: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("media_router", class "Landroid/media/MediaRouter;", $stack20);
+
+        $stack23 = new android.app.SystemServiceRegistry$8;
+
+        specialinvoke $stack23.<android.app.SystemServiceRegistry$8: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("bluetooth", class "Landroid/bluetooth/BluetoothManager;", $stack23);
+
+        $stack26 = new android.app.SystemServiceRegistry$9;
+
+        specialinvoke $stack26.<android.app.SystemServiceRegistry$9: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("hdmi_control", class "Landroid/hardware/hdmi/HdmiControlManager;", $stack26);
+
+        $stack29 = new android.app.SystemServiceRegistry$10;
+
+        specialinvoke $stack29.<android.app.SystemServiceRegistry$10: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("textclassification", class "Landroid/view/textclassifier/TextClassificationManager;", $stack29);
+
+        $stack32 = new android.app.SystemServiceRegistry$11;
+
+        specialinvoke $stack32.<android.app.SystemServiceRegistry$11: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("clipboard", class "Landroid/content/ClipboardManager;", $stack32);
+
+        $stack35 = <android.app.SystemServiceRegistry: java.util.HashMap SYSTEM_SERVICE_NAMES>;
+
+        virtualinvoke $stack35.<java.util.HashMap: java.lang.Object put(java.lang.Object,java.lang.Object)>(class "Landroid/text/ClipboardManager;", "clipboard");
+
+        $stack37 = new android.app.SystemServiceRegistry$12;
+
+        specialinvoke $stack37.<android.app.SystemServiceRegistry$12: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("connectivity", class "Landroid/net/ConnectivityManager;", $stack37);
+
+        $stack40 = new android.app.SystemServiceRegistry$13;
+
+        specialinvoke $stack40.<android.app.SystemServiceRegistry$13: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("ipsec", class "Landroid/net/IpSecManager;", $stack40);
+
+        $stack43 = new android.app.SystemServiceRegistry$14;
+
+        specialinvoke $stack43.<android.app.SystemServiceRegistry$14: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("country_detector", class "Landroid/location/CountryDetector;", $stack43);
+
+        $stack46 = new android.app.SystemServiceRegistry$15;
+
+        specialinvoke $stack46.<android.app.SystemServiceRegistry$15: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("device_policy", class "Landroid/app/admin/DevicePolicyManager;", $stack46);
+
+        $stack49 = new android.app.SystemServiceRegistry$16;
+
+        specialinvoke $stack49.<android.app.SystemServiceRegistry$16: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("download", class "Landroid/app/DownloadManager;", $stack49);
+
+        $stack52 = new android.app.SystemServiceRegistry$17;
+
+        specialinvoke $stack52.<android.app.SystemServiceRegistry$17: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("batterymanager", class "Landroid/os/BatteryManager;", $stack52);
+
+        $stack55 = new android.app.SystemServiceRegistry$18;
+
+        specialinvoke $stack55.<android.app.SystemServiceRegistry$18: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("nfc", class "Landroid/nfc/NfcManager;", $stack55);
+
+        $stack58 = new android.app.SystemServiceRegistry$19;
+
+        specialinvoke $stack58.<android.app.SystemServiceRegistry$19: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("dropbox", class "Landroid/os/DropBoxManager;", $stack58);
+
+        $stack61 = new android.app.SystemServiceRegistry$20;
+
+        specialinvoke $stack61.<android.app.SystemServiceRegistry$20: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("input", class "Landroid/hardware/input/InputManager;", $stack61);
+
+        $stack64 = new android.app.SystemServiceRegistry$21;
+
+        specialinvoke $stack64.<android.app.SystemServiceRegistry$21: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("display", class "Landroid/hardware/display/DisplayManager;", $stack64);
+
+        $stack67 = new android.app.SystemServiceRegistry$22;
+
+        specialinvoke $stack67.<android.app.SystemServiceRegistry$22: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("input_method", class "Landroid/view/inputmethod/InputMethodManager;", $stack67);
+
+        $stack70 = new android.app.SystemServiceRegistry$23;
+
+        specialinvoke $stack70.<android.app.SystemServiceRegistry$23: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("textservices", class "Landroid/view/textservice/TextServicesManager;", $stack70);
+
+        $stack73 = new android.app.SystemServiceRegistry$24;
+
+        specialinvoke $stack73.<android.app.SystemServiceRegistry$24: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("keyguard", class "Landroid/app/KeyguardManager;", $stack73);
+
+        $stack76 = new android.app.SystemServiceRegistry$25;
+
+        specialinvoke $stack76.<android.app.SystemServiceRegistry$25: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("layout_inflater", class "Landroid/view/LayoutInflater;", $stack76);
+
+        $stack79 = new android.app.SystemServiceRegistry$26;
+
+        specialinvoke $stack79.<android.app.SystemServiceRegistry$26: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("location", class "Landroid/location/LocationManager;", $stack79);
+
+        $stack82 = new android.app.SystemServiceRegistry$27;
+
+        specialinvoke $stack82.<android.app.SystemServiceRegistry$27: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("netpolicy", class "Landroid/net/NetworkPolicyManager;", $stack82);
+
+        $stack85 = new android.app.SystemServiceRegistry$28;
+
+        specialinvoke $stack85.<android.app.SystemServiceRegistry$28: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("notification", class "Landroid/app/NotificationManager;", $stack85);
+
+        $stack88 = new android.app.SystemServiceRegistry$29;
+
+        specialinvoke $stack88.<android.app.SystemServiceRegistry$29: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("servicediscovery", class "Landroid/net/nsd/NsdManager;", $stack88);
+
+        $stack91 = new android.app.SystemServiceRegistry$30;
+
+        specialinvoke $stack91.<android.app.SystemServiceRegistry$30: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("power", class "Landroid/os/PowerManager;", $stack91);
+
+        $stack94 = new android.app.SystemServiceRegistry$31;
+
+        specialinvoke $stack94.<android.app.SystemServiceRegistry$31: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("recovery", class "Landroid/os/RecoverySystem;", $stack94);
+
+        $stack97 = new android.app.SystemServiceRegistry$32;
+
+        specialinvoke $stack97.<android.app.SystemServiceRegistry$32: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("search", class "Landroid/app/SearchManager;", $stack97);
+
+        $stack100 = new android.app.SystemServiceRegistry$33;
+
+        specialinvoke $stack100.<android.app.SystemServiceRegistry$33: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("sensor", class "Landroid/hardware/SensorManager;", $stack100);
+
+        $stack103 = new android.app.SystemServiceRegistry$34;
+
+        specialinvoke $stack103.<android.app.SystemServiceRegistry$34: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("stats", class "Landroid/app/StatsManager;", $stack103);
+
+        $stack106 = new android.app.SystemServiceRegistry$35;
+
+        specialinvoke $stack106.<android.app.SystemServiceRegistry$35: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("statusbar", class "Landroid/app/StatusBarManager;", $stack106);
+
+        $stack109 = new android.app.SystemServiceRegistry$36;
+
+        specialinvoke $stack109.<android.app.SystemServiceRegistry$36: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("storage", class "Landroid/os/storage/StorageManager;", $stack109);
+
+        $stack112 = new android.app.SystemServiceRegistry$37;
+
+        specialinvoke $stack112.<android.app.SystemServiceRegistry$37: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("storagestats", class "Landroid/app/usage/StorageStatsManager;", $stack112);
+
+        $stack115 = new android.app.SystemServiceRegistry$38;
+
+        specialinvoke $stack115.<android.app.SystemServiceRegistry$38: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("system_update", class "Landroid/os/SystemUpdateManager;", $stack115);
+
+        $stack118 = new android.app.SystemServiceRegistry$39;
+
+        specialinvoke $stack118.<android.app.SystemServiceRegistry$39: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("phone", class "Landroid/telephony/TelephonyManager;", $stack118);
+
+        $stack121 = new android.app.SystemServiceRegistry$40;
+
+        specialinvoke $stack121.<android.app.SystemServiceRegistry$40: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("telephony_subscription_service", class "Landroid/telephony/SubscriptionManager;", $stack121);
+
+        $stack124 = new android.app.SystemServiceRegistry$41;
+
+        specialinvoke $stack124.<android.app.SystemServiceRegistry$41: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("carrier_config", class "Landroid/telephony/CarrierConfigManager;", $stack124);
+
+        $stack127 = new android.app.SystemServiceRegistry$42;
+
+        specialinvoke $stack127.<android.app.SystemServiceRegistry$42: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("telecom", class "Landroid/telecom/TelecomManager;", $stack127);
+
+        $stack130 = new android.app.SystemServiceRegistry$43;
+
+        specialinvoke $stack130.<android.app.SystemServiceRegistry$43: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("euicc", class "Landroid/telephony/euicc/EuiccManager;", $stack130);
+
+        $stack133 = new android.app.SystemServiceRegistry$44;
+
+        specialinvoke $stack133.<android.app.SystemServiceRegistry$44: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("euicc_card", class "Landroid/telephony/euicc/EuiccCardManager;", $stack133);
+
+        $stack136 = new android.app.SystemServiceRegistry$45;
+
+        specialinvoke $stack136.<android.app.SystemServiceRegistry$45: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("uimode", class "Landroid/app/UiModeManager;", $stack136);
+
+        $stack139 = new android.app.SystemServiceRegistry$46;
+
+        specialinvoke $stack139.<android.app.SystemServiceRegistry$46: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("usb", class "Landroid/hardware/usb/UsbManager;", $stack139);
+
+        $stack142 = new android.app.SystemServiceRegistry$47;
+
+        specialinvoke $stack142.<android.app.SystemServiceRegistry$47: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("serial", class "Landroid/hardware/SerialManager;", $stack142);
+
+        $stack145 = new android.app.SystemServiceRegistry$48;
+
+        specialinvoke $stack145.<android.app.SystemServiceRegistry$48: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("vibrator", class "Landroid/os/Vibrator;", $stack145);
+
+        $stack148 = new android.app.SystemServiceRegistry$49;
+
+        specialinvoke $stack148.<android.app.SystemServiceRegistry$49: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("wallpaper", class "Landroid/app/WallpaperManager;", $stack148);
+
+        $stack151 = new android.app.SystemServiceRegistry$50;
+
+        specialinvoke $stack151.<android.app.SystemServiceRegistry$50: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("lowpan", class "Landroid/net/lowpan/LowpanManager;", $stack151);
+
+        $stack154 = new android.app.SystemServiceRegistry$51;
+
+        specialinvoke $stack154.<android.app.SystemServiceRegistry$51: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("wifi", class "Landroid/net/wifi/WifiManager;", $stack154);
+
+        $stack157 = new android.app.SystemServiceRegistry$52;
+
+        specialinvoke $stack157.<android.app.SystemServiceRegistry$52: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("wifip2p", class "Landroid/net/wifi/p2p/WifiP2pManager;", $stack157);
+
+        $stack160 = new android.app.SystemServiceRegistry$53;
+
+        specialinvoke $stack160.<android.app.SystemServiceRegistry$53: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("wifiaware", class "Landroid/net/wifi/aware/WifiAwareManager;", $stack160);
+
+        $stack163 = new android.app.SystemServiceRegistry$54;
+
+        specialinvoke $stack163.<android.app.SystemServiceRegistry$54: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("wifiscanner", class "Landroid/net/wifi/WifiScanner;", $stack163);
+
+        $stack166 = new android.app.SystemServiceRegistry$55;
+
+        specialinvoke $stack166.<android.app.SystemServiceRegistry$55: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("rttmanager", class "Landroid/net/wifi/RttManager;", $stack166);
+
+        $stack169 = new android.app.SystemServiceRegistry$56;
+
+        specialinvoke $stack169.<android.app.SystemServiceRegistry$56: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("wifirtt", class "Landroid/net/wifi/rtt/WifiRttManager;", $stack169);
+
+        $stack172 = new android.app.SystemServiceRegistry$57;
+
+        specialinvoke $stack172.<android.app.SystemServiceRegistry$57: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("ethernet", class "Landroid/net/EthernetManager;", $stack172);
+
+        $stack175 = new android.app.SystemServiceRegistry$58;
+
+        specialinvoke $stack175.<android.app.SystemServiceRegistry$58: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("window", class "Landroid/view/WindowManager;", $stack175);
+
+        $stack178 = new android.app.SystemServiceRegistry$59;
+
+        specialinvoke $stack178.<android.app.SystemServiceRegistry$59: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("user", class "Landroid/os/UserManager;", $stack178);
+
+        $stack181 = new android.app.SystemServiceRegistry$60;
+
+        specialinvoke $stack181.<android.app.SystemServiceRegistry$60: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("appops", class "Landroid/app/AppOpsManager;", $stack181);
+
+        $stack184 = new android.app.SystemServiceRegistry$61;
+
+        specialinvoke $stack184.<android.app.SystemServiceRegistry$61: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("camera", class "Landroid/hardware/camera2/CameraManager;", $stack184);
+
+        $stack187 = new android.app.SystemServiceRegistry$62;
+
+        specialinvoke $stack187.<android.app.SystemServiceRegistry$62: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("launcherapps", class "Landroid/content/pm/LauncherApps;", $stack187);
+
+        $stack190 = new android.app.SystemServiceRegistry$63;
+
+        specialinvoke $stack190.<android.app.SystemServiceRegistry$63: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("restrictions", class "Landroid/content/RestrictionsManager;", $stack190);
+
+        $stack193 = new android.app.SystemServiceRegistry$64;
+
+        specialinvoke $stack193.<android.app.SystemServiceRegistry$64: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("print", class "Landroid/print/PrintManager;", $stack193);
+
+        $stack196 = new android.app.SystemServiceRegistry$65;
+
+        specialinvoke $stack196.<android.app.SystemServiceRegistry$65: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("companiondevice", class "Landroid/companion/CompanionDeviceManager;", $stack196);
+
+        $stack199 = new android.app.SystemServiceRegistry$66;
+
+        specialinvoke $stack199.<android.app.SystemServiceRegistry$66: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("consumer_ir", class "Landroid/hardware/ConsumerIrManager;", $stack199);
+
+        $stack202 = new android.app.SystemServiceRegistry$67;
+
+        specialinvoke $stack202.<android.app.SystemServiceRegistry$67: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("media_session", class "Landroid/media/session/MediaSessionManager;", $stack202);
+
+        $stack205 = new android.app.SystemServiceRegistry$68;
+
+        specialinvoke $stack205.<android.app.SystemServiceRegistry$68: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("trust", class "Landroid/app/trust/TrustManager;", $stack205);
+
+        $stack208 = new android.app.SystemServiceRegistry$69;
+
+        specialinvoke $stack208.<android.app.SystemServiceRegistry$69: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("fingerprint", class "Landroid/hardware/fingerprint/FingerprintManager;", $stack208);
+
+        $stack211 = new android.app.SystemServiceRegistry$70;
+
+        specialinvoke $stack211.<android.app.SystemServiceRegistry$70: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("tv_input", class "Landroid/media/tv/TvInputManager;", $stack211);
+
+        $stack214 = new android.app.SystemServiceRegistry$71;
+
+        specialinvoke $stack214.<android.app.SystemServiceRegistry$71: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("network_score", class "Landroid/net/NetworkScoreManager;", $stack214);
+
+        $stack217 = new android.app.SystemServiceRegistry$72;
+
+        specialinvoke $stack217.<android.app.SystemServiceRegistry$72: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("usagestats", class "Landroid/app/usage/UsageStatsManager;", $stack217);
+
+        $stack220 = new android.app.SystemServiceRegistry$73;
+
+        specialinvoke $stack220.<android.app.SystemServiceRegistry$73: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("netstats", class "Landroid/app/usage/NetworkStatsManager;", $stack220);
+
+        $stack223 = new android.app.SystemServiceRegistry$74;
+
+        specialinvoke $stack223.<android.app.SystemServiceRegistry$74: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("jobscheduler", class "Landroid/app/job/JobScheduler;", $stack223);
+
+        $stack226 = new android.app.SystemServiceRegistry$75;
+
+        specialinvoke $stack226.<android.app.SystemServiceRegistry$75: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("persistent_data_block", class "Landroid/service/persistentdata/PersistentDataBlockManager;", $stack226);
+
+        $stack229 = new android.app.SystemServiceRegistry$76;
+
+        specialinvoke $stack229.<android.app.SystemServiceRegistry$76: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("oem_lock", class "Landroid/service/oemlock/OemLockManager;", $stack229);
+
+        $stack232 = new android.app.SystemServiceRegistry$77;
+
+        specialinvoke $stack232.<android.app.SystemServiceRegistry$77: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("media_projection", class "Landroid/media/projection/MediaProjectionManager;", $stack232);
+
+        $stack235 = new android.app.SystemServiceRegistry$78;
+
+        specialinvoke $stack235.<android.app.SystemServiceRegistry$78: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("appwidget", class "Landroid/appwidget/AppWidgetManager;", $stack235);
+
+        $stack238 = new android.app.SystemServiceRegistry$79;
+
+        specialinvoke $stack238.<android.app.SystemServiceRegistry$79: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("midi", class "Landroid/media/midi/MidiManager;", $stack238);
+
+        $stack241 = new android.app.SystemServiceRegistry$80;
+
+        specialinvoke $stack241.<android.app.SystemServiceRegistry$80: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("broadcastradio", class "Landroid/hardware/radio/RadioManager;", $stack241);
+
+        $stack244 = new android.app.SystemServiceRegistry$81;
+
+        specialinvoke $stack244.<android.app.SystemServiceRegistry$81: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("hardware_properties", class "Landroid/os/HardwarePropertiesManager;", $stack244);
+
+        $stack247 = new android.app.SystemServiceRegistry$82;
+
+        specialinvoke $stack247.<android.app.SystemServiceRegistry$82: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("soundtrigger", class "Landroid/media/soundtrigger/SoundTriggerManager;", $stack247);
+
+        $stack250 = new android.app.SystemServiceRegistry$83;
+
+        specialinvoke $stack250.<android.app.SystemServiceRegistry$83: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("shortcut", class "Landroid/content/pm/ShortcutManager;", $stack250);
+
+        $stack253 = new android.app.SystemServiceRegistry$84;
+
+        specialinvoke $stack253.<android.app.SystemServiceRegistry$84: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("network_watchlist", class "Landroid/net/NetworkWatchlistManager;", $stack253);
+
+        $stack256 = new android.app.SystemServiceRegistry$85;
+
+        specialinvoke $stack256.<android.app.SystemServiceRegistry$85: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("systemhealth", class "Landroid/os/health/SystemHealthManager;", $stack256);
+
+        $stack259 = new android.app.SystemServiceRegistry$86;
+
+        specialinvoke $stack259.<android.app.SystemServiceRegistry$86: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("contexthub", class "Landroid/hardware/location/ContextHubManager;", $stack259);
+
+        $stack262 = new android.app.SystemServiceRegistry$87;
+
+        specialinvoke $stack262.<android.app.SystemServiceRegistry$87: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("incident", class "Landroid/os/IncidentManager;", $stack262);
+
+        $stack265 = new android.app.SystemServiceRegistry$88;
+
+        specialinvoke $stack265.<android.app.SystemServiceRegistry$88: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("autofill", class "Landroid/view/autofill/AutofillManager;", $stack265);
+
+        $stack268 = new android.app.SystemServiceRegistry$89;
+
+        specialinvoke $stack268.<android.app.SystemServiceRegistry$89: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("vrmanager", class "Landroid/app/VrManager;", $stack268);
+
+        $stack271 = new android.app.SystemServiceRegistry$90;
+
+        specialinvoke $stack271.<android.app.SystemServiceRegistry$90: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("timezone", class "Landroid/app/timezone/RulesManager;", $stack271);
+
+        $stack274 = new android.app.SystemServiceRegistry$91;
+
+        specialinvoke $stack274.<android.app.SystemServiceRegistry$91: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("crossprofileapps", class "Landroid/content/pm/CrossProfileApps;", $stack274);
+
+        $stack277 = new android.app.SystemServiceRegistry$92;
+
+        specialinvoke $stack277.<android.app.SystemServiceRegistry$92: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("slice", class "Landroid/app/slice/SliceManager;", $stack277);
+
+        $stack280 = new android.app.SystemServiceRegistry$93;
+
+        specialinvoke $stack280.<android.app.SystemServiceRegistry$93: void <init>()>();
+
+        staticinvoke <android.app.SystemServiceRegistry: void registerService(java.lang.String,java.lang.Class,android.app.SystemServiceRegistry$ServiceFetcher)>("deviceidle", class "Landroid/os/DeviceIdleManager;", $stack280);
+
+        return;
+    }
+
+    private void <init>()
+    {
+        android.app.SystemServiceRegistry l0;
+
+        l0 := @this: android.app.SystemServiceRegistry;
+
+        specialinvoke l0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    static int access$008()
+    {
+        int l0, $stack1;
+
+        l0 = <android.app.SystemServiceRegistry: int sServiceCacheSize>;
+
+        $stack1 = l0 + 1;
+
+        <android.app.SystemServiceRegistry: int sServiceCacheSize> = $stack1;
+
+        return l0;
+    }
+
+    public static java.lang.Object[] createServiceCache()
+    {
+        int $stack0;
+        java.lang.Object[] $stack1;
+
+        $stack0 = <android.app.SystemServiceRegistry: int sServiceCacheSize>;
+
+        $stack1 = newarray (java.lang.Object)[$stack0];
+
+        return $stack1;
+    }
+
+    public static java.lang.Object getSystemService(android.app.ContextImpl, java.lang.String)
+    {
+        java.util.HashMap $stack2;
+        java.lang.Object $stack3, l0#4;
+        android.app.ContextImpl l0;
+        java.lang.String l1;
+        android.app.SystemServiceRegistry$ServiceFetcher l1#3;
+
+        l0 := @parameter0: android.app.ContextImpl;
+
+        l1 := @parameter1: java.lang.String;
+
+        $stack2 = <android.app.SystemServiceRegistry: java.util.HashMap SYSTEM_SERVICE_FETCHERS>;
+
+        $stack3 = virtualinvoke $stack2.<java.util.HashMap: java.lang.Object get(java.lang.Object)>(l1);
+
+        l1#3 = (android.app.SystemServiceRegistry$ServiceFetcher) $stack3;
+
+        if l1#3 == null goto label1;
+
+        l0#4 = interfaceinvoke l1#3.<android.app.SystemServiceRegistry$ServiceFetcher: java.lang.Object getService(android.app.ContextImpl)>(l0);
+
+        goto label2;
+
+     label1:
+        l0#4 = null;
+
+     label2:
+        return l0#4;
+    }
+
+    public static java.lang.String getSystemServiceName(java.lang.Class)
+    {
+        java.lang.Class l0;
+        java.util.HashMap $stack1;
+        java.lang.Object $stack2;
+        java.lang.String $stack3;
+
+        l0 := @parameter0: java.lang.Class;
+
+        $stack1 = <android.app.SystemServiceRegistry: java.util.HashMap SYSTEM_SERVICE_NAMES>;
+
+        $stack2 = virtualinvoke $stack1.<java.util.HashMap: java.lang.Object get(java.lang.Object)>(l0);
+
+        $stack3 = (java.lang.String) $stack2;
+
+        return $stack3;
+    }
+
+    public static void onServiceNotFound(android.os.ServiceManager$ServiceNotFoundException)
+    {
+        android.os.ServiceManager$ServiceNotFoundException l0;
+        int $stack1;
+        java.lang.String $stack3, $stack6;
+        java.lang.Throwable tmp$1954779972;
+
+        l0 := @parameter0: android.os.ServiceManager$ServiceNotFoundException;
+
+        $stack1 = staticinvoke <android.os.Process: int myUid()>();
+
+        if $stack1 >= 10000 goto label1;
+
+        $stack6 = virtualinvoke l0.<android.os.ServiceManager$ServiceNotFoundException: java.lang.String getMessage()>();
+
+        tmp$1954779972 = (java.lang.Throwable) l0;
+
+        staticinvoke <android.util.Log: int wtf(java.lang.String,java.lang.String,java.lang.Throwable)>("SystemServiceRegistry", $stack6, tmp$1954779972);
+
+        goto label2;
+
+     label1:
+        $stack3 = virtualinvoke l0.<android.os.ServiceManager$ServiceNotFoundException: java.lang.String getMessage()>();
+
+        staticinvoke <android.util.Log: int w(java.lang.String,java.lang.String)>("SystemServiceRegistry", $stack3);
+
+     label2:
+        return;
+    }
+
+    private static void registerService(java.lang.String, java.lang.Class, android.app.SystemServiceRegistry$ServiceFetcher)
+    {
+        java.lang.String l0;
+        java.lang.Class l1;
+        android.app.SystemServiceRegistry$ServiceFetcher l2;
+        java.util.HashMap $stack3, $stack5;
+
+        l0 := @parameter0: java.lang.String;
+
+        l1 := @parameter1: java.lang.Class;
+
+        l2 := @parameter2: android.app.SystemServiceRegistry$ServiceFetcher;
+
+        $stack3 = <android.app.SystemServiceRegistry: java.util.HashMap SYSTEM_SERVICE_NAMES>;
+
+        virtualinvoke $stack3.<java.util.HashMap: java.lang.Object put(java.lang.Object,java.lang.Object)>(l1, l0);
+
+        $stack5 = <android.app.SystemServiceRegistry: java.util.HashMap SYSTEM_SERVICE_FETCHERS>;
+
+        virtualinvoke $stack5.<java.util.HashMap: java.lang.Object put(java.lang.Object,java.lang.Object)>(l0, l2);
+
+        return;
+    }
+}

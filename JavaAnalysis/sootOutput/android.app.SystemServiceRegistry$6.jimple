@@ -1,0 +1,46 @@
+class android.app.SystemServiceRegistry$6 extends android.app.SystemServiceRegistry$CachedServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$6 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$6;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$CachedServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.media.AudioManager createService(android.app.ContextImpl)
+    {
+        android.app.SystemServiceRegistry$6 l0;
+        android.app.ContextImpl l1;
+        android.media.AudioManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$6;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = new android.media.AudioManager;
+
+        specialinvoke $stack2.<android.media.AudioManager: void <init>(android.content.Context)>(l1);
+
+        return $stack2;
+    }
+
+    public volatile java.lang.Object createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$6 l0;
+        android.app.ContextImpl l1;
+        android.media.AudioManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$6;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = virtualinvoke l0.<android.app.SystemServiceRegistry$6: android.media.AudioManager createService(android.app.ContextImpl)>(l1);
+
+        return $stack2;
+    }
+}

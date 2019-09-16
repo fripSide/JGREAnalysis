@@ -1,0 +1,46 @@
+class android.app.SystemServiceRegistry$74 extends android.app.SystemServiceRegistry$StaticServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$74 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$74;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$StaticServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.app.job.JobScheduler createService() throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$74 l0;
+        android.app.JobSchedulerImpl $stack1;
+        android.os.IBinder $stack2;
+        android.app.job.IJobScheduler $stack3;
+
+        l0 := @this: android.app.SystemServiceRegistry$74;
+
+        $stack1 = new android.app.JobSchedulerImpl;
+
+        $stack2 = staticinvoke <android.os.ServiceManager: android.os.IBinder getServiceOrThrow(java.lang.String)>("jobscheduler");
+
+        $stack3 = staticinvoke <android.app.job.IJobScheduler$Stub: android.app.job.IJobScheduler asInterface(android.os.IBinder)>($stack2);
+
+        specialinvoke $stack1.<android.app.JobSchedulerImpl: void <init>(android.app.job.IJobScheduler)>($stack3);
+
+        return $stack1;
+    }
+
+    public volatile java.lang.Object createService() throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$74 l0;
+        android.app.job.JobScheduler $stack1;
+
+        l0 := @this: android.app.SystemServiceRegistry$74;
+
+        $stack1 = virtualinvoke l0.<android.app.SystemServiceRegistry$74: android.app.job.JobScheduler createService()>();
+
+        return $stack1;
+    }
+}

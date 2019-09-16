@@ -1,0 +1,55 @@
+class android.app.SystemServiceRegistry$93 extends android.app.SystemServiceRegistry$CachedServiceFetcher
+{
+
+    void <init>()
+    {
+        android.app.SystemServiceRegistry$93 l0;
+
+        l0 := @this: android.app.SystemServiceRegistry$93;
+
+        specialinvoke l0.<android.app.SystemServiceRegistry$CachedServiceFetcher: void <init>()>();
+
+        return;
+    }
+
+    public android.os.DeviceIdleManager createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$93 l0;
+        android.app.ContextImpl l1;
+        android.os.IDeviceIdleController l2;
+        android.os.IBinder $stack3;
+        android.os.DeviceIdleManager $stack5;
+        android.content.Context $stack6;
+
+        l0 := @this: android.app.SystemServiceRegistry$93;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack3 = staticinvoke <android.os.ServiceManager: android.os.IBinder getServiceOrThrow(java.lang.String)>("deviceidle");
+
+        l2 = staticinvoke <android.os.IDeviceIdleController$Stub: android.os.IDeviceIdleController asInterface(android.os.IBinder)>($stack3);
+
+        $stack5 = new android.os.DeviceIdleManager;
+
+        $stack6 = virtualinvoke l1.<android.app.ContextImpl: android.content.Context getOuterContext()>();
+
+        specialinvoke $stack5.<android.os.DeviceIdleManager: void <init>(android.content.Context,android.os.IDeviceIdleController)>($stack6, l2);
+
+        return $stack5;
+    }
+
+    public volatile java.lang.Object createService(android.app.ContextImpl) throws android.os.ServiceManager$ServiceNotFoundException
+    {
+        android.app.SystemServiceRegistry$93 l0;
+        android.app.ContextImpl l1;
+        android.os.DeviceIdleManager $stack2;
+
+        l0 := @this: android.app.SystemServiceRegistry$93;
+
+        l1 := @parameter0: android.app.ContextImpl;
+
+        $stack2 = virtualinvoke l0.<android.app.SystemServiceRegistry$93: android.os.DeviceIdleManager createService(android.app.ContextImpl)>(l1);
+
+        return $stack2;
+    }
+}
