@@ -8,7 +8,9 @@ import soot.jimple.InterfaceInvokeExpr
 import soot.jimple.InvokeExpr
 import soot.jimple.Stmt
 import soot.jimple.internal.JInstanceFieldRef
+import soot.jimple.internal.JNewExpr
 import java.util.*
+import kotlin.collections.HashMap
 
 class ExitPoint(var mtd: SootMethod) {
     var isNative: Boolean =  false
@@ -30,9 +32,12 @@ class ExitPointChecker(var entryMtd: SootMethod) {
 
     private val listClassTypes = hashSetOf("android.util.SparseArray")
 
-
+    private val kIBinderInf = "android.os.IBinder"
+    private val kLinkToDeathCls = "android.os.IBinder\$DeathRecipient"
 
     val valueDefines = HashMap<Local, SootClass>()
+
+    val pointToSet = HashMap<Local, Local>()
 
     val vulDetail = StringBuilder()
 
@@ -64,6 +69,7 @@ class ExitPointChecker(var entryMtd: SootMethod) {
     }
 
     private fun findValueDefines(u: AssignStmt) {
+        println("findValueDefines ${u.rightOp.javaClass} $u")
         val left = u.leftOp
         val right = u.rightOp
         if (left is Local) {
@@ -76,6 +82,11 @@ class ExitPointChecker(var entryMtd: SootMethod) {
 //                    println("=========ref $left = $ref ${ref.sootClass}")
                 }
 //                println(" right.field $filed ${filed.javaClass} ${filed.declaringClass} ${filed.type}")
+            }
+
+            if (right is JNewExpr) {
+                val jn = right.type as RefType
+                addLocalDefine(left, jn.sootClass)
             }
         }
     }
@@ -95,26 +106,63 @@ class ExitPointChecker(var entryMtd: SootMethod) {
                 backwardResolveValueType(entryMtd, arg)
                 if (arg is Local) {
                     val valCls = valueDefines[arg]
-                    if (valCls != null && ServiceImplExtractor.isBinderInterface(valCls)) {
+                    if (valCls != null && isExitClass(valCls)) {
                         println("Local isBinderInterface: $arg ${valueDefines[arg]}")
+
+                        return VulnerableApiDesc(valCls)
                     }
                     println("Local value: $arg ${valueDefines[arg]}")
+                    if (valCls != null) {
+                        println(ServiceImplExtractor.isBinderClass(valCls))
+                        println(valCls.interfaces)
+
+                    }
+
                 }
             }
+
             println(invoke)
             println(valueDefines)
-            DebugTool.exitHere("Contain Exit list in $entryMtd -> $cur")
+//            DebugTool.exitHere("Contain Exit list in $entryMtd -> $cur")
         }
 
         return null
     }
 
+    private fun isExitClass(sc: SootClass): Boolean {
+        if (ServiceImplExtractor.isBinderClass(sc)) return true
+
+        sc.interfaces.forEach { inf ->
+            if (inf.name.startsWith(kIBinderInf)) return true
+        }
+        return false
+    }
+
     private fun backwardResolveValueType(mtd: SootMethod, v: Value): SootClass? {
         val body = SootTool.tryGetMethodBody(mtd)
         body?.units?.forEach { u ->
-            println("${u.javaClass} $u")
+            if (u is AssignStmt) {
+                val asi = u as AssignStmt
+
+            }
+
         }
         return null
+    }
+
+    private fun getLocalPointTo(loc: Local): Local {
+        var cur: Local? = loc
+        while (cur != null && cur in pointToSet) {
+            val nxt = pointToSet[cur]
+            if (nxt == null) return cur
+            cur = nxt
+        }
+        return loc
+    }
+
+    private fun addLocalDefine(loc: Local, sc: SootClass) {
+        val key = getLocalPointTo(loc)
+        valueDefines[key] = sc
     }
 
     private fun checkHoldBinderInList() {

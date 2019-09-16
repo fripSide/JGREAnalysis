@@ -72,28 +72,7 @@ class CallGraphAnalysis {
     }
 
     private fun isBinderParam(ref: RefType): Boolean {
-        val sc = ref.sootClass
-        if (sc.isInterface) {
-            return ServiceImplExtractor.isBinderInterface(sc)
-        }
-        val hir = Scene.v().activeHierarchy
-        val supList = hir.getSuperclassesOf(sc)
-
-        var isInf = false
-        supList.forEach { sup -> // stub
-            val infList = sup.interfaces
-//            println(infList)
-            for (inf in infList) {
-                for (supInf in inf.interfaces) {
-                    if (supInf.name == ServiceImplExtractor.kServiceImplInterface) {
-                        isInf = true
-                        return@forEach
-                    }
-                }
-            }
-        }
-
-        return isInf
+        return ServiceImplExtractor.isBinderClass(ref.sootClass)
     }
 
 }

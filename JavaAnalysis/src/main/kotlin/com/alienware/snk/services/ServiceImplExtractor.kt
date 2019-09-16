@@ -36,7 +36,31 @@ object ServiceImplExtractor {
         return remainList
     }
 
-    fun isBinderInterface(sc: SootClass): Boolean {
+    fun isBinderClass(sc: SootClass): Boolean {
+        if (sc.isInterface) {
+            return ServiceImplExtractor.isBinderInterface(sc)
+        }
+        val hir = Scene.v().activeHierarchy
+        val supList = hir.getSuperclassesOf(sc)
+
+        var isInf = false
+        supList.forEach { sup -> // stub
+            val infList = sup.interfaces
+//            println(infList)
+            for (inf in infList) {
+                for (supInf in inf.interfaces) {
+                    if (supInf.name == ServiceImplExtractor.kServiceImplInterface) {
+                        isInf = true
+                        return@forEach
+                    }
+                }
+            }
+        }
+
+        return isInf
+    }
+
+    private fun isBinderInterface(sc: SootClass): Boolean {
         val supList =  sc.interfaces
         supList.forEach { sup ->
             if (sup.name == kServiceImplInterface) return true
