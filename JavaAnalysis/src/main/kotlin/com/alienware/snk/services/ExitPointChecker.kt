@@ -24,7 +24,7 @@ class VulnerableApiDesc(var binderCls: SootClass) {
     }
 }
 
-class ExitPointChecker(var mtd: SootMethod) {
+class ExitPointChecker(var entryMtd: SootMethod) {
 
     private val kRemoteCallback = "android.os.RemoteCallbackList"
 
@@ -40,7 +40,7 @@ class ExitPointChecker(var mtd: SootMethod) {
         params.forEach { t, u ->
             valueDefines[t] = u
         }
-        val body = SootTool.tryGetMethodBody(mtd)
+        val body = SootTool.tryGetMethodBody(entryMtd)
         // find value defines
         body?.units?.forEach { u ->
             if (u is AssignStmt) {
@@ -87,12 +87,12 @@ class ExitPointChecker(var mtd: SootMethod) {
         val cur = invoke.method
         val clsName = cur.declaringClass.name
         if (clsName == kRemoteCallback) {
-            return VulnerableApiDesc(mtd.declaringClass)
+            return VulnerableApiDesc(entryMtd.declaringClass)
         }
         if (clsName in listClassTypes) {
             for (arg in invoke.args) {
                 println(arg)
-                backwardResolveValueType(cur, arg)
+                backwardResolveValueType(entryMtd, arg)
                 if (arg is Local) {
                     val valCls = valueDefines[arg]
                     if (valCls != null && ServiceImplExtractor.isBinderInterface(valCls)) {
@@ -103,7 +103,7 @@ class ExitPointChecker(var mtd: SootMethod) {
             }
             println(invoke)
             println(valueDefines)
-            DebugTool.exitHere("Contain Exit list in $mtd -> $cur")
+            DebugTool.exitHere("Contain Exit list in $entryMtd -> $cur")
         }
 
         return null
@@ -112,7 +112,7 @@ class ExitPointChecker(var mtd: SootMethod) {
     private fun backwardResolveValueType(mtd: SootMethod, v: Value): SootClass? {
         val body = SootTool.tryGetMethodBody(mtd)
         body?.units?.forEach { u ->
-            println(u)
+            println("${u.javaClass} $u")
         }
         return null
     }
