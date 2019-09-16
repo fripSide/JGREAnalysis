@@ -56,6 +56,7 @@ object VulnerabilitiesDetecting {
 
     fun dumpVul() {
         vulSet.forEach { println("Find Vul: $it") }
+        println("Total Size: ${vulSet.size}")
     }
 
     private fun getPublicApis(sc: SootClass): HashSet<String> {
@@ -86,10 +87,11 @@ object VulnerabilitiesDetecting {
 
 private fun analysisOneCls(cls: SootClass) {
     val inf = SootTool.getInfForImpl(cls)
-
+    println("$cls $inf")
     if (cls == inf) {
         cls.methods.forEach { mtd ->
-            val cg = CallGraphAnalysis(1)
+//            println("all method: $mtd")
+            val cg = CallGraphAnalysis(2)
             val vul = cg.analysisEntryPoint(mtd)
             if (vul != null) {
                 println("Vul Detect: $vul")
@@ -101,47 +103,58 @@ private fun analysisOneCls(cls: SootClass) {
     VulnerabilitiesDetecting.dumpVul()
 }
 
+/*
+TODO:
+"com.android.server.AppOpsService" -> inf
+"com.android.server.DeviceIdleController\$BinderService" -> get Interface
+ */
 fun quickAnalysis() {
     var clsPath = CONFIG.ANDROID_JAR
     clsPath = "cls/"
     SootTool.initSootSimply("", clsPath)
 
     // TaskChangeNotificationController
-//    run {
-//        val focusCls = "com.android.server.am.ActivityManagerService"
-//        val focusMtd = "registerReceiver"
-//        val cls = Scene.v().getSootClass(focusCls)
+    run {
+        val focusCls = "com.android.server.DeviceIdleController\$BinderService"
+        val cls = Scene.v().getSootClass(focusCls)
+//        val focusMtd = "registerMaintenanceActivityListener"
 //        val mtd = cls.getMethodByName(focusMtd)
 //        val cg = CallGraphAnalysis()
 //        val vul = cg.analysisEntryPoint(mtd)
 //        if (vul != null) {
 //            println("Vul Detect: $vul")
 //        }
-//        analysisOneCls(cls)
-//    }
+        analysisOneCls(cls)
+    }
 
     val targetCls = listOf("com.android.server.accessibility.AccessibilityManagerService",
             "com.android.server.am.ActivityManagerService",
-            "com.android.server.AppOpsService")
+            "com.android.server.AppOpsService",
+            "com.android.server.audio.AudioService",
+            "com.android.server.autofill.AutofillManagerService\$AutoFillManagerServiceStub",
+            "com.android.server.clipboard.ClipboardService\$ClipboardImpl",
+            "com.android.server.CountryDetectorService",
+            "com.android.server.DeviceIdleController\$BinderService",
+            "")
 
-    for (clsName in targetCls) {
-        val cls = Scene.v().getSootClass(clsName)
-        val inf = SootTool.getInfForImpl(cls)
-        println("$cls $inf")
-
-        if (cls == inf) {
-            cls.methods.forEach { mtd ->
-                val cg = CallGraphAnalysis(1)
-                val vul = cg.analysisEntryPoint(mtd)
-                if (vul != null) {
-                    println("Vul Detect: $vul")
-                }
-            }
-        } else {
-            VulnerabilitiesDetecting.analysisImplClass(cls, inf)
-        }
-    }
-    VulnerabilitiesDetecting.dumpVul()
+//    for (clsName in targetCls) {
+//        val cls = Scene.v().getSootClass(clsName)
+//        val inf = SootTool.getInfForImpl(cls)
+//        println("$cls $inf")
+//
+//        if (cls == inf) {
+//            cls.methods.forEach { mtd ->
+//                val cg = CallGraphAnalysis(1)
+//                val vul = cg.analysisEntryPoint(mtd)
+//                if (vul != null) {
+//                    println("Vul Detect: $vul")
+//                }
+//            }
+//        } else {
+//            VulnerabilitiesDetecting.analysisImplClass(cls, inf)
+//        }
+//    }
+//    VulnerabilitiesDetecting.dumpVul()
 }
 
 fun runDetecting(apiList: ServiceApiList) {
