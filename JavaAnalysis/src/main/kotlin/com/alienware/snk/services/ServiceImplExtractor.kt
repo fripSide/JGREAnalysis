@@ -217,21 +217,21 @@ object ServiceImplExtractor {
         val cls  = impl.implClass
         if (cls == null || cls.isInterface) return
         impl.inf = SootTool.getInfForImpl(cls)
-        val hir = Scene.v().activeHierarchy
-        val supList = hir.getSuperclassesOf(cls)
-        supList.forEach { sup -> // stub
-            val infList = sup.interfaces
-//            println(infList)
-            for (inf in infList) {
-                for (supInf in inf.interfaces) {
-                    if (supInf.name == kServiceImplInterface) {
-                        impl.inf = inf
-//                        println("Find sup: $sup")
-                        return@forEach
-                    }
-                }
-            }
-        }
+//        val hir = Scene.v().activeHierarchy
+//        val supList = hir.getSuperclassesOf(cls)
+//        supList.forEach { sup -> // stub
+//            val infList = sup.interfaces
+////            println(infList)
+//            for (inf in infList) {
+//                for (supInf in inf.interfaces) {
+//                    if (supInf.name == kServiceImplInterface) {
+//                        impl.inf = inf
+////                        println("Find sup: $sup")
+//                        return@forEach
+//                    }
+//                }
+//            }
+//        }
 
     }
 }

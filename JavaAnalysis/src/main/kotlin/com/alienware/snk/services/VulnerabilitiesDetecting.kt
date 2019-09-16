@@ -2,6 +2,7 @@ package com.alienware.snk.services
 
 import ServiceApiList
 import com.alienware.snk.CONFIG
+import com.alienware.snk.utils.DebugTool
 import com.alienware.snk.utils.LogNow
 import com.alienware.snk.utils.SootTool
 import soot.Scene
@@ -33,19 +34,28 @@ object VulnerabilitiesDetecting {
         }
     }
 
-    private fun analysisImplClass(sc: SootClass, inf: SootClass?) {
+    fun analysisImplClass(sc: SootClass, inf: SootClass?) {
         LogNow.info("Start to analysis $sc")
         val methods = getPublicApis(inf!!)
-        methods.forEach { mtd ->
-            println(mtd)
-        }
+//        methods.forEach { mtd ->
+//            println(mtd)
+//        }
         sc.methods.forEach { mtd ->
             if (mtd.subSignature in methods) {
                 if (analysisOneFunction(mtd)) {
                     vulSet.add(mtd)
                 }
+            } else {
+//                println("not in ${mtd.subSignature} $methods")
+//                if (mtd.name == "addAccessibilityInteractionConnection") {
+//                    DebugTool.exitHere()
+//                }
             }
         }
+    }
+
+    fun dumpVul() {
+        vulSet.forEach { println("Find Vul: $it") }
     }
 
     private fun getPublicApis(sc: SootClass): HashSet<String> {
@@ -59,9 +69,9 @@ object VulnerabilitiesDetecting {
     }
 
     private fun analysisOneFunction(mtd: SootMethod): Boolean {
-        val focus = "addClient"
-        if (mtd.name != focus) return false
-        LogNow.info("Analysis native method: ${mtd.subSignature}")
+//        val focus = "addClient"
+//        if (mtd.name != focus) return false
+        LogNow.info("Analysis IPC method: ${mtd.subSignature}")
         val cg = CallGraphAnalysis()
         val vul = cg.analysisEntryPoint(mtd)
         if (vul != null) {
@@ -74,16 +84,64 @@ object VulnerabilitiesDetecting {
 
 }
 
+private fun analysisOneCls(cls: SootClass) {
+    val inf = SootTool.getInfForImpl(cls)
+
+    if (cls == inf) {
+        cls.methods.forEach { mtd ->
+            val cg = CallGraphAnalysis(1)
+            val vul = cg.analysisEntryPoint(mtd)
+            if (vul != null) {
+                println("Vul Detect: $vul")
+            }
+        }
+    } else {
+        VulnerabilitiesDetecting.analysisImplClass(cls, inf)
+    }
+    VulnerabilitiesDetecting.dumpVul()
+}
+
 fun quickAnalysis() {
     var clsPath = CONFIG.ANDROID_JAR
     clsPath = "cls/"
     SootTool.initSootSimply("", clsPath)
-    val focusCls = "com.android.server.accessibility.AccessibilityManagerService"
-    val cls = Scene.v().getSootClass(focusCls)
-    val mtd = cls.getMethodByName("addAccessibilityInteractionConnection")
-    val cg = CallGraphAnalysis()
-    val vul = cg.analysisEntryPoint(mtd)
-    println(vul)
+
+    // TaskChangeNotificationController
+//    run {
+//        val focusCls = "com.android.server.am.ActivityManagerService"
+//        val focusMtd = "registerReceiver"
+//        val cls = Scene.v().getSootClass(focusCls)
+//        val mtd = cls.getMethodByName(focusMtd)
+//        val cg = CallGraphAnalysis()
+//        val vul = cg.analysisEntryPoint(mtd)
+//        if (vul != null) {
+//            println("Vul Detect: $vul")
+//        }
+//        analysisOneCls(cls)
+//    }
+
+    val targetCls = listOf("com.android.server.accessibility.AccessibilityManagerService",
+            "com.android.server.am.ActivityManagerService",
+            "com.android.server.AppOpsService")
+
+    for (clsName in targetCls) {
+        val cls = Scene.v().getSootClass(clsName)
+        val inf = SootTool.getInfForImpl(cls)
+        println("$cls $inf")
+
+        if (cls == inf) {
+            cls.methods.forEach { mtd ->
+                val cg = CallGraphAnalysis(1)
+                val vul = cg.analysisEntryPoint(mtd)
+                if (vul != null) {
+                    println("Vul Detect: $vul")
+                }
+            }
+        } else {
+            VulnerabilitiesDetecting.analysisImplClass(cls, inf)
+        }
+    }
+    VulnerabilitiesDetecting.dumpVul()
 }
 
 fun runDetecting(apiList: ServiceApiList) {

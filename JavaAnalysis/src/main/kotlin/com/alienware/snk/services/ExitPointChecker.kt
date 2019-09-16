@@ -1,6 +1,7 @@
 package com.alienware.snk.services
 
 import com.alienware.snk.utils.DebugTool
+import com.alienware.snk.utils.LogNow
 import com.alienware.snk.utils.SootTool
 import soot.*
 import soot.jimple.AssignStmt
@@ -8,7 +9,9 @@ import soot.jimple.InterfaceInvokeExpr
 import soot.jimple.InvokeExpr
 import soot.jimple.Stmt
 import soot.jimple.internal.JInstanceFieldRef
+import soot.jimple.internal.JInterfaceInvokeExpr
 import soot.jimple.internal.JNewExpr
+import soot.jimple.internal.JimpleLocal
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -20,20 +23,24 @@ class ExitPoint(var mtd: SootMethod) {
 class VulnerableApiDesc(var binderCls: SootClass) {
     var entryPoint: SootMethod? = null
     var callChain = LinkedList<SootMethod>()
+    var listTag: String = ""
 
     override fun toString(): String {
-        return "$entryPoint Calls: $callChain By cls: $binderCls"
+        return "$entryPoint Calls: $callChain By $listTag -> $binderCls"
     }
 }
 
 class ExitPointChecker(var entryMtd: SootMethod) {
 
     private val kRemoteCallback = "android.os.RemoteCallbackList"
+    private val kRemoteListRegisterName = "register"
 
-    private val listClassTypes = hashSetOf("android.util.SparseArray")
+    private val listClassTypes = hashSetOf("android.util.SparseArray", "java.util.HashMap", "android.util.ArrayMap")
+    private val listAddMethods = hashSetOf("add", "put")
 
     private val kIBinderInf = "android.os.IBinder"
     private val kLinkToDeathCls = "android.os.IBinder\$DeathRecipient"
+    private val kAsBinder = "asBinder"
 
     val valueDefines = HashMap<Local, SootClass>()
 
@@ -42,6 +49,7 @@ class ExitPointChecker(var entryMtd: SootMethod) {
     val vulDetail = StringBuilder()
 
     fun containBinderList(params: HashMap<Local, SootClass>): VulnerableApiDesc? {
+//        println("containBinderList: $entryMtd")
         params.forEach { t, u ->
             valueDefines[t] = u
         }
@@ -53,7 +61,8 @@ class ExitPointChecker(var entryMtd: SootMethod) {
             }
         }
 
-        println(valueDefines)
+//        println(valueDefines)
+//        println(pointToSet)
 
         // detect Binder list
         body?.units?.forEach { u ->
@@ -69,7 +78,7 @@ class ExitPointChecker(var entryMtd: SootMethod) {
     }
 
     private fun findValueDefines(u: AssignStmt) {
-        println("findValueDefines ${u.rightOp.javaClass} $u")
+//        LogNow.debug("findValueDefines ${u.rightOp.javaClass} $u")
         val left = u.leftOp
         val right = u.rightOp
         if (left is Local) {
@@ -79,14 +88,25 @@ class ExitPointChecker(var entryMtd: SootMethod) {
                 if (filed.type is RefType) {
                     val ref = filed.type as RefType
                     valueDefines[left] = ref.sootClass
-//                    println("=========ref $left = $ref ${ref.sootClass}")
                 }
 //                println(" right.field $filed ${filed.javaClass} ${filed.declaringClass} ${filed.type}")
             }
 
+            if (right is JimpleLocal) {
+                pointToSet[left] = right
+            }
+
             if (right is JNewExpr) {
                 val jn = right.type as RefType
-                addLocalDefine(left, jn.sootClass)
+//                addLocalDefine(left, jn.sootClass)
+                valueDefines[left] = jn.sootClass
+            }
+
+            if (right is JInterfaceInvokeExpr) {
+                val cls = resolveInterfaceInvoke(right)
+                if (cls != null) {
+                    valueDefines[left] = cls
+                }
             }
         }
     }
@@ -97,32 +117,27 @@ class ExitPointChecker(var entryMtd: SootMethod) {
         }
         val cur = invoke.method
         val clsName = cur.declaringClass.name
-        if (clsName == kRemoteCallback) {
-            return VulnerableApiDesc(entryMtd.declaringClass)
+        if (clsName == kRemoteCallback && cur.name == kRemoteListRegisterName) {
+            val vul = VulnerableApiDesc(entryMtd.declaringClass)
+            vul.listTag = clsName
+            LogNow.info("Contain RemoteList: $invoke ${invoke.method.signature}")
+            return vul
         }
-        if (clsName in listClassTypes) {
+        if (clsName in listClassTypes && cur.name in listAddMethods) {
             for (arg in invoke.args) {
-                println(arg)
-                backwardResolveValueType(entryMtd, arg)
                 if (arg is Local) {
-                    val valCls = valueDefines[arg]
+                    val valCls = getLocalDefine(arg)
                     if (valCls != null && isExitClass(valCls)) {
-                        println("Local isBinderInterface: $arg ${valueDefines[arg]}")
-
-                        return VulnerableApiDesc(valCls)
+                        LogNow.debug("Local isBinderInterface: $invoke $arg ${valueDefines[arg]}")
+                        val vul = VulnerableApiDesc(valCls)
+                        vul.listTag = clsName
+                        return vul
                     }
-                    println("Local value: $arg ${valueDefines[arg]}")
-                    if (valCls != null) {
-                        println(ServiceImplExtractor.isBinderClass(valCls))
-                        println(valCls.interfaces)
-
-                    }
-
+                    LogNow.debug("Local value: $arg ${valueDefines[arg]}")
                 }
             }
 
-            println(invoke)
-            println(valueDefines)
+
 //            DebugTool.exitHere("Contain Exit list in $entryMtd -> $cur")
         }
 
@@ -138,18 +153,6 @@ class ExitPointChecker(var entryMtd: SootMethod) {
         return false
     }
 
-    private fun backwardResolveValueType(mtd: SootMethod, v: Value): SootClass? {
-        val body = SootTool.tryGetMethodBody(mtd)
-        body?.units?.forEach { u ->
-            if (u is AssignStmt) {
-                val asi = u as AssignStmt
-
-            }
-
-        }
-        return null
-    }
-
     private fun getLocalPointTo(loc: Local): Local {
         var cur: Local? = loc
         while (cur != null && cur in pointToSet) {
@@ -160,9 +163,21 @@ class ExitPointChecker(var entryMtd: SootMethod) {
         return loc
     }
 
-    private fun addLocalDefine(loc: Local, sc: SootClass) {
+    private fun getLocalDefine(loc: Local): SootClass? {
         val key = getLocalPointTo(loc)
-        valueDefines[key] = sc
+        return valueDefines[key]
+    }
+
+    private fun resolveInterfaceInvoke(inv: JInterfaceInvokeExpr): SootClass? {
+        val mRef = inv.methodRef
+        if (mRef.name == kAsBinder) {
+            return mRef.declaringClass
+        }
+        val ref = mRef.returnType
+        if (ref is RefType) {
+            return ref.sootClass
+        }
+        return null
     }
 
     private fun checkHoldBinderInList() {

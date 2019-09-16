@@ -7,20 +7,27 @@ import soot.jimple.InterfaceInvokeExpr
 import soot.jimple.ParameterRef
 import soot.jimple.Stmt
 import java.util.*
+import kotlin.collections.HashSet
 
 /*
 Trace binder object.
 */
-class CallGraphAnalysis {
+class CallGraphAnalysis(var lev: Int = 2) {
+
+    val visitSet = HashSet<SootMethod>()
 
     fun analysisEntryPoint(mtd: SootMethod): VulnerableApiDesc? {
         val initial = LinkedList<SootMethod>()
-        val vul = callGraphAnalysis(mtd, initial)
+        val vul = callGraphAnalysis(mtd, initial, lev)
         vul?.entryPoint = mtd
         return vul
     }
 
-    private fun callGraphAnalysis(mtd: SootMethod, path: LinkedList<SootMethod>): VulnerableApiDesc? {
+    private fun callGraphAnalysis(mtd: SootMethod, path: LinkedList<SootMethod>, searchLev: Int = 2): VulnerableApiDesc? {
+        if (searchLev <= 0) return null
+        if (visitSet.contains(mtd)) return null
+        visitSet.add(mtd)
+
         path.add(mtd)
         val vul = checkOneMethod(mtd)
         if (vul != null) {
@@ -35,7 +42,8 @@ class CallGraphAnalysis {
                 val inv = stmt.invokeExpr
                 val np = LinkedList(path)
                 if (inv !is InterfaceInvokeExpr) {
-                    callGraphAnalysis(inv.method, np)
+                    val vul = callGraphAnalysis(inv.method, np, searchLev - 1)
+                    if (vul != null) return vul
                 }
             }
         }

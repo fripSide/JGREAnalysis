@@ -313,7 +313,7 @@ object SootTool {
             val cur = allCls.poll()
             if (cur == OBJECT) continue
 //            println("analysis $cur ${cur.isConcrete} ${cur.interfaces} ${cur.superclass}")
-            if (cur.superclass != OBJECT)
+            if (cur.superclass != null && cur.superclass != OBJECT)
                 allCls.add(cur.superclass)
 
             allCls.addAll(cur.interfaces)
