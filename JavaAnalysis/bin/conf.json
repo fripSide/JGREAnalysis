@@ -1,0 +1,5 @@
+{
+  "ANDROID_JAR": "bin/framework-lite.jar",
+  "DEBUG": false,
+  "LOG_LEV": "info"
+}
