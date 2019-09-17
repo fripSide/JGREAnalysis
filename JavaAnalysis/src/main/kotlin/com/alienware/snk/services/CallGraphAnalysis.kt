@@ -46,13 +46,13 @@ class CallGraphAnalysis(var lev: Int = 2) {
                     val methods = HashSet<SootMethod>()
                     // Resolve Implicit call
                     if (ImplicitCallResolver.isImplicitCall(inv)) {
-                        val mtds = ImplicitCallResolver().resolve(inv)
-                        methods.addAll(mtds)
+                        val mtdSet = ImplicitCallResolver().resolve(inv)
+                        methods.addAll(mtdSet)
                     } else {
                         methods.add(inv.method)
                     }
 
-                    for (m in methods) {
+                    for (m in methods) { // find the first one
                         val np = LinkedList(path)
                         val v2 = callGraphAnalysis(m, np, searchLev - 1)
                         if (v2 != null) return v2
