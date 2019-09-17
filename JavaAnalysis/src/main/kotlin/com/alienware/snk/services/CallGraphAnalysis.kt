@@ -25,6 +25,7 @@ class CallGraphAnalysis(var lev: Int = 2) {
     }
 
     private fun callGraphAnalysis(mtd: SootMethod, path: LinkedList<SootMethod>, searchLev: Int = 2): VulnerableApiDesc? {
+//        LogNow.info("Want to analysis calls: $mtd")
         if (searchLev <= 0) return null
         if (visitSet.contains(mtd)) return null
         visitSet.add(mtd)

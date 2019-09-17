@@ -33,7 +33,7 @@ class ExitPointChecker(var entryMtd: SootMethod) {
     private val kRemoteListRegisterName = "register"
 
     private val listClassTypes = hashSetOf("android.util.SparseArray", "java.util.HashMap", "android.util.ArrayMap",
-            "java.util.ArrayList")
+            "java.util.ArrayList", "java.util.Map", "java.util.List")
     private val listAddMethods = hashSetOf("add", "put")
 
     private val kIBinderInf = "android.os.IBinder"
@@ -45,9 +45,6 @@ class ExitPointChecker(var entryMtd: SootMethod) {
     fun containBinderList(): VulnerableApiDesc? {
         val body = SootTool.tryGetMethodBody(entryMtd)
         pointToAnalysis.run()
-
-//        println(valueDefines)
-//        println(pointToSet)
 
         // detect Binder list
         body?.units?.forEach { u ->
@@ -67,6 +64,7 @@ class ExitPointChecker(var entryMtd: SootMethod) {
         if (invoke is InterfaceInvokeExpr) {
             return null
         }
+//        println("detectAddToList $invoke")
         val cur = invoke.method
         val clsName = cur.declaringClass.name
         if (clsName == kRemoteCallback && cur.name == kRemoteListRegisterName) {
@@ -105,10 +103,25 @@ class ExitPointChecker(var entryMtd: SootMethod) {
     }
 
     private fun isExitClass(sc: SootClass): Boolean {
+//        println("Check isExitClass: $sc")
         if (ServiceImplExtractor.isBinderClass(sc)) return true
 
         sc.interfaces.forEach { inf ->
             if (inf.name.startsWith(kIBinderInf)) return true
+        }
+
+        sc.fields.forEach { fi ->
+            val ref = fi.makeRef()
+            val ty = ref.type()
+            if (ty is RefType) {
+                val cls = ty.sootClass
+                if (cls.name == kIBinderInf) {
+                    return true
+                }
+                cls.interfaces.forEach { inf ->
+                    if (inf.name.startsWith(kIBinderInf)) return true
+                }
+            }
         }
         return false
     }

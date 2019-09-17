@@ -1,5 +1,6 @@
 package com.alienware.snk.services
 
+import com.alienware.snk.utils.LogNow
 import com.alienware.snk.utils.SootTool
 import soot.Local
 import soot.RefType
@@ -36,6 +37,7 @@ class PointToAnalysis(var entryMtd: SootMethod) {
         val body = SootTool.tryGetMethodBody(entryMtd)
         // find value defines
         body?.units?.forEach { u ->
+//            println("${u.javaClass} $u")
             if (u is AssignStmt) {
                 findValueDefines(u)
             }
@@ -56,6 +58,8 @@ class PointToAnalysis(var entryMtd: SootMethod) {
 //        LogNow.debug("findValueDefines ${u.rightOp.javaClass} $u")
         val left = u.leftOp
         val right = u.rightOp
+
+
         if (left is Local) {
             if (right is JInstanceFieldRef) {
                 val filed = right.field
@@ -76,6 +80,7 @@ class PointToAnalysis(var entryMtd: SootMethod) {
 //                addLocalDefine(left, jn.sootClass)
                 valueDefines[left] = jn.sootClass
                 localValues.add(left)
+                LogNow.info("Is Local value: $left $u ${getLocalPointTo(left)}")
             }
 
             // binder define
