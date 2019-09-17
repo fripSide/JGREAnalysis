@@ -95,7 +95,9 @@ class PointToAnalysis(var entryMtd: SootMethod) {
 
     private fun getLocalPointTo(loc: Local): Local {
         var cur: Local? = loc
-        while (cur != null && cur in pointToSet) {
+        val visitSet = hashSetOf<Local>()
+        while (cur != null && cur in pointToSet && !visitSet.contains(cur)) {
+            visitSet.add(cur)
             val nxt = pointToSet[cur]
             if (nxt == null) return cur
             cur = nxt

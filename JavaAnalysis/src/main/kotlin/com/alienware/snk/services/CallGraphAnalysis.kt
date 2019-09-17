@@ -31,7 +31,7 @@ class CallGraphAnalysis(var lev: Int = 2) {
         visitSet.add(mtd)
         path.add(mtd)
         val vul = checkOneMethod(mtd)
-//        LogNow.info("Analysis calls: $mtd")
+        LogNow.info("Analysis calls: $mtd")
         if (vul != null) {
             vul.callChain = path
             return vul

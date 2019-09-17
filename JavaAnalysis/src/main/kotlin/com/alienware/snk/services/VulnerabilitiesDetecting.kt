@@ -2,12 +2,13 @@ package com.alienware.snk.services
 
 import ServiceApiList
 import com.alienware.snk.CONFIG
-import com.alienware.snk.utils.DebugTool
 import com.alienware.snk.utils.LogNow
 import com.alienware.snk.utils.SootTool
+import com.alienware.snk.utils.Statistics
 import soot.Scene
 import soot.SootClass
 import soot.SootMethod
+import java.lang.StringBuilder
 
 object VulnerabilitiesDetecting {
 
@@ -62,6 +63,10 @@ object VulnerabilitiesDetecting {
     fun dumpVul() {
         vulSet.forEach { println("Find Vul: ${vulMap[it]}") }
         println("Total Size: ${vulSet.size}")
+
+        saveSummary()
+
+        saveDetail()
     }
 
     private fun getPublicApis(sc: SootClass): HashSet<String> {
@@ -88,6 +93,31 @@ object VulnerabilitiesDetecting {
         return false
     }
 
+
+    private fun saveSummary() {
+        val data = StringBuilder()
+        val results = HashMap<String, HashSet<String>>()
+        vulMap.values.forEach { vul ->
+            val mtd = vul.entryPoint!!
+            val clsName = mtd.declaringClass.name
+            if (clsName !in results) {
+                results[clsName] = HashSet<String>()
+            }
+            results[clsName]!!.add(mtd.signature)
+        }
+
+        results.forEach { t, u ->
+            data.append("$t (${u.size})\n")
+            u.forEach { it ->
+                data.append("\t$it\n")
+            }
+        }
+        Statistics.saveResult(data.toString(), Statistics.RESULTS_TXT)
+    }
+
+    private fun saveDetail() {
+
+    }
 }
 
 private fun analysisOneCls(cls: SootClass) {
@@ -144,16 +174,16 @@ fun quickAnalysis() {
 
     // TaskChangeNotificationController
     run {
-        val focusCls = "com.android.server.wifi.WifiServiceImpl"
+        val focusCls = "com.android.server.am.ActivityManagerService"
         val cls = Scene.v().getSootClass(focusCls)
-//        val focusMtd = "listenForSubscriber"
-//        val mtd = cls.getMethodByName(focusMtd)
-//        val cg = CallGraphAnalysis(3)
-//        val vul = cg.analysisEntryPoint(mtd)
-//        if (vul != null) {
-//            println("Vul Detect: $vul")
-//        }
-        analysisOneCls(cls)
+        val focusMtd = "attachApplication"
+        val mtd = cls.getMethodByName(focusMtd)
+        val cg = CallGraphAnalysis(3)
+        val vul = cg.analysisEntryPoint(mtd)
+        if (vul != null) {
+            println("Vul Detect: $vul")
+        }
+//        analysisOneCls(cls)
     }
 
     val targetCls = listOf("com.android.server.accessibility.AccessibilityManagerService",
@@ -174,27 +204,26 @@ fun quickAnalysis() {
             "com.android.server.print.PrintManagerService\$PrintManagerImpl",
             "com.android.server.TelephonyRegistry",
             "com.android.server.wallpaper.WallpaperManagerService",
-            "com.android.server.wifi.WifiServiceImpl",
-            "")
+            "com.android.server.wifi.WifiServiceImpl")
 
-//    for (clsName in targetCls) {
-//        val cls = Scene.v().getSootClass(clsName)
-//        val inf = SootTool.getInfForImpl(cls)
-//        println("$cls $inf")
-//
-//        if (cls == inf) {
-//            cls.methods.forEach { mtd ->
-//                val cg = CallGraphAnalysis(1)
-//                val vul = cg.analysisEntryPoint(mtd)
-//                if (vul != null) {
-//                    println("Vul Detect: $vul")
-//                }
-//            }
-//        } else {
-//            VulnerabilitiesDetecting.analysisImplClass(cls, inf)
-//        }
-//    }
-//    VulnerabilitiesDetecting.dumpVul()
+    for (clsName in targetCls) {
+        val cls = Scene.v().getSootClass(clsName)
+        val inf = SootTool.getInfForImpl(cls)
+        println("$cls $inf")
+
+        if (cls == inf) {
+            cls.methods.forEach { mtd ->
+                val cg = CallGraphAnalysis(1)
+                val vul = cg.analysisEntryPoint(mtd)
+                if (vul != null) {
+                    println("Vul Detect: $vul")
+                }
+            }
+        } else {
+            VulnerabilitiesDetecting.analysisImplClass(cls, inf)
+        }
+    }
+    VulnerabilitiesDetecting.dumpVul()
 }
 
 fun runDetecting(apiList: ServiceApiList) {

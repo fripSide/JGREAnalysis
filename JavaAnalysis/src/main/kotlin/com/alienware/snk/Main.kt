@@ -15,9 +15,9 @@ import java.io.File
 
 fun runAnalysis() {
     LogNow.show("Start to run JGREAnalyzer:")
-    quickAnalysis()
-//    val apiList = runIPCExtractor()
-//    runDetecting(apiList)
+//    quickAnalysis()
+    val apiList = runIPCExtractor()
+    runDetecting(apiList)
 }
 
 open class Main {

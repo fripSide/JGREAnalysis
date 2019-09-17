@@ -12,10 +12,7 @@ import java.util.*
 import kotlin.collections.HashMap
 import kotlin.collections.HashSet
 
-class ExitPoint(var mtd: SootMethod) {
-    var isNative: Boolean =  false
-    var isBinder: Boolean = false
-}
+//data class VulData()
 
 class VulnerableApiDesc(var binderCls: SootClass) {
     var entryPoint: SootMethod? = null
@@ -24,6 +21,10 @@ class VulnerableApiDesc(var binderCls: SootClass) {
 
     override fun toString(): String {
         return "$entryPoint Calls: $callChain By $listTag -> $binderCls"
+    }
+
+    fun getData() {
+
     }
 }
 
@@ -43,12 +44,12 @@ class ExitPointChecker(var entryMtd: SootMethod) {
     private val pointToAnalysis = PointToAnalysis(entryMtd)
 
     fun containBinderList(): VulnerableApiDesc? {
+//        println("containBinderList: $entryMtd")
         val body = SootTool.tryGetMethodBody(entryMtd)
         pointToAnalysis.run()
 
         // detect Binder list
         body?.units?.forEach { u ->
-//            println("${u.javaClass} $u")
             val stmt = u as Stmt
             if (stmt.containsInvokeExpr()) {
                 val invoke = stmt.invokeExpr

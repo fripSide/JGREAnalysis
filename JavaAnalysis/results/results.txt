@@ -1,0 +1,40 @@
+com.android.server.midi.MidiService (5)
+	<com.android.server.midi.MidiService: void closeDevice(android.os.IBinder,android.os.IBinder)>
+	<com.android.server.midi.MidiService: void unregisterListener(android.os.IBinder,android.media.midi.IMidiDeviceListener)>
+	<com.android.server.midi.MidiService: void openDevice(android.os.IBinder,android.media.midi.MidiDeviceInfo,android.media.midi.IMidiDeviceOpenCallback)>
+	<com.android.server.midi.MidiService: void openBluetoothDevice(android.os.IBinder,android.bluetooth.BluetoothDevice,android.media.midi.IMidiDeviceOpenCallback)>
+	<com.android.server.midi.MidiService: void registerListener(android.os.IBinder,android.media.midi.IMidiDeviceListener)>
+com.android.server.media.MediaSessionService$SessionManagerImpl (1)
+	<com.android.server.media.MediaSessionService$SessionManagerImpl: void addSessionsListener(android.media.session.IActiveSessionsListener,android.content.ComponentName,int)>
+com.android.server.accessibility.AccessibilityManagerService (2)
+	<com.android.server.accessibility.AccessibilityManagerService: int addAccessibilityInteractionConnection(android.view.IWindow,android.view.accessibility.IAccessibilityInteractionConnection,java.lang.String,int)>
+	<com.android.server.accessibility.AccessibilityManagerService: long addClient(android.view.accessibility.IAccessibilityManagerClient,int)>
+com.android.server.CountryDetectorService (1)
+	<com.android.server.CountryDetectorService: void addCountryListener(android.location.ICountryListener)>
+com.android.server.media.MediaRouterService (1)
+	<com.android.server.media.MediaRouterService: void registerClientAsUser(android.media.IMediaRouterClient,java.lang.String,int)>
+com.android.server.wallpaper.WallpaperManagerService (2)
+	<com.android.server.wallpaper.WallpaperManagerService: void registerWallpaperColorsCallback(android.app.IWallpaperManagerCallback,int)>
+	<com.android.server.wallpaper.WallpaperManagerService: android.os.ParcelFileDescriptor getWallpaper(java.lang.String,android.app.IWallpaperManagerCallback,int,android.os.Bundle,int)>
+com.android.server.ethernet.EthernetServiceImpl (1)
+	<com.android.server.ethernet.EthernetServiceImpl: void addListener(android.net.IEthernetServiceListener)>
+com.android.server.audio.AudioService (7)
+	<com.android.server.audio.AudioService: void forceRemoteSubmixFullVolume(boolean,android.os.IBinder)>
+	<com.android.server.audio.AudioService: void registerRecordingCallback(android.media.IRecordingConfigDispatcher)>
+	<com.android.server.audio.AudioService: void stopBluetoothSco(android.os.IBinder)>
+	<com.android.server.audio.AudioService: void registerAudioServerStateDispatcher(android.media.IAudioServerStateDispatcher)>
+	<com.android.server.audio.AudioService: java.lang.String registerAudioPolicy(android.media.audiopolicy.AudioPolicyConfig,android.media.audiopolicy.IAudioPolicyCallback,boolean,boolean,boolean)>
+	<com.android.server.audio.AudioService: void registerPlaybackCallback(android.media.IPlaybackConfigDispatcher)>
+	<com.android.server.audio.AudioService: android.media.AudioRoutesInfo startWatchingRoutes(android.media.IAudioRoutesObserver)>
+com.android.server.am.ActivityManagerService (7)
+	<com.android.server.am.ActivityManagerService: void registerProcessObserver(android.app.IProcessObserver)>
+	<com.android.server.am.ActivityManagerService: android.content.Intent registerReceiver(android.app.IApplicationThread,java.lang.String,android.content.IIntentReceiver,android.content.IntentFilter,java.lang.String,int,int)>
+	<com.android.server.am.ActivityManagerService: int bindService(android.app.IApplicationThread,android.os.IBinder,android.content.Intent,java.lang.String,android.app.IServiceConnection,int,java.lang.String,int)>
+	<com.android.server.am.ActivityManagerService: void registerTaskStackListener(android.app.ITaskStackListener)>
+	<com.android.server.am.ActivityManagerService: void registerUidObserver(android.app.IUidObserver,int,int,java.lang.String)>
+	<com.android.server.am.ActivityManagerService: void registerIntentSenderCancelListener(android.content.IIntentSender,com.android.internal.os.IResultReceiver)>
+	<com.android.server.am.ActivityManagerService: void registerUserSwitchObserver(android.app.IUserSwitchObserver,java.lang.String)>
+com.android.server.wifi.WifiServiceImpl (1)
+	<com.android.server.wifi.WifiServiceImpl: int startLocalOnlyHotspot(android.os.Messenger,android.os.IBinder,java.lang.String)>
+com.android.server.autofill.AutofillManagerService$AutoFillManagerServiceStub (1)
+	<com.android.server.autofill.AutofillManagerService$AutoFillManagerServiceStub: int addClient(android.view.autofill.IAutoFillManagerClient,int)>

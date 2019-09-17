@@ -8,6 +8,8 @@ object Statistics {
 
     val SAVE_SERVICE_API = "service_api.json"
 
+    val RESULTS_TXT = "results.txt"
+
     init {
         if (!File(SAVE_DIR).exists()) {
             File(SAVE_DIR).mkdir()
