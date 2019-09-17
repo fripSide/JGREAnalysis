@@ -132,6 +132,10 @@ Level 3:
 com.android.server.TelephonyRegistry
 listenForSubscriber
 
+TODO:
+1.Wallpaper extract
+2. wifi
+
  */
 fun quickAnalysis() {
     var clsPath = CONFIG.ANDROID_JAR
