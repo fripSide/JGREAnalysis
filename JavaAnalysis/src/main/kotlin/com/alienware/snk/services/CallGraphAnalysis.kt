@@ -1,5 +1,6 @@
 package com.alienware.snk.services
 
+import com.alienware.snk.utils.LogNow
 import com.alienware.snk.utils.SootTool
 import soot.*
 import soot.jimple.IdentityStmt
@@ -27,9 +28,9 @@ class CallGraphAnalysis(var lev: Int = 2) {
         if (searchLev <= 0) return null
         if (visitSet.contains(mtd)) return null
         visitSet.add(mtd)
-
         path.add(mtd)
         val vul = checkOneMethod(mtd)
+//        LogNow.info("Analysis calls: $mtd")
         if (vul != null) {
             vul.callChain = path
             return vul
@@ -37,13 +38,15 @@ class CallGraphAnalysis(var lev: Int = 2) {
 
         val body = SootTool.tryGetMethodBody(mtd)
         body?.units?.forEach { u ->
+//            println("${u.javaClass} $u")
             val stmt = u as Stmt
             if (stmt.containsInvokeExpr()) {
                 val inv = stmt.invokeExpr
                 val np = LinkedList(path)
                 if (inv !is InterfaceInvokeExpr) {
-                    val vul = callGraphAnalysis(inv.method, np, searchLev - 1)
-                    if (vul != null) return vul
+
+                    val v2 = callGraphAnalysis(inv.method, np, searchLev - 1)
+                    if (v2 != null) return v2
                 }
             }
         }

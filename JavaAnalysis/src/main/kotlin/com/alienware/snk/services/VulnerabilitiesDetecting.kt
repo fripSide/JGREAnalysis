@@ -55,7 +55,7 @@ object VulnerabilitiesDetecting {
     }
 
     fun dumpVul() {
-        vulSet.forEach { println("Find Vul: $it") }
+        vulSet.forEach { println("Find Vul: ${vulMap[it]}") }
         println("Total Size: ${vulSet.size}")
     }
 
@@ -90,11 +90,13 @@ private fun analysisOneCls(cls: SootClass) {
     println("$cls $inf")
     if (cls == inf) {
         cls.methods.forEach { mtd ->
-//            println("all method: $mtd")
-            val cg = CallGraphAnalysis(2)
-            val vul = cg.analysisEntryPoint(mtd)
-            if (vul != null) {
-                println("Vul Detect: $vul")
+            if (mtd.isPublic) {
+                println("all method: $mtd")
+                val cg = CallGraphAnalysis(2)
+                val vul = cg.analysisEntryPoint(mtd)
+                if (vul != null) {
+                    println("Vul Detect: $vul")
+                }
             }
         }
     } else {
@@ -105,8 +107,19 @@ private fun analysisOneCls(cls: SootClass) {
 
 /*
 TODO:
-"com.android.server.AppOpsService" -> inf
-"com.android.server.DeviceIdleController\$BinderService" -> get Interface
+False Positive:
+<com.android.server.midi.MidiService: void unregisterListener -> get and add before delete
+
+FN:
+"com.android.server.fingerprint.FingerprintService\$FingerprintServiceWrapper" -> Handler Implicit Call
+MidiService.registerDeviceServer, exceed max level
+
+
+Is not service API:
+MediaSessionRecord.registerCallbackListener
+MediaSessionService.createSession
+
+
  */
 fun quickAnalysis() {
     var clsPath = CONFIG.ANDROID_JAR
@@ -115,9 +128,9 @@ fun quickAnalysis() {
 
     // TaskChangeNotificationController
     run {
-        val focusCls = "com.android.server.DeviceIdleController\$BinderService"
+        val focusCls = "com.android.server.midi.MidiService"
         val cls = Scene.v().getSootClass(focusCls)
-//        val focusMtd = "registerMaintenanceActivityListener"
+//        val focusMtd = "getSessions"
 //        val mtd = cls.getMethodByName(focusMtd)
 //        val cg = CallGraphAnalysis()
 //        val vul = cg.analysisEntryPoint(mtd)
@@ -135,6 +148,12 @@ fun quickAnalysis() {
             "com.android.server.clipboard.ClipboardService\$ClipboardImpl",
             "com.android.server.CountryDetectorService",
             "com.android.server.DeviceIdleController\$BinderService",
+            "com.android.server.ethernet.EthernetServiceImpl",
+            "com.android.server.fingerprint.FingerprintService\$FingerprintServiceWrapper",
+            "com.android.server.input.InputManagerService",
+            "com.android.server.media.MediaRouterService",
+            "com.android.server.media.MediaSessionService\$SessionManagerImpl",
+            "com.android.server.midi.MidiService",
             "")
 
 //    for (clsName in targetCls) {

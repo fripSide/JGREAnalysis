@@ -2,14 +2,11 @@ package com.alienware.snk.utils
 
 import soot.*
 import soot.jimple.*
-import soot.jimple.internal.ImmediateBox
-import soot.jimple.internal.JInstanceFieldRef
-import soot.jimple.internal.JVirtualInvokeExpr
-import soot.jimple.internal.JimpleLocal
 import soot.jimple.spark.SparkTransformer
 import soot.options.Options
 import soot.jimple.ReturnVoidStmt
 import soot.jimple.IdentityStmt
+import soot.jimple.internal.*
 import java.util.*
 import kotlin.collections.HashSet
 
@@ -385,5 +382,14 @@ object SootTool {
             }
         }
         return false
+    }
+
+    fun getInvokeLocalFiled(inv: InvokeExpr): Local? {
+        inv.useBoxes.forEach { u ->
+            if (u is JimpleLocalBox && u.value is Local) {
+                return u.value as Local
+            }
+        }
+        return null
     }
 }
