@@ -1,6 +1,5 @@
 package com.alienware.snk.services
 
-import com.alienware.snk.utils.DebugTool
 import com.alienware.snk.utils.LogNow
 import com.alienware.snk.utils.SootTool
 import soot.*
@@ -41,26 +40,11 @@ class ExitPointChecker(var entryMtd: SootMethod) {
     private val kLinkToDeathCls = "android.os.IBinder\$DeathRecipient"
     private val kAsBinder = "asBinder"
 
-    val valueDefines = HashMap<Local, SootClass>()
+    private val pointToAnalysis = PointToAnalysis(entryMtd)
 
-    val pointToSet = HashMap<Local, Local>()
-
-    val localValues = HashSet<Local>()
-
-    val vulDetail = StringBuilder()
-
-    fun containBinderList(params: HashMap<Local, SootClass>): VulnerableApiDesc? {
-//        println("containBinderList: $entryMtd")
-        params.forEach { t, u ->
-            valueDefines[t] = u
-        }
+    fun containBinderList(): VulnerableApiDesc? {
         val body = SootTool.tryGetMethodBody(entryMtd)
-        // find value defines
-        body?.units?.forEach { u ->
-            if (u is AssignStmt) {
-                findValueDefines(u)
-            }
-        }
+        pointToAnalysis.run()
 
 //        println(valueDefines)
 //        println(pointToSet)
@@ -79,41 +63,6 @@ class ExitPointChecker(var entryMtd: SootMethod) {
         return null
     }
 
-    private fun findValueDefines(u: AssignStmt) {
-//        LogNow.debug("findValueDefines ${u.rightOp.javaClass} $u")
-        val left = u.leftOp
-        val right = u.rightOp
-        if (left is Local) {
-            if (right is JInstanceFieldRef) {
-                val filed = right.field
-                // is Class
-                if (filed.type is RefType) {
-                    val ref = filed.type as RefType
-                    valueDefines[left] = ref.sootClass
-                }
-//                println(" right.field $filed ${filed.javaClass} ${filed.declaringClass} ${filed.type}")
-            }
-
-            if (right is JimpleLocal) {
-                pointToSet[left] = right
-            }
-
-            if (right is JNewExpr) {
-                val jn = right.type as RefType
-//                addLocalDefine(left, jn.sootClass)
-                valueDefines[left] = jn.sootClass
-                localValues.add(left)
-            }
-
-            if (right is JInterfaceInvokeExpr) {
-                val cls = resolveInterfaceInvoke(right)
-                if (cls != null) {
-                    valueDefines[left] = cls
-                }
-            }
-        }
-    }
-
     private fun detectAddToList(invoke: InvokeExpr): VulnerableApiDesc? {
         if (invoke is InterfaceInvokeExpr) {
             return null
@@ -128,25 +77,23 @@ class ExitPointChecker(var entryMtd: SootMethod) {
         }
         if (clsName in listClassTypes && cur.name in listAddMethods) {
             val loc = SootTool.getInvokeLocalFiled(invoke)
-            if (loc != null && isLocalValue(loc)) {
+            if (loc != null && pointToAnalysis.isLocalValue(loc)) {
                 LogNow.info("$clsName $loc is local List.")
                 return null
             }
             for (arg in invoke.args) {
                 if (arg is Local) {
-                    val valCls = getLocalDefine(arg)
+                    val valCls = pointToAnalysis.getLocalDefine(arg)
                     if (valCls != null && isExitClass(valCls)) {
-                        println(invoke.useBoxes)
-                        println(invoke.getArgBox(0))
-                        println()
-
+//                        println(invoke.useBoxes)
+//                        println(invoke.getArgBox(0))
 //                        println(isLocalValue(invoke.))
-                        LogNow.info("Local isBinderInterface: $invoke $arg ${valueDefines[arg]}")
+                        LogNow.info("Local isBinderInterface: $invoke $arg ${pointToAnalysis.valueDefines[arg]}")
                         val vul = VulnerableApiDesc(valCls)
                         vul.listTag = clsName
                         return vul
                     }
-                    LogNow.info("Local value: $arg ${valueDefines[arg]}")
+                    LogNow.info("Local value: $arg ${pointToAnalysis.valueDefines[arg]}")
                 }
             }
 
@@ -164,41 +111,5 @@ class ExitPointChecker(var entryMtd: SootMethod) {
             if (inf.name.startsWith(kIBinderInf)) return true
         }
         return false
-    }
-
-    private fun getLocalPointTo(loc: Local): Local {
-        var cur: Local? = loc
-        while (cur != null && cur in pointToSet) {
-            val nxt = pointToSet[cur]
-            if (nxt == null) return cur
-            cur = nxt
-        }
-        return loc
-    }
-
-    private fun getLocalDefine(loc: Local): SootClass? {
-        val key = getLocalPointTo(loc)
-        return valueDefines[key]
-    }
-
-    private fun resolveInterfaceInvoke(inv: JInterfaceInvokeExpr): SootClass? {
-        val mRef = inv.methodRef
-        if (mRef.name == kAsBinder) {
-            return mRef.declaringClass
-        }
-        val ref = mRef.returnType
-        if (ref is RefType) {
-            return ref.sootClass
-        }
-        return null
-    }
-
-    private fun isLocalValue(loc: Local): Boolean {
-        val real = getLocalPointTo(loc)
-        return localValues.contains(real)
-    }
-
-    private fun checkHoldBinderInList() {
-
     }
 }

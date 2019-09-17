@@ -54,6 +54,11 @@ object VulnerabilitiesDetecting {
         }
     }
 
+    fun addVul(mtd: SootMethod, vul: VulnerableApiDesc) {
+        vulSet.add(mtd)
+        vulMap[mtd] = vul
+    }
+
     fun dumpVul() {
         vulSet.forEach { println("Find Vul: ${vulMap[it]}") }
         println("Total Size: ${vulSet.size}")
@@ -95,7 +100,8 @@ private fun analysisOneCls(cls: SootClass) {
                 val cg = CallGraphAnalysis(2)
                 val vul = cg.analysisEntryPoint(mtd)
                 if (vul != null) {
-                    println("Vul Detect: $vul")
+//                    println("Vul Detect: $vul")
+                    VulnerabilitiesDetecting.addVul(mtd, vul)
                 }
             }
         }
@@ -128,9 +134,9 @@ fun quickAnalysis() {
 
     // TaskChangeNotificationController
     run {
-        val focusCls = "com.android.server.midi.MidiService"
+        val focusCls = "com.android.server.NetworkManagementService"
         val cls = Scene.v().getSootClass(focusCls)
-//        val focusMtd = "getSessions"
+//        val focusMtd = "registerNetworkActivityListener"
 //        val mtd = cls.getMethodByName(focusMtd)
 //        val cg = CallGraphAnalysis()
 //        val vul = cg.analysisEntryPoint(mtd)
@@ -154,6 +160,7 @@ fun quickAnalysis() {
             "com.android.server.media.MediaRouterService",
             "com.android.server.media.MediaSessionService\$SessionManagerImpl",
             "com.android.server.midi.MidiService",
+            "com.android.server.NetworkManagementService",
             "")
 
 //    for (clsName in targetCls) {
