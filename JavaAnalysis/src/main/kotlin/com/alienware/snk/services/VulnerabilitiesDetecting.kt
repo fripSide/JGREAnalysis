@@ -97,7 +97,7 @@ private fun analysisOneCls(cls: SootClass) {
         cls.methods.forEach { mtd ->
             if (mtd.isPublic) {
                 println("all method: $mtd")
-                val cg = CallGraphAnalysis(2)
+                val cg = CallGraphAnalysis(3)
                 val vul = cg.analysisEntryPoint(mtd)
                 if (vul != null) {
 //                    println("Vul Detect: $vul")
@@ -115,16 +115,22 @@ private fun analysisOneCls(cls: SootClass) {
 TODO:
 False Positive:
 <com.android.server.midi.MidiService: void unregisterListener -> get and add before delete
+<com.android.server.wallpaper.WallpaperManagerService: getWallpaper
 
 FN:
-"com.android.server.fingerprint.FingerprintService\$FingerprintServiceWrapper" -> Handler Implicit Call
+"com.android.server.fingerprint.FingerprintService\$FingerprintServiceWrapper": Handler Implicit Call
 MidiService.registerDeviceServer, exceed max level
+
+com.android.server.print.PrintManagerService$PrintManagerImpl->addPrintJobStateChangeListener: Implicit call
 
 
 Is not service API:
 MediaSessionRecord.registerCallbackListener
 MediaSessionService.createSession
 
+Level 3:
+com.android.server.TelephonyRegistry
+listenForSubscriber
 
  */
 fun quickAnalysis() {
@@ -134,11 +140,11 @@ fun quickAnalysis() {
 
     // TaskChangeNotificationController
     run {
-        val focusCls = "com.android.server.NetworkManagementService"
+        val focusCls = "com.android.server.wifi.WifiServiceImpl"
         val cls = Scene.v().getSootClass(focusCls)
-//        val focusMtd = "registerNetworkActivityListener"
+//        val focusMtd = "listenForSubscriber"
 //        val mtd = cls.getMethodByName(focusMtd)
-//        val cg = CallGraphAnalysis()
+//        val cg = CallGraphAnalysis(3)
 //        val vul = cg.analysisEntryPoint(mtd)
 //        if (vul != null) {
 //            println("Vul Detect: $vul")
@@ -161,6 +167,10 @@ fun quickAnalysis() {
             "com.android.server.media.MediaSessionService\$SessionManagerImpl",
             "com.android.server.midi.MidiService",
             "com.android.server.NetworkManagementService",
+            "com.android.server.print.PrintManagerService\$PrintManagerImpl",
+            "com.android.server.TelephonyRegistry",
+            "com.android.server.wallpaper.WallpaperManagerService",
+            "com.android.server.wifi.WifiServiceImpl",
             "")
 
 //    for (clsName in targetCls) {
