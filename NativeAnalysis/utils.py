@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 import os
 import logging
+import json
 from clang import cindex
 from clang.cindex import CursorKind
+
 __author__ = 'fripSide'
 
 
@@ -38,10 +40,10 @@ def debug_walk_node(node, level=0):
 
 def debug_dump_node(node, level=0):
 	logging.debug('%s %-35s %-20s %-10s [%-6s:%s - %-6s:%s] %s %s ' % (' ' * level,
-		node.kind, node.spelling, node.type.spelling,
-		node.extent.start.line, node.extent.start.column,
-		node.extent.end.line, node.extent.end.column,
-		node.location.file, node.mangled_name))
+																	   node.kind, node.spelling, node.type.spelling,
+																	   node.extent.start.line, node.extent.start.column,
+																	   node.extent.end.line, node.extent.end.column,
+																	   node.location.file, node.mangled_name))
 
 
 def fully_qualified(c):
@@ -73,13 +75,50 @@ def extract_method_defines_in_file(src):
 	tu = index.parse(src)
 	root = tu.cursor
 	nodes = []
-	for node in root.get_children():
-		if node.kind == CursorKind.FUNCTION_DECL:
-			nodes.append(node)
-	return nodes
+
+	def extract_method_in_node(node):
+		cur_nodes = []
+		for n in node.get_children():
+			if n.kind == CursorKind.FUNCTION_DECL:
+				cur_nodes.append(n)
+			cur_nodes += extract_method_in_node(n)
+		return cur_nodes
+
+	# for node in root.get_children():
+	# 	if node.kind == CursorKind.FUNCTION_DECL:
+	# 		nodes.append(node)
+	# 	pass
+	return extract_method_in_node(root)
+
+
+def read_lines(file_path, start, end):
+	try:
+		with open(file_path, "r") as fp:
+			data = list(fp.readlines())
+			return data[start:end]
+	except Exception as ex:
+		print("Failed to read file: {} {}".format(file_path, ex.args))
 
 
 def save_results():
 	pass
 
-init()
+
+def load_json(path):
+	with open(path, "r") as fp:
+		return json.load(fp)
+
+
+def write_json(data, path):
+	with open(path, "w") as fp:
+		return json.dump(data, fp)
+
+
+def check_and_mkdir(path):
+	if not os.path.exists(path):
+		os.makedirs(path)
+
+
+def check_and_remove(path):
+	if os.path.exists(path):
+		os.remove(path)
