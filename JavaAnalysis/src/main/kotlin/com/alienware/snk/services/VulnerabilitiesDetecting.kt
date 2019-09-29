@@ -25,7 +25,7 @@ object VulnerabilitiesDetecting {
             var targetCls: SootClass? = api.helperClass
             val focus = "android.view.accessibility.IAccessibilityManager"
             val targetName = api.inf?.name ?: ""
-            if (targetName != focus) continue
+//            if (targetName != focus) continue
 
             if (api.isHelperClass()) {
                 targetCls = api.helperClass
@@ -228,4 +228,5 @@ fun quickAnalysis() {
 
 fun runDetecting(apiList: ServiceApiList) {
     VulnerabilitiesDetecting.detectingVul(apiList)
+    VulnerabilitiesDetecting.dumpVul()
 }
