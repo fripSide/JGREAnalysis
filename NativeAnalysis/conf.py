@@ -20,7 +20,10 @@ class Conf:
 
 	@staticmethod
 	def framework_core_jni_path():
-		return os.path.join(Conf.DEFAULT_AOSP_PATH, "frameworks\\base\\core\\jni")
+		raw_path = os.path.join(Conf.DEFAULT_AOSP_PATH, "frameworks\\base\\core\\jni")
+		path = raw_path.replace("\\", os.sep)
+		path = path.replace("/", os.sep)
+		return path
 
 
 config = Conf()

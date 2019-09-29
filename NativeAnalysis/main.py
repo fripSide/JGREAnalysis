@@ -4,7 +4,7 @@ import sys
 import clang
 import logging
 import argparse
-from conf import config
+from conf import Conf, config
 from clang import cindex
 
 TEST_DIR = r"E:\Projects\CPP\leveldb"
@@ -165,8 +165,8 @@ def init_arg_parser():
 	if not args.source:
 		arg_parser.print_help()
 		sys.exit()
-	config.DEFAULT_AOSP_PATH = args.source
-	config.COMPILE_DB_FILE = args.db
+	Conf.DEFAULT_AOSP_PATH = args.source
+	Conf.COMPILE_DB_FILE = args.db
 	logging.info("AOSP Path: {} Compile DB:{}".format(args.source, args.db))
 
 
@@ -175,6 +175,8 @@ def main():
 	from call_graph_analysis import process_jni_dir
 	utils.init()
 	init_arg_parser()
+	logging.info(config.DEFAULT_AOSP_PATH)
+	logging.info(config.framework_core_jni_path())
 	process_jni_dir(config.framework_core_jni_path())
 
 

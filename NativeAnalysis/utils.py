@@ -122,3 +122,8 @@ def check_and_mkdir(path):
 def check_and_remove(path):
 	if os.path.exists(path):
 		os.remove(path)
+
+
+def format_path(path):
+	path = path.replace("\\", os.sep)
+	return path.replace("/", os.sep)
