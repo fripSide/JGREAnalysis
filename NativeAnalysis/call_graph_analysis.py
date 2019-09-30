@@ -5,6 +5,8 @@ import logging
 import traceback
 from clang import cindex
 from clang.cindex import CursorKind
+from compile_info import compile_commands
+from jni_map import parse_jni_in_framework
 
 __author__ = 'fripSide'
 
@@ -15,6 +17,8 @@ HEADERS = ["D:\\ubuntu\Android-7.1.1_r10\\frameworks\\native\\include",
 		   # "D:\\ubuntu\Android-7.1.1_r10\\frameworks\\base\\core\\jni\\include",
 		   "D:\\ubuntu\\Android-7.1.1_r10\\system\\core\\include",  # sp defined in RefBase.h
 		   JNI_HEADER]
+
+JGR_METHOD_SIGNATURE = "_JNIEnv::NewGlobalRef"
 
 
 # TEST_FILE_Ubuntu = "/mnt/d/ubuntu/Android-7.1.1_r10/frameworks/base/core/jni/android_util_Binder.cpp"
@@ -39,6 +43,7 @@ def get_method_simple_name(node):
 
 class Edge:
 	def __init__(self, called):
+		self.is_exit_point = False
 		self.call_expr = called
 		self.node = called.referenced or called
 
@@ -47,6 +52,8 @@ class Edge:
 
 	@property
 	def simple_name(self):
+		if self.is_exit_point:
+			return get_method_simple_name(self.node) + " -> " + JGR_METHOD_SIGNATURE
 		if self.call_expr.kind == CursorKind.TYPE_REF:
 			pass
 		return get_method_simple_name(self.node)
@@ -87,15 +94,18 @@ class Scope:
 
 class CallGraph:
 	TYPE_METHOD_CALL = [CursorKind.CALL_EXPR]
+	JGR_TAG = "env->NewGlobalRef"
 
 	def __init__(self):
 		self.method_defines = {}
 		self.method_calls = {}
 
-	def add_file(self, file_path, headers):
+	def add_file(self, file_path, headers=None):
 		try:
 			index = cindex.Index.create()
-			args = ["-I{}".format(t) for t in headers]
+			args = compile_commands.get_commands_for_file(file_path)
+			if headers:
+				args += ["-I{}".format(t) for t in headers]
 			tu = index.parse(file_path, args=args)
 			root = tu.cursor
 			self.__get_entry_method_node(root)
@@ -113,7 +123,7 @@ class CallGraph:
 		pass
 
 	def __get_entry_method_node(self, node):
-		focus_tag = "javaObjectForIBinder"
+		focus_tag = "android_os_Binder_init"
 		for n in node.get_children():
 			# if n.spelling != focus_tag:
 			# 	continue
@@ -124,6 +134,9 @@ class CallGraph:
 			if n.kind == CursorKind.FUNCTION_DECL:
 				self.__extract_child_call_node(entry_method, n, self.TYPE_METHOD_CALL)
 			# utils.debug_walk_node(n)
+
+			if n.kind == CursorKind.NAMESPACE:
+				self.__get_entry_method_node(n)
 
 			# utils.debug_dump_node(n)
 
@@ -158,6 +171,7 @@ class CallGraph:
 			# utils.debug_walk_node(n)
 			# utils.debug_dump_node(n)
 			self.__extract_child_call_node(entry_method, n, self.TYPE_METHOD_CALL)
+		self.__find_new_global_ref_by_hardcode(entry_method, node)
 
 	def __resolve_sp_class_init(self, method_node, call_node):
 		"""
@@ -187,14 +201,36 @@ class CallGraph:
 		if simple_name not in self.method_defines:
 			self.method_defines[simple_name] = set()
 		self.method_defines[simple_name].add(Edge(call_node))
-		if method not in self.method_calls:
-			self.method_calls[method] = set()
-		self.method_calls[method].add(edge)
+		self.__add_to_call_set(method, edge)
 
-	def __find_new_global_ref_in_hardcode(self, node):
-		file_path = node.location.file
-		first_line = node.extent.start.line
-		last_line = node.extent.end.line
+	def __find_new_global_ref_by_hardcode(self, entry_method, node):
+		"""
+		If the node is not parser correctly, try to read the source code directly
+		"""
+		if node.kind != CursorKind.FUNCTION_DECL:
+			return
+		file_path = str(node.location.file)
+		first, last = self.__get_node_range(node)
+		if first < last:
+			lines = utils.read_lines(file_path, first, last)
+			for li in lines:
+				if self.JGR_TAG in li:
+					name = get_method_simple_name(entry_method)
+					edge = Edge(node)
+					edge.is_exit_point = True
+					self.__add_to_call_set(name, edge)
+
+	def __add_to_call_set(self, name, edge):
+		if name not in self.method_calls:
+			self.method_calls[name] = set()
+		self.method_calls[name].add(edge)
+
+	def __get_node_range(self, node):
+		first, last = int(node.extent.start.line), int(node.extent.end.line)
+		for n in node.get_children():
+			child_last = int(n.extent.end.line)
+			last = max(last, child_last)
+		return first, last
 
 
 class CallGraphAnalysis:
@@ -225,34 +261,44 @@ class CallGraphAnalysis:
 			ret = self.__walk_call_graph(simple_name, cur_path)
 			if ret:
 				return ret
-			if simple_name in self.exit_points:
+			if simple_name in self.exit_points or call.is_exit_point:
 				logging.info("Find exit point: {}".format(simple_name))
 				return cur_path
 
 	def __setup_exit_points(self, exit_points):
 		for et in exit_points:
-			self.exit_points.add(et)
+			self.exit_points.append(et)
 
 	def __save_results(self):
+		from conf import config
+		save_path = config.local_path("data/results.txt")
+		items = []
 		for k, item in self.call_chains.items():
 			chains = " -> ".join([e.simple_name for e in item])
+			items.append("{}->{}".format(k, chains))
 			logging.info("{}->{}".format(k, chains))
+		with open(save_path, "w") as fp:
+			fp.write("\n".join(items))
 
 
-def parse_files():
+def process_jni_dir(work_dir):
 	call_graph = CallGraph()
-	work_dir = "D:\\ubuntu\\Android-7.1.1_r10\\frameworks\\base\\core\\jni\\"
+
 	all_files = os.listdir(work_dir)
 	cpp_files = [os.path.join(work_dir, f) for f in filter(lambda v: v.endswith("cpp"), all_files)]
 	for cpp in cpp_files:
 		call_graph.add_file(cpp, HEADERS)
 
-	entry_points = set("android_os_BinderProxy_linkToDeath")
+	jni_map = parse_jni_in_framework()
+	jni_methods = jni_map.keys()
+	# jni_methods = []
+
+	entry_points = set()
 	for cpp in cpp_files:
 		nodes = utils.extract_method_defines_in_file(cpp)
 		for n in nodes:
 			spelling = n.spelling
-			if spelling.startswith("android_"):
+			if spelling.startswith("android_") or spelling in jni_methods:
 				entry_points.add(spelling)
 	# call_graph.add_file(TEST_FILE, HEADERS)
 	analysis = CallGraphAnalysis(call_graph)
@@ -260,4 +306,6 @@ def parse_files():
 
 
 if __name__ == "__main__":
-	parse_files()
+	work_dir = "D:\\ubuntu\\Android-7.1.1_r10\\frameworks\\base\\core\\jni\\"
+	utils.init()
+	process_jni_dir(work_dir)

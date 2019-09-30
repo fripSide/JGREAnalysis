@@ -1,5 +1,5 @@
 ### Python
-version 3.6+
+version 3.6+ x64
 
 ### clang for python:
 https://pypi.org/project/clang/

@@ -1,0 +1,10 @@
+android_media_AudioRecord_setup->_JNIEnv::NewGlobalRef
+android_os_BinderProxy_unlinkToDeath->JavaDeathRecipient::JavaDeathRecipient -> _JNIEnv::NewGlobalRef
+android_hardware_UsbRequest_queue_array->_JNIEnv::NewGlobalRef
+nativeClassInit->_JNIEnv::NewGlobalRef
+android_media_JetPlayer_setup->android_media_JetPlayer_setup -> _JNIEnv::NewGlobalRef
+android_media_AudioTrack_setup->android_media_AudioTrack_setup -> _JNIEnv::NewGlobalRef
+nativeGetSensorAtIndex->translateNativeSensorToJavaSensor -> getInternedString -> _JNIEnv::NewGlobalRef
+android_hardware_UsbRequest_queue_direct->android_hardware_UsbRequest_queue_direct -> _JNIEnv::NewGlobalRef
+android_os_BinderProxy_linkToDeath->JavaDeathRecipient::JavaDeathRecipient -> _JNIEnv::NewGlobalRef
+initialize->_JNIEnv::NewGlobalRef

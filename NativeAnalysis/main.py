@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 import os
+import sys
 import clang
 import logging
-import optparse
+import argparse
+from conf import Conf, config
 from clang import cindex
 
 TEST_DIR = r"E:\Projects\CPP\leveldb"
@@ -148,11 +150,35 @@ def get_files(work_dir):
 	return headers, srcs
 
 
-def main():
+def analyze_one_file():
 	setup()
 	headers, srcs = get_files(TEST_DIR)
 	print(srcs[0])
 	parse(srcs[0], headers)
+
+
+def init_arg_parser():
+	arg_parser = argparse.ArgumentParser()
+	arg_parser.add_argument("-p", dest="source", help="set source path")
+	arg_parser.add_argument("-c", dest="db", help="set compile_db_path")
+	args = arg_parser.parse_args()
+	if not args.source:
+		arg_parser.print_help()
+		sys.exit()
+	Conf.DEFAULT_AOSP_PATH = args.source
+	Conf.COMPILE_DB_FILE = args.db
+	logging.info("AOSP Path: {} Compile DB:{}".format(args.source, args.db))
+
+
+def main():
+	import utils
+	from call_graph_analysis import process_jni_dir
+	utils.init()
+	init_arg_parser()
+	logging.info(config.DEFAULT_AOSP_PATH)
+	logging.info(config.framework_core_jni_path())
+	process_jni_dir(config.framework_core_jni_path())
+
 
 if __name__ == "__main__":
 	main()
