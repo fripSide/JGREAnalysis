@@ -29,7 +29,7 @@ class IPCExtractor {
 
     fun saveResults() {
         val ret = HashSet<ApiData>()
-        apiList.allApi.forEach { api ->
+        ServiceApiList.allApi.forEach { api ->
             ret.add(api.getDataClass())
         }
         val data =  Klaxon().toJsonString(ret)

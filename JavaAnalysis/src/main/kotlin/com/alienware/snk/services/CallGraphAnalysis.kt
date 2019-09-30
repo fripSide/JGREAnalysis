@@ -17,6 +17,10 @@ class CallGraphAnalysis(var lev: Int = 2) {
 
     val visitSet = HashSet<SootMethod>()
 
+    private var vul: VulnerableApiDesc? = null
+
+    var containExitPoint = false
+
     fun analysisEntryPoint(mtd: SootMethod): VulnerableApiDesc? {
         val initial = LinkedList<SootMethod>()
         val vul = callGraphAnalysis(mtd, initial, lev)
@@ -31,7 +35,6 @@ class CallGraphAnalysis(var lev: Int = 2) {
         visitSet.add(mtd)
         path.add(mtd)
         val vul = checkOneMethod(mtd)
-        LogNow.info("Analysis calls: $mtd")
         if (vul != null) {
             vul.callChain = path
             return vul
@@ -47,7 +50,7 @@ class CallGraphAnalysis(var lev: Int = 2) {
                     val methods = HashSet<SootMethod>()
                     // Resolve Implicit call
                     if (ImplicitCallResolver.isImplicitCall(inv)) {
-                        val mtdSet = ImplicitCallResolver().resolve(inv)
+                        val mtdSet = ImplicitCallResolver.resolve(inv)
                         methods.addAll(mtdSet)
                     } else {
                         methods.add(inv.method)
@@ -66,8 +69,16 @@ class CallGraphAnalysis(var lev: Int = 2) {
     }
 
     private fun checkOneMethod(mtd: SootMethod): VulnerableApiDesc? {
+//        LogNow.info("Analysis calls: $mtd")
         val exitPoints = ExitPointChecker(mtd)
-        return exitPoints.containBinderList()
+        val detect = exitPoints.containBinderList()
+        vul = detect ?: vul
+        if (exitPoints.containExitPoint) containExitPoint = true
+//        println("$mtd ${exitPoints.containExitPoint}")
+        if (containExitPoint) {
+            return vul
+        }
+       return null
     }
 
 }

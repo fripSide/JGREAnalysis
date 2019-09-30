@@ -53,9 +53,28 @@ class ServiceApiClass(var helperClass: SootClass? = null, var inf: SootClass? = 
 
 class ServiceApiList {
 
-    val allApi = HashSet<ServiceApiClass>()
+
+    companion object {
+        val allApi = HashSet<ServiceApiClass>()
+
+        fun getServiceApiForImple(sc: SootClass): ServiceApiClass? {
+            allApi.forEach { api ->
+                if (api.implClass == sc) return api
+            }
+            return null
+        }
+
+        fun getAllList(): HashSet<ServiceApiClass> {
+            return allApi
+        }
+    }
+
+    init {
+        allApi.clear()
+    }
 
     fun addServiceApiList(cls: HashSet<ServiceApiClass>) {
         allApi.addAll(cls)
     }
+
 }

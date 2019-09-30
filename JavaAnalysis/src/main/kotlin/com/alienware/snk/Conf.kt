@@ -8,6 +8,7 @@ package com.alienware.snk
 //}
 const val version = "0.1"
 
-data class Conf(val ANDROID_JAR: String = "", val DEBUG: Boolean = true, val LOG_LEV: String = "info")
+data class Conf(val ANDROID_JAR: String = "", val DEBUG: Boolean = true, val LOG_LEV: String = "info",
+                val EDGE_MINER: String = "")
 
 lateinit var CONFIG: Conf

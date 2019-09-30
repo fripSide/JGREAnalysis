@@ -4,15 +4,9 @@ import com.alienware.snk.utils.LogNow
 import com.alienware.snk.utils.SootTool
 import soot.*
 import soot.jimple.*
-import soot.jimple.internal.JInstanceFieldRef
-import soot.jimple.internal.JInterfaceInvokeExpr
-import soot.jimple.internal.JNewExpr
-import soot.jimple.internal.JimpleLocal
 import java.util.*
-import kotlin.collections.HashMap
-import kotlin.collections.HashSet
 
-//data class VulData()
+data class VulData(public var serviceName: String, var mtd: String, var listTag: String, var callChain: List<String>)
 
 class VulnerableApiDesc(var binderCls: SootClass) {
     var entryPoint: SootMethod? = null
@@ -23,8 +17,12 @@ class VulnerableApiDesc(var binderCls: SootClass) {
         return "$entryPoint Calls: $callChain By $listTag -> $binderCls"
     }
 
-    fun getData() {
-
+    fun getData(): VulData {
+        val calls = mutableListOf<String>()
+        callChain.forEach { m ->
+            calls.add(m.signature)
+        }
+        return VulData("", entryPoint.toString(), listTag, calls)
     }
 }
 
@@ -41,7 +39,12 @@ class ExitPointChecker(var entryMtd: SootMethod) {
     private val kLinkToDeathCls = "android.os.IBinder\$DeathRecipient"
     private val kAsBinder = "asBinder"
 
+    //
+    private val exitPointMthods = hashSetOf("asBinder", "linkToDeath")
+
     private val pointToAnalysis = PointToAnalysis(entryMtd)
+
+    var containExitPoint = false
 
     fun containBinderList(): VulnerableApiDesc? {
 //        println("containBinderList: $entryMtd")
@@ -53,6 +56,8 @@ class ExitPointChecker(var entryMtd: SootMethod) {
             val stmt = u as Stmt
             if (stmt.containsInvokeExpr()) {
                 val invoke = stmt.invokeExpr
+//                println(invoke)
+                checkContainExitPoint(invoke)
                 val vul = detectAddToList(invoke)
                 if (vul != null) return vul
             }
@@ -71,13 +76,14 @@ class ExitPointChecker(var entryMtd: SootMethod) {
         if (clsName == kRemoteCallback && cur.name == kRemoteListRegisterName) {
             val vul = VulnerableApiDesc(entryMtd.declaringClass)
             vul.listTag = clsName
+            containExitPoint = true
             LogNow.info("Contain RemoteList: $invoke ${invoke.method.signature}")
             return vul
         }
         if (clsName in listClassTypes && cur.name in listAddMethods) {
             val loc = SootTool.getInvokeLocalFiled(invoke)
             if (loc != null && pointToAnalysis.isLocalValue(loc)) {
-                LogNow.info("$clsName $loc is local List.")
+                LogNow.debug("$clsName $loc is local List.")
                 return null
             }
             for (arg in invoke.args) {
@@ -87,12 +93,12 @@ class ExitPointChecker(var entryMtd: SootMethod) {
 //                        println(invoke.useBoxes)
 //                        println(invoke.getArgBox(0))
 //                        println(isLocalValue(invoke.))
-                        LogNow.info("Local isBinderInterface: $invoke $arg ${pointToAnalysis.valueDefines[arg]}")
+                        LogNow.debug("Local isBinderInterface: $valCls $invoke $arg ${pointToAnalysis.valueDefines[arg]}")
                         val vul = VulnerableApiDesc(valCls)
                         vul.listTag = clsName
                         return vul
                     }
-                    LogNow.info("Local value: $arg ${pointToAnalysis.valueDefines[arg]}")
+                    LogNow.debug("Local value: $arg ${pointToAnalysis.valueDefines[arg]}")
                 }
             }
 
@@ -104,7 +110,6 @@ class ExitPointChecker(var entryMtd: SootMethod) {
     }
 
     private fun isExitClass(sc: SootClass): Boolean {
-//        println("Check isExitClass: $sc")
         if (ServiceImplExtractor.isBinderClass(sc)) return true
 
         sc.interfaces.forEach { inf ->
@@ -119,11 +124,19 @@ class ExitPointChecker(var entryMtd: SootMethod) {
                 if (cls.name == kIBinderInf) {
                     return true
                 }
+//                if (ServiceImplExtractor.isBinderClass(sc)) return true
                 cls.interfaces.forEach { inf ->
                     if (inf.name.startsWith(kIBinderInf)) return true
                 }
             }
         }
         return false
+    }
+
+    private fun checkContainExitPoint(inv: InvokeExpr) {
+        val mtd = inv.methodRef
+        if (mtd.name in exitPointMthods) {
+            containExitPoint = true
+        }
     }
 }

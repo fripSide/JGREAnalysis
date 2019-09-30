@@ -353,6 +353,10 @@ object SootTool {
         return nameSet
     }
 
+    fun resolveInvokeByCha(mtd: SootMethod): HashSet<SootMethod> {
+        return hashSetOf()
+    }
+
     fun isEmptyMtd(mtd: SootMethod): Boolean {
         val activeBody = tryGetMethodBody(mtd)
         activeBody?.units?.forEach { u ->
@@ -391,5 +395,9 @@ object SootTool {
             }
         }
         return null
+    }
+
+    fun convertSootNameToSmaliName(mtd: SootMethodRef): String {
+        return ""
     }
 }

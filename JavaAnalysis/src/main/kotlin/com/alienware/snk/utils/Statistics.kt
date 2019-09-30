@@ -9,6 +9,14 @@ object Statistics {
     val SAVE_SERVICE_API = "service_api.json"
 
     val RESULTS_TXT = "results.txt"
+    val RESULTS_JSON = "results.json"
+
+    /*
+    Ground truth from dynamic verification for vulnerability results statistic in different Android Version.
+     */
+    val groundTruth = mutableListOf<Pair<String, String>>(
+            Pair("", "")
+    )
 
     init {
         if (!File(SAVE_DIR).exists()) {

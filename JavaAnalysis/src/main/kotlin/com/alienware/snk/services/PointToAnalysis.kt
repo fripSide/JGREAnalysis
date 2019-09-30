@@ -71,8 +71,8 @@ class PointToAnalysis(var entryMtd: SootMethod) {
 //                println(" right.field $filed ${filed.javaClass} ${filed.declaringClass} ${filed.type}")
             }
 
-            if (right is JimpleLocal) {
-                pointToSet[left] = right
+            if (right is JimpleLocal) { // left = right, left value is point to right
+                pointToSet[left] =  right
             }
 
             if (right is JNewExpr) {
@@ -80,7 +80,7 @@ class PointToAnalysis(var entryMtd: SootMethod) {
 //                addLocalDefine(left, jn.sootClass)
                 valueDefines[left] = jn.sootClass
                 localValues.add(left)
-                LogNow.info("Is Local value: $left $u ${getLocalPointTo(left)}")
+//                LogNow.debug("Is Local value: $left $u ${getLocalPointTo(left)}")
             }
 
             // binder define
