@@ -13,7 +13,7 @@ class SourceFileScanner:
 	FILE_LIST_PATH = config.local_path("data/file_list.txt")
 	TARGET_EXT = [".java", ".h", ".cc", ".c", ".cpp", ".aidl"]
 	CPP_EXT = [".h", ".cc", ".cpp", ".c"]
-	SCAN_DIRS = ["frameworks"]
+	SCAN_DIRS = [""]
 
 	def __init__(self, aosp_path=config.DEFAULT_AOSP_PATH):
 		self.file_list = []
@@ -22,14 +22,16 @@ class SourceFileScanner:
 		self.__process_files()
 
 	def __scan_files(self, base_dir):
-		if osp.exists(self.FILE_LIST_PATH):
-			logging.info("Load file list from cache: %s", self.FILE_LIST_PATH)
-			with open(self.FILE_LIST_PATH) as fp:
-				for line in fp:
-					self.file_list.append(line.rstrip())
-			return
+		# if osp.exists(self.FILE_LIST_PATH):
+		# 	logging.info("Load file list from cache: %s", self.FILE_LIST_PATH)
+		# 	with open(self.FILE_LIST_PATH) as fp:
+		# 		for line in fp:
+		# 			self.file_list.append(line.rstrip())
+		# 	return
 		for ch in self.SCAN_DIRS:
 			dir_path = osp.join(base_dir, ch)
+			if not osp.exists(dir_path):
+				continue
 			files = self.__walk_dir(dir_path)
 			with open(self.FILE_LIST_PATH, "wb") as fp:
 				for fi in files:

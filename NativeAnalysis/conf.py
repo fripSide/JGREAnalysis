@@ -5,7 +5,7 @@ import os
 
 class Conf:
 
-	DEFAULT_AOSP_PATH = "D:\\ubuntu\\Android-7.1.1_r10\\"
+	DEFAULT_AOSP_PATH = "F:\\Android_9.0\\aosp"
 	DEPLOY_DIR = os.getcwd()
 	COMPILE_DB_FILE = None
 	SAVE_PATH = "data"

@@ -3,6 +3,7 @@ import os
 import utils
 import logging
 import traceback
+from conf import config
 from clang import cindex
 from clang.cindex import CursorKind
 from compile_info import compile_commands
@@ -10,18 +11,9 @@ from jni_map import parse_jni_in_framework
 
 __author__ = 'fripSide'
 
-TEST_FILE = "D:\\ubuntu\\Android-7.1.1_r10\\frameworks\\base\\core\\jni\\android_util_Binder.cpp"
-JNI_HEADER = "D:\\ubuntu\\Android-7.1.1_r10\\prebuilts\\ndk\\current\\platforms\\android-14\\arch-arm\\usr\\include\\"
-
-HEADERS = ["D:\\ubuntu\Android-7.1.1_r10\\frameworks\\native\\include",
-		   # "D:\\ubuntu\Android-7.1.1_r10\\frameworks\\base\\core\\jni\\include",
-		   "D:\\ubuntu\\Android-7.1.1_r10\\system\\core\\include",  # sp defined in RefBase.h
-		   JNI_HEADER]
+TEST_FILE = "frameworks\\base\\core\\jni\\android_util_Binder.cpp"
 
 JGR_METHOD_SIGNATURE = "_JNIEnv::NewGlobalRef"
-
-
-# TEST_FILE_Ubuntu = "/mnt/d/ubuntu/Android-7.1.1_r10/frameworks/base/core/jni/android_util_Binder.cpp"
 
 
 def get_method_simple_name(node):
@@ -270,7 +262,6 @@ class CallGraphAnalysis:
 			self.exit_points.append(et)
 
 	def __save_results(self):
-		from conf import config
 		save_path = config.local_path("data/results.txt")
 		items = []
 		for k, item in self.call_chains.items():
@@ -286,12 +277,12 @@ def process_jni_dir(work_dir):
 
 	all_files = os.listdir(work_dir)
 	cpp_files = [os.path.join(work_dir, f) for f in filter(lambda v: v.endswith("cpp"), all_files)]
-	for cpp in cpp_files:
-		call_graph.add_file(cpp, HEADERS)
+	# for cpp in cpp_files:
+	# 	call_graph.add_file(cpp, HEADERS)
 
-	jni_map = parse_jni_in_framework()
-	jni_methods = jni_map.keys()
-	# jni_methods = []
+	# jni_map = parse_jni_in_framework()
+	# jni_methods = jni_map.keys()
+	jni_methods = []
 
 	entry_points = set()
 	for cpp in cpp_files:
@@ -300,12 +291,12 @@ def process_jni_dir(work_dir):
 			spelling = n.spelling
 			if spelling.startswith("android_") or spelling in jni_methods:
 				entry_points.add(spelling)
-	# call_graph.add_file(TEST_FILE, HEADERS)
+	call_graph.add_file(config.aosp_file(TEST_FILE))
 	analysis = CallGraphAnalysis(call_graph)
 	analysis.run_analysis(entry_points)
 
 
 if __name__ == "__main__":
-	work_dir = "D:\\ubuntu\\Android-7.1.1_r10\\frameworks\\base\\core\\jni\\"
+	work_dir = "F:\\Android_9.0\\aosp\\frameworks\\base\\core\\jni\\"
 	utils.init()
 	process_jni_dir(work_dir)

@@ -39,10 +39,9 @@ class CompileInfo:
 			print("Failed to load compile_commands.json. Use default commands.")
 
 	def __get_default_commands(self):
-		aosp = config.DEFAULT_AOSP_PATH
 		cmds = []
 		for header in default_includes:
-			cmds.append("-I{}".format(os.path.join(aosp, header)))
+			cmds.append("-I{}".format(config.aosp_file(header)))
 		return cmds
 
 	def get_commands_for_file(self, fi):
