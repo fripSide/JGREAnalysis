@@ -80,7 +80,7 @@ class PointToAnalysis(var entryMtd: SootMethod) {
 //                addLocalDefine(left, jn.sootClass)
                 valueDefines[left] = jn.sootClass
                 localValues.add(left)
-//                LogNow.debug("Is Local value: $left $u ${getLocalPointTo(left)}")
+                LogNow.debug("Is Local value: $left $u ${getLocalPointTo(left)}")
             }
 
             // binder define

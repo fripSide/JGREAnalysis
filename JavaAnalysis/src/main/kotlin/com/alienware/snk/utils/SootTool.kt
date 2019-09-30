@@ -166,6 +166,14 @@ object SootTool {
         return null
     }
 
+    fun tryGetMethodFromInv(inv: InvokeExpr): SootMethod? {
+        try {
+            return inv.method
+        } catch (ex: Exception) {
+        }
+        return null
+    }
+
 
     fun getReturnFromMethod(mtd: SootMethod, notNull: Boolean = false): Value? {
         val b = mtd.retrieveActiveBody()

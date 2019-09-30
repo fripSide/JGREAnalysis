@@ -33,7 +33,10 @@ class JimpleValueSolver {
         checkAndGetCls!!
         curCls = mtd.declaringClass
         curMtd = mtd
-        val body = mtd.retrieveActiveBody()
+        val body = SootTool.tryGetMethodBody(mtd)
+        if (body == null) {
+            return
+        }
         // unit
         var lev = deep
         workList.clear()

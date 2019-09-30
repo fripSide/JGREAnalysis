@@ -50,7 +50,7 @@ class CallGraphAnalysis(var lev: Int = 2) {
                     val methods = HashSet<SootMethod>()
                     // Resolve Implicit call
                     if (ImplicitCallResolver.isImplicitCall(inv)) {
-                        val mtdSet = ImplicitCallResolver.resolve(inv)
+                        val mtdSet = ImplicitCallResolver.resolve(inv, mtd)
                         methods.addAll(mtdSet)
                     } else {
                         methods.add(inv.method)
