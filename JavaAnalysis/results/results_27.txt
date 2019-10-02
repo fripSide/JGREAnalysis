@@ -1,0 +1,209 @@
+"wifi" android.net.wifi.IWifiManager (1)
+	<com.android.server.wifi.WifiServiceImpl: int startLocalOnlyHotspot(android.os.Messenger,android.os.IBinder,java.lang.String)>
+"print" android.print.IPrintManager (1)
+	<com.android.server.print.PrintManagerService$PrintManagerImpl: void createPrinterDiscoverySession(android.print.IPrinterDiscoveryObserver,int)>
+"activity" android.app.IActivityManager (7)
+	<com.android.server.am.ActivityManagerService: void registerProcessObserver(android.app.IProcessObserver)>
+	<com.android.server.am.ActivityManagerService: boolean unlockUser(int,byte[],byte[],android.os.IProgressListener)>
+	<com.android.server.am.ActivityManagerService: android.content.Intent registerReceiver(android.app.IApplicationThread,java.lang.String,android.content.IIntentReceiver,android.content.IntentFilter,java.lang.String,int,int)>
+	<com.android.server.am.ActivityManagerService: int bindService(android.app.IApplicationThread,android.os.IBinder,android.content.Intent,java.lang.String,android.app.IServiceConnection,int,java.lang.String,int)>
+	<com.android.server.am.ActivityManagerService: void registerUidObserver(android.app.IUidObserver,int,int,java.lang.String)>
+	<com.android.server.am.ActivityManagerService: void registerUserSwitchObserver(android.app.IUserSwitchObserver,java.lang.String)>
+	<com.android.server.am.ActivityManagerService: void registerIntentSenderCancelListener(android.content.IIntentSender,com.android.internal.os.IResultReceiver)>
+"input" android.hardware.input.IInputManager (3)
+	<com.android.server.input.InputManagerService: void vibrate(int,long[],int,android.os.IBinder)>
+	<com.android.server.input.InputManagerService: void registerInputDevicesChangedListener(android.hardware.input.IInputDevicesChangedListener)>
+	<com.android.server.input.InputManagerService: void registerTabletModeChangedListener(android.hardware.input.ITabletModeChangedListener)>
+"audio" android.media.IAudioService (6)
+	<com.android.server.audio.AudioService: void forceRemoteSubmixFullVolume(boolean,android.os.IBinder)>
+	<com.android.server.audio.AudioService: int requestAudioFocus(android.media.AudioAttributes,int,android.os.IBinder,android.media.IAudioFocusDispatcher,java.lang.String,java.lang.String,int,android.media.audiopolicy.IAudioPolicyCallback,int)>
+	<com.android.server.audio.AudioService: void registerRecordingCallback(android.media.IRecordingConfigDispatcher)>
+	<com.android.server.audio.AudioService: java.lang.String registerAudioPolicy(android.media.audiopolicy.AudioPolicyConfig,android.media.audiopolicy.IAudioPolicyCallback,boolean,boolean)>
+	<com.android.server.audio.AudioService: void registerPlaybackCallback(android.media.IPlaybackConfigDispatcher)>
+	<com.android.server.audio.AudioService: android.media.AudioRoutesInfo startWatchingRoutes(android.media.IAudioRoutesObserver)>
+"deviceidle" android.os.IDeviceIdleController (1)
+	<com.android.server.DeviceIdleController$BinderService: boolean registerMaintenanceActivityListener(android.os.IMaintenanceActivityListener)>
+"accessibility" android.view.accessibility.IAccessibilityManager (2)
+	<com.android.server.accessibility.AccessibilityManagerService: int addAccessibilityInteractionConnection(android.view.IWindow,android.view.accessibility.IAccessibilityInteractionConnection,int)>
+	<com.android.server.accessibility.AccessibilityManagerService: long addClient(android.view.accessibility.IAccessibilityManagerClient,int)>
+"network_management" android.os.INetworkManagementService (2)
+	<com.android.server.NetworkManagementService: void registerNetworkActivityListener(android.os.INetworkActivityListener)>
+	<com.android.server.NetworkManagementService: void registerObserver(android.net.INetworkManagementEventObserver)>
+"graphicsstats" android.view.IGraphicsStats (1)
+	<com.android.server.GraphicsStatsService: android.os.ParcelFileDescriptor requestBufferForProcess(java.lang.String,android.view.IGraphicsStatsCallback)>
+"ethernet" android.net.IEthernetManager (1)
+	<com.android.server.ethernet.EthernetServiceImpl: void addListener(android.net.IEthernetServiceListener)>
+"media_router" android.media.IMediaRouterService (1)
+	<com.android.server.media.MediaRouterService: void registerClientAsUser(android.media.IMediaRouterClient,java.lang.String,int)>
+"appops" com.android.internal.app.IAppOpsService (4)
+	<com.android.server.AppOpsService: void setUserRestriction(int,boolean,android.os.IBinder,int,java.lang.String[])>
+	<com.android.server.AppOpsService: void startWatchingMode(int,java.lang.String,com.android.internal.app.IAppOpsCallback)>
+	<com.android.server.AppOpsService: android.os.IBinder getToken(android.os.IBinder)>
+	<com.android.server.AppOpsService: void setUserRestrictions(android.os.Bundle,android.os.IBinder,int)>
+"autofill" android.view.autofill.IAutoFillManager (1)
+	<com.android.server.autofill.AutofillManagerService$AutoFillManagerServiceStub: int addClient(android.view.autofill.IAutoFillManagerClient,int)>
+"input_method" com.android.internal.view.IInputMethodManager (1)
+	<com.android.server.InputMethodManagerService: void addClient(com.android.internal.view.IInputMethodClient,com.android.internal.view.IInputContext,int,int)>
+"wallpaper" android.app.IWallpaperManager (2)
+	<com.android.server.wallpaper.WallpaperManagerService: void registerWallpaperColorsCallback(android.app.IWallpaperManagerCallback,int)>
+	<com.android.server.wallpaper.WallpaperManagerService: android.os.ParcelFileDescriptor getWallpaper(java.lang.String,android.app.IWallpaperManagerCallback,int,android.os.Bundle,int)>
+"voiceinteraction" com.android.internal.app.IVoiceInteractionManagerService (2)
+	<com.android.server.voiceinteraction.VoiceInteractionManagerService$VoiceInteractionManagerServiceStub: void showSession(android.service.voice.IVoiceInteractionService,android.os.Bundle,int)>
+	<com.android.server.voiceinteraction.VoiceInteractionManagerService$VoiceInteractionManagerServiceStub: void registerVoiceInteractionSessionListener(com.android.internal.app.IVoiceInteractionSessionListener)>
+"display" android.hardware.display.IDisplayManager (2)
+	<com.android.server.display.DisplayManagerService$BinderService: void registerCallback(android.hardware.display.IDisplayManagerCallback)>
+	<com.android.server.display.DisplayManagerService$BinderService: int createVirtualDisplay(android.hardware.display.IVirtualDisplayCallback,android.media.projection.IMediaProjection,java.lang.String,java.lang.String,int,int,int,android.view.Surface,int,java.lang.String)>
+"telephony.registry" com.android.internal.telephony.ITelephonyRegistry (3)
+	<com.android.server.TelephonyRegistry: void listen(java.lang.String,com.android.internal.telephony.IPhoneStateListener,int,boolean)>
+	<com.android.server.TelephonyRegistry: void addOnSubscriptionsChangedListener(java.lang.String,com.android.internal.telephony.IOnSubscriptionsChangedListener)>
+	<com.android.server.TelephonyRegistry: void listenForSubscriber(int,java.lang.String,com.android.internal.telephony.IPhoneStateListener,int,boolean)>
+"mount" android.os.storage.IStorageManager (1)
+	<com.android.server.StorageManagerService: void registerListener(android.os.storage.IStorageEventListener)>
+"launcherapps" android.content.pm.ILauncherApps (1)
+	<com.android.server.pm.LauncherAppsService$LauncherAppsImpl: void addOnAppsChangedListener(java.lang.String,android.content.pm.IOnAppsChangedListener)>
+"power" android.os.IPowerManager (2)
+	<com.android.server.power.PowerManagerService$BinderService: void acquireWakeLock(android.os.IBinder,int,java.lang.String,java.lang.String,android.os.WorkSource,java.lang.String)>
+	<com.android.server.power.PowerManagerService$BinderService: void acquireWakeLockWithUid(android.os.IBinder,int,java.lang.String,java.lang.String,int)>
+"netpolicy" android.net.INetworkPolicyManager (1)
+	<com.android.server.net.NetworkPolicyManagerService: void registerListener(android.net.INetworkPolicyListener)>
+"package" android.content.pm.IPackageManager (2)
+	<com.android.server.pm.PackageManagerService: void addOnPermissionsChangeListener(android.content.pm.IOnPermissionsChangeListener)>
+	<com.android.server.pm.PackageManagerService: void registerMoveCallback(android.content.pm.IPackageMoveObserver)>
+"contexthub" android.hardware.location.IContextHubService (1)
+	<com.android.server.location.ContextHubService: int registerCallback(android.hardware.location.IContextHubCallback)>
+"window" android.view.IWindowManager (2)
+	<com.android.server.wm.WindowManagerService: boolean registerWallpaperVisibilityListener(android.view.IWallpaperVisibilityListener,int)>
+	<com.android.server.wm.WindowManagerService: void registerDockedStackListener(android.view.IDockedStackListener)>
+"midi" android.media.midi.IMidiManager (7)
+	<com.android.server.midi.MidiService: void closeDevice(android.os.IBinder,android.os.IBinder)>
+	<com.android.server.midi.MidiService: void unregisterListener(android.os.IBinder,android.media.midi.IMidiDeviceListener)>
+	<com.android.server.midi.MidiService: void openDevice(android.os.IBinder,android.media.midi.MidiDeviceInfo,android.media.midi.IMidiDeviceOpenCallback)>
+	<com.android.server.midi.MidiService: void openBluetoothDevice(android.os.IBinder,android.bluetooth.BluetoothDevice,android.media.midi.IMidiDeviceOpenCallback)>
+	<com.android.server.midi.MidiService: void registerListener(android.os.IBinder,android.media.midi.IMidiDeviceListener)>
+	<com.android.server.midi.MidiService: android.media.midi.MidiDeviceInfo registerDeviceServer(android.media.midi.IMidiDeviceServer,int,int,java.lang.String[],java.lang.String[],android.os.Bundle,int)>
+	<com.android.server.midi.MidiService: void unregisterDeviceServer(android.media.midi.IMidiDeviceServer)>
+"network_score" android.net.INetworkScoreService (1)
+	<com.android.server.NetworkScoreService: void registerNetworkScoreCache(int,android.net.INetworkScoreCache,int)>
+"country_detector" android.location.ICountryDetector (1)
+	<com.android.server.CountryDetectorService: void addCountryListener(android.location.ICountryListener)>
+"media_session" android.media.session.ISessionManager (1)
+	<com.android.server.media.MediaSessionService$SessionManagerImpl: void addSessionsListener(android.media.session.IActiveSessionsListener,android.content.ComponentName,int)>
+"location" android.location.ILocationManager (7)
+	<com.android.server.LocationManagerService: void requestLocationUpdates(android.location.LocationRequest,android.location.ILocationListener,android.app.PendingIntent,java.lang.String)>
+	<com.android.server.LocationManagerService: void addTestProvider(java.lang.String,com.android.internal.location.ProviderProperties,java.lang.String)>
+	<com.android.server.LocationManagerService: void removeUpdates(android.location.ILocationListener,android.app.PendingIntent,java.lang.String)>
+	<com.android.server.LocationManagerService: boolean addGnssNavigationMessageListener(android.location.IGnssNavigationMessageListener,java.lang.String)>
+	<com.android.server.LocationManagerService: void clearTestProviderEnabled(java.lang.String,java.lang.String)>
+	<com.android.server.LocationManagerService: boolean addGnssMeasurementsListener(android.location.IGnssMeasurementsListener,java.lang.String)>
+	<com.android.server.LocationManagerService: void setTestProviderEnabled(java.lang.String,boolean,java.lang.String)>
+"clipboard" android.content.IClipboard (1)
+	<com.android.server.clipboard.ClipboardService$ClipboardImpl: void addPrimaryClipChangedListener(android.content.IOnPrimaryClipChangedListener,java.lang.String)>
+"content" android.content.IContentService (2)
+	<com.android.server.content.ContentService: void addStatusChangeListener(int,android.content.ISyncStatusObserver)>
+	<com.android.server.content.ContentService: void registerContentObserver(android.net.Uri,boolean,android.database.IContentObserver,int,int)>
+Vulnerabilities in Helper Class:
+	<android.view.autofill.AutofillManager: void notifyViewExited(android.view.View,int)>
+	<android.view.autofill.AutofillManager: void notifyViewEntered(android.view.View)>
+	<android.app.AppOpsManager: int startOp(java.lang.String,int,java.lang.String)>
+	<android.app.WallpaperManager: android.os.ParcelFileDescriptor getWallpaperFile(int)>
+	<android.app.AppOpsManager: android.os.IBinder getToken(com.android.internal.app.IAppOpsService)>
+	<android.hardware.input.InputManager: void registerInputDeviceListener(android.hardware.input.InputManager$InputDeviceListener,android.os.Handler)>
+	<android.net.NetworkScoreManager: void registerNetworkScoreCache(int,android.net.INetworkScoreCache,int)>
+	<android.hardware.display.DisplayManager: void registerDisplayListener(android.hardware.display.DisplayManager$DisplayListener,android.os.Handler)>
+	<android.net.NetworkPolicyManager: void registerListener(android.net.INetworkPolicyListener)>
+	<android.net.EthernetManager: void addListener(android.net.EthernetManager$Listener)>
+	<android.location.LocationManager: void requestLocationUpdates(long,float,android.location.Criteria,android.app.PendingIntent)>
+	<android.media.midi.MidiManager: void registerDeviceCallback(android.media.midi.MidiManager$DeviceCallback,android.os.Handler)>
+	<android.content.pm.LauncherApps: void registerCallback(android.content.pm.LauncherApps$Callback,android.os.Handler)>
+	<android.location.LocationManager: void removeUpdates(android.location.LocationListener)>
+	<android.telephony.SubscriptionManager: void addOnSubscriptionsChangedListener(android.telephony.SubscriptionManager$OnSubscriptionsChangedListener)>
+	<android.location.LocationManager: void requestSingleUpdate(java.lang.String,android.location.LocationListener,android.os.Looper)>
+	<android.hardware.input.InputManager: android.view.InputDevice getInputDeviceByDescriptor(java.lang.String)>
+	<android.media.session.MediaSessionManager: void addOnActiveSessionsChangedListener(android.media.session.MediaSessionManager$OnActiveSessionsChangedListener,android.content.ComponentName,int,android.os.Handler)>
+	<android.view.accessibility.AccessibilityManager: android.view.accessibility.AccessibilityManager getInstance(android.content.Context)>
+	<android.media.midi.MidiManager: void openBluetoothDevice(android.bluetooth.BluetoothDevice,android.media.midi.MidiManager$OnDeviceOpenedListener,android.os.Handler)>
+	<android.app.AppOpsManager: void finishOp(int,int,java.lang.String)>
+	<android.telephony.TelephonyManager: void listen(android.telephony.PhoneStateListener,int)>
+	<android.content.ClipboardManager: void addPrimaryClipChangedListener(android.content.ClipboardManager$OnPrimaryClipChangedListener)>
+	<android.hardware.display.DisplayManager: android.view.Display[] getDisplays(java.lang.String)>
+	<android.view.autofill.AutofillManager: void notifyViewExited(android.view.View)>
+	<android.media.AudioManager: int requestAudioFocus(android.media.AudioManager$OnAudioFocusChangeListener,android.media.AudioAttributes,int,int)>
+	<android.hardware.display.DisplayManager: android.hardware.display.VirtualDisplay createVirtualDisplay(android.media.projection.MediaProjection,java.lang.String,int,int,int,android.view.Surface,int,android.hardware.display.VirtualDisplay$Callback,android.os.Handler,java.lang.String)>
+	<android.location.LocationManager: void requestLocationUpdates(android.location.LocationRequest,android.app.PendingIntent)>
+	<android.app.WallpaperManager: android.graphics.Bitmap getBitmapAsUser(int)>
+	<android.hardware.input.InputManager: int[] getInputDeviceIds()>
+	<android.view.accessibility.AccessibilityManager: void interrupt()>
+	<android.media.MediaRouter: void rebindAsUser(int)>
+	<android.app.AppOpsManager: void setUserRestriction(int,boolean,android.os.IBinder,java.lang.String[])>
+	<android.view.accessibility.AccessibilityManager: void <init>(android.os.Handler,android.view.accessibility.IAccessibilityManager,int)>
+	<android.view.autofill.AutofillManager: boolean isEnabled()>
+	<android.location.LocationManager: void requestLocationUpdates(long,float,android.location.Criteria,android.location.LocationListener,android.os.Looper)>
+	<android.view.accessibility.AccessibilityManager: void sendAccessibilityEvent(android.view.accessibility.AccessibilityEvent)>
+	<android.media.midi.MidiManager: void openDevice(android.media.midi.MidiDeviceInfo,android.media.midi.MidiManager$OnDeviceOpenedListener,android.os.Handler)>
+	<android.media.AudioManager: void registerAudioPlaybackCallback(android.media.AudioManager$AudioPlaybackCallback,android.os.Handler)>
+	<android.view.autofill.AutofillManager: void requestAutofill(android.view.View,int,android.graphics.Rect)>
+	<android.hardware.input.InputManager: void registerOnTabletModeChangedListener(android.hardware.input.InputManager$OnTabletModeChangedListener,android.os.Handler)>
+	<android.app.AppOpsManager: void startWatchingMode(java.lang.String,java.lang.String,android.app.AppOpsManager$OnOpChangedListener)>
+	<android.view.autofill.AutofillManager: void requestAutofill(android.view.View)>
+	<android.view.accessibility.AccessibilityManager: boolean sendFingerprintGesture(int)>
+	<android.hardware.location.ContextHubManager: void <init>(android.content.Context,android.os.Looper)>
+	<android.location.CountryDetector: void addCountryListener(android.location.CountryListener,android.os.Looper)>
+	<android.location.LocationManager: void setTestProviderEnabled(java.lang.String,boolean)>
+	<android.app.AppOpsManager: int startOpNoThrow(java.lang.String,int,java.lang.String)>
+	<android.location.LocationManager: void addTestProvider(java.lang.String,boolean,boolean,boolean,boolean,boolean,boolean,boolean,int,int)>
+	<android.app.WallpaperManager: void addOnColorsChangedListener(android.app.WallpaperManager$OnColorsChangedListener,android.os.Handler)>
+	<android.view.accessibility.AccessibilityManager: void notifyAccessibilityButtonVisibilityChanged(boolean)>
+	<android.media.session.MediaSessionManager: void addOnActiveSessionsChangedListener(android.media.session.MediaSessionManager$OnActiveSessionsChangedListener,android.content.ComponentName)>
+	<android.location.LocationManager: void requestLocationUpdates(android.location.LocationRequest,android.location.LocationListener,android.os.Looper)>
+	<android.media.AudioManager: int requestAudioFocus(android.media.AudioManager$OnAudioFocusChangeListener,android.media.AudioAttributes,int,int,android.media.audiopolicy.AudioPolicy)>
+	<android.view.accessibility.AccessibilityManager: boolean isTouchExplorationEnabled()>
+	<android.app.AppOpsManager: void finishOp(java.lang.String,int,java.lang.String)>
+	<android.net.ConnectivityManager: void addDefaultNetworkActiveListener(android.net.ConnectivityManager$OnNetworkActiveListener)>
+	<android.app.WallpaperManager: void addOnColorsChangedListener(android.app.WallpaperManager$OnColorsChangedListener,android.os.Handler,int)>
+	<android.media.midi.MidiManager: android.media.midi.MidiDeviceServer createDeviceServer(android.media.midi.MidiReceiver[],int,java.lang.String[],java.lang.String[],android.os.Bundle,int,android.media.midi.MidiDeviceServer$Callback)>
+	<android.view.accessibility.AccessibilityManager: void <init>(android.content.Context,android.view.accessibility.IAccessibilityManager,int)>
+	<android.net.NetworkScoreManager: void registerNetworkScoreCache(int,android.net.INetworkScoreCache)>
+	<android.view.accessibility.AccessibilityManager: java.util.List getEnabledAccessibilityServiceList(int)>
+	<android.view.accessibility.AccessibilityManager: boolean isEnabled()>
+	<android.content.pm.LauncherApps: void registerCallback(android.content.pm.LauncherApps$Callback)>
+	<android.view.accessibility.AccessibilityManager: void performAccessibilityShortcut()>
+	<android.location.LocationManager: void requestSingleUpdate(java.lang.String,android.app.PendingIntent)>
+	<android.view.accessibility.AccessibilityManager: boolean isHighTextContrastEnabled()>
+	<android.media.AudioManager: void requestAudioFocusForCall(int,int)>
+	<android.hardware.display.DisplayManager: android.hardware.display.VirtualDisplay createVirtualDisplay(java.lang.String,int,int,int,android.view.Surface,int,android.hardware.display.VirtualDisplay$Callback,android.os.Handler)>
+	<android.app.AppOpsManager: int startOpNoThrow(int,int,java.lang.String)>
+	<android.view.autofill.AutofillManager: void onCreate(android.os.Bundle)>
+	<android.app.AppOpsManager: void startWatchingMode(int,java.lang.String,android.app.AppOpsManager$OnOpChangedListener)>
+	<android.location.LocationManager: void removeUpdates(android.app.PendingIntent)>
+	<android.app.AppOpsManager: void setUserRestriction(int,boolean,android.os.IBinder)>
+	<android.print.PrintManager: android.print.PrinterDiscoverySession createPrinterDiscoverySession()>
+	<android.media.AudioManager: boolean registerRemoteController(android.media.RemoteController)>
+	<android.view.accessibility.AccessibilityManager: void removeAccessibilityInteractionConnection(android.view.IWindow)>
+	<android.media.AudioManager: int requestAudioFocus(android.media.AudioFocusRequest)>
+	<android.app.AppOpsManager: int startOp(int)>
+	<android.hardware.input.InputManager: android.view.InputDevice getInputDevice(int)>
+	<android.media.AudioManager: int registerAudioPolicy(android.media.audiopolicy.AudioPolicy)>
+	<android.view.accessibility.AccessibilityManager: void setPictureInPictureActionReplacingConnection(android.view.accessibility.IAccessibilityInteractionConnection)>
+	<android.location.LocationManager: void requestLocationUpdates(java.lang.String,long,float,android.app.PendingIntent)>
+	<android.app.AppOpsManager: void setUserRestrictionForUser(int,boolean,android.os.IBinder,java.lang.String[],int)>
+	<android.app.AppOpsManager: int startOp(int,int,java.lang.String)>
+	<android.location.LocationManager: void requestSingleUpdate(android.location.Criteria,android.location.LocationListener,android.os.Looper)>
+	<android.location.LocationManager: void requestLocationUpdates(java.lang.String,long,float,android.location.LocationListener)>
+	<android.view.accessibility.AccessibilityManager: java.util.List getInstalledAccessibilityServiceList()>
+	<android.hardware.display.DisplayManager: void startWifiDisplayScan()>
+	<android.app.ActivityManager: void addOnUidImportanceListener(android.app.ActivityManager$OnUidImportanceListener,int)>
+	<android.media.session.MediaSessionManager: void addOnActiveSessionsChangedListener(android.media.session.MediaSessionManager$OnActiveSessionsChangedListener,android.content.ComponentName,android.os.Handler)>
+	<android.net.wifi.WifiManager: void startLocalOnlyHotspot(android.net.wifi.WifiManager$LocalOnlyHotspotCallback,android.os.Handler)>
+	<android.media.AudioManager: int requestAudioFocus(android.media.AudioFocusRequest,android.media.audiopolicy.AudioPolicy)>
+	<android.location.LocationManager: void requestLocationUpdates(java.lang.String,long,float,android.location.LocationListener,android.os.Looper)>
+	<android.app.WallpaperManager: android.os.ParcelFileDescriptor getWallpaperFile(int,int)>
+	<android.os.storage.StorageManager: void registerListener(android.os.storage.StorageEventListener)>
+	<android.media.AudioManager: void registerAudioRecordingCallback(android.media.AudioManager$AudioRecordingCallback,android.os.Handler)>
+	<android.media.midi.MidiManager: void unregisterDeviceCallback(android.media.midi.MidiManager$DeviceCallback)>
+	<android.media.MediaRouter: void <init>(android.content.Context)>
+	<android.location.LocationManager: void clearTestProviderEnabled(java.lang.String)>
+	<android.view.accessibility.AccessibilityManager: int addAccessibilityInteractionConnection(android.view.IWindow,android.view.accessibility.IAccessibilityInteractionConnection)>
+	<android.location.LocationManager: void requestSingleUpdate(android.location.Criteria,android.app.PendingIntent)>
+	<android.app.AppOpsManager: void finishOp(int)>
+	<android.view.autofill.AutofillManager: void notifyViewEntered(android.view.View,int,android.graphics.Rect)>
+	<android.view.accessibility.AccessibilityManager: void notifyAccessibilityButtonClicked()>

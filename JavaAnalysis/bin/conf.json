@@ -1,5 +1,6 @@
 {
   "ANDROID_JAR": "bin/framework-lite.jar",
   "DEBUG": false,
-  "LOG_LEV": "info"
+  "LOG_LEV": "info",
+  "EDGE_MINER": "bin\\callbacks.txt"
 }

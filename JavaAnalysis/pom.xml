@@ -54,13 +54,6 @@
             <systemPath>${project.basedir}/bin/soot-dev.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>com.google</groupId>
-            <artifactId>android</artifactId>
-            <version>1.0-dev</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/bin/framework-9-all.jar</systemPath>
-        </dependency>
-        <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-reflect</artifactId>
             <version>${kotlin.version}</version>

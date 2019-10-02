@@ -343,6 +343,16 @@ object SootTool {
         return sc
     }
 
+
+    fun isIInterface(sc: SootClass): Boolean {
+        for (inf in sc.interfaces) {
+            if (inf.name == "android.os.IInterface") {
+                return true
+            }
+        }
+        return false
+    }
+
     fun extractParamsNameInMethod(mtd: SootMethod): HashSet<String> {
         val nameSet = HashSet<String>()
         val body = SootTool.tryGetMethodBody(mtd)

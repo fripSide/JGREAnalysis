@@ -1,0 +1,6 @@
+android_hardware_UsbRequest_queue_direct: android_hardware_UsbRequest_queue_direct -> _JNIEnv::NewGlobalRef
+android_media_JetPlayer_setup: android_media_JetPlayer_setup -> _JNIEnv::NewGlobalRef
+android_hardware_UsbRequest_queue: android_hardware_UsbRequest_queue -> _JNIEnv::NewGlobalRef
+android_media_AudioRecord_setup: android_media_AudioRecord_setup -> _JNIEnv::NewGlobalRef
+android_media_AudioTrack_setup: android_media_AudioTrack_setup -> _JNIEnv::NewGlobalRef
+android_hardware_UsbRequest_queue_array: android_hardware_UsbRequest_queue_array -> _JNIEnv::NewGlobalRef

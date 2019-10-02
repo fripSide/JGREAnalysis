@@ -1,4 +1,5 @@
 import com.alienware.snk.utils.LogNow
+import fj.Hash
 import soot.SootClass
 
 class ApiData(var helperClass: String? = null, var inf: String? = null, var implClass: String? = null, var managerName: String? = null, var serviceName: String? = null)
@@ -57,7 +58,7 @@ class ServiceApiList {
     companion object {
         val allApi = HashSet<ServiceApiClass>()
 
-        fun getServiceApiForImple(sc: SootClass): ServiceApiClass? {
+        fun getServiceApiForImpl(sc: SootClass): ServiceApiClass? {
             allApi.forEach { api ->
                 if (api.implClass == sc) return api
             }
@@ -66,6 +67,16 @@ class ServiceApiList {
 
         fun getAllList(): HashSet<ServiceApiClass> {
             return allApi
+        }
+
+        fun getInfSet(): HashSet<SootClass> {
+            val infSet = HashSet<SootClass>()
+            for (api in allApi) {
+                if (api.inf != null) {
+                    infSet.add(api.inf!!)
+                }
+            }
+            return infSet
         }
     }
 

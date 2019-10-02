@@ -9,6 +9,7 @@ import soot.Scene
 import soot.SootClass
 import soot.SootMethod
 import ServiceApiClass
+import com.alienware.snk.utils.DebugTool
 import com.beust.klaxon.Klaxon
 import java.lang.StringBuilder
 
@@ -18,7 +19,10 @@ object VulnerabilitiesDetecting {
 
     val checkExitPointExtractly = true
 
+    private val helperVulSet = HashSet<SootMethod>()
+
     private val vulSet = HashSet<SootMethod>()
+    private val vulNameSet = HashSet<String>()
 
     private val vulMap = HashMap<SootMethod, VulnerableApiDesc>()
 
@@ -27,18 +31,24 @@ object VulnerabilitiesDetecting {
     2. accessibility manager
      */
     fun detectingVul(apiList: HashSet<ServiceApiClass>) {
+        // analysis system service class
         for (api in apiList) {
             var targetCls: SootClass? = api.helperClass
             val focus = "android.view.accessibility.IAccessibilityManager"
             val targetName = api.inf?.name ?: ""
 //            if (targetName != focus) continue
 
-            if (api.isHelperClass()) {
-                targetCls = api.helperClass
-            } else {
+            if (!api.isHelperClass()) {
                 analysisImplClass(api.implClass!!, api.inf)
             }
         }
+        // analysis helper class
+        for (api in apiList) {
+            if (api.isHelperClass()) {
+                analysisHelperClass(api.helperClass!!)
+            }
+        }
+
         dumpVul()
     }
 
@@ -60,18 +70,57 @@ object VulnerabilitiesDetecting {
         }
     }
 
+
+    fun testOneHelperMethod(sm: SootMethod) {
+        val vul = AnalysisHelperApi(sm, vulSet).findVulIPCCall()
+        if (vul != null) {
+            DebugTool.exitHere()
+        }
+    }
+
+
+    private fun analysisHelperClass(sc: SootClass) {
+//        val focus = "AppOpsManager"
+//        if (!sc.name.endsWith(focus)) return
+        sc.methods.forEach {mtd ->
+            if (mtd.isPublic && mtd.isConcrete) {
+//                LogNow.info("$mtd")
+                val vul = AnalysisHelperApi(mtd, vulSet).findVulIPCCall()
+                if (vul != null) {
+                    helperVulSet.add(mtd)
+//                    DebugTool.exitHere()
+                }
+            }
+        }
+    }
+
+    private fun setVulInf() {
+        vulSet.forEach { vul ->
+            vulNameSet.add(vul.subSignature)
+        }
+    }
+
     fun addVul(mtd: SootMethod, vul: VulnerableApiDesc) {
         vulSet.add(mtd)
         vulMap[mtd] = vul
     }
 
+
+
     fun dumpVul() {
         vulSet.forEach { println("Find Vul: ${vulMap[it]}") }
-        println("Total Size: ${vulSet.size}")
+
+        LogNow.show("Vul in helper: ${helperVulSet.size}")
+        helperVulSet.forEach { mtd ->
+            LogNow.show("$mtd")
+        }
 
         saveSummary()
 
         saveDetail()
+
+        Statistics.simpleReport()
+        LogNow.show("Total Vul Size: ${vulSet.size}")
     }
 
     private fun getPublicApis(sc: SootClass): HashSet<String> {
@@ -99,7 +148,6 @@ object VulnerabilitiesDetecting {
         return false
     }
 
-
     private fun saveSummary() {
         val data = StringBuilder()
         val results = HashMap<SootClass, HashSet<String>>()
@@ -114,7 +162,7 @@ object VulnerabilitiesDetecting {
         }
 
         results.forEach { t, u ->
-            val api = ServiceApiList.getServiceApiForImple(t)
+            val api = ServiceApiList.getServiceApiForImpl(t)
             if (api != null) {
                 data.append("${api.serviceName} ${api.inf} (${u.size})\n")
             } else {
@@ -124,6 +172,11 @@ object VulnerabilitiesDetecting {
             u.forEach { it ->
                 data.append("\t$it\n")
             }
+        }
+
+        data.append("Vulnerabilities in Helper Class:\n")
+        helperVulSet.forEach { vul ->
+            data.append("\t${vul.signature}\n")
         }
         Statistics.saveResult(data.toString(), Statistics.RESULTS_TXT)
     }
@@ -141,7 +194,7 @@ object VulnerabilitiesDetecting {
             results[cls]!!.add(vul.getData())
         }
         results.forEach{ cls, data ->
-            val api = ServiceApiList.getServiceApiForImple(cls)
+            val api = ServiceApiList.getServiceApiForImpl(cls)
             if (api != null) {
                 data.forEach { it ->
                     it.serviceName = api.serviceName ?: ""
@@ -204,22 +257,33 @@ TODO:
  */
 fun quickAnalysis() {
     var clsPath = CONFIG.ANDROID_JAR
-    clsPath = "cls/"
+//    clsPath = "cls/"
     SootTool.initSootSimply("", clsPath)
 
-    // TaskChangeNotificationController
     run {
-        val focusCls = "com.android.server.fingerprint.FingerprintService\$FingerprintServiceWrapper"
+        val focusCls = "android.app.AppOpsManager"
         val cls = Scene.v().getSootClass(focusCls)
-        val focusMtd = "addLockoutResetCallback"
-        val mtd = cls.getMethodByName(focusMtd)
-        val cg = CallGraphAnalysis(3)
-        val vul = cg.analysisEntryPoint(mtd)
-        if (vul != null) {
-            println("Vul Detect: $vul")
+        val focusMtd = "startWatchingMode"
+        for (mtd in cls.methods) {
+            if (mtd.name == focusMtd)
+                VulnerabilitiesDetecting.testOneHelperMethod(mtd)
         }
-//        analysisOneCls(cls)
     }
+
+
+    // TaskChangeNotificationController
+//    run {
+//        val focusCls = "com.android.server.fingerprint.FingerprintService\$FingerprintServiceWrapper"
+//        val cls = Scene.v().getSootClass(focusCls)
+//        val focusMtd = "addLockoutResetCallback"
+//        val mtd = cls.getMethodByName(focusMtd)
+//        val cg = CallGraphAnalysis(3)
+//        val vul = cg.analysisEntryPoint(mtd)
+//        if (vul != null) {
+//            println("Vul Detect: $vul")
+//        }
+//        analysisOneCls(cls)
+//    }
 
     val targetCls = listOf("com.android.server.accessibility.AccessibilityManagerService",
             "com.android.server.am.ActivityManagerService",
@@ -263,4 +327,5 @@ fun quickAnalysis() {
 
 fun runDetecting() {
     VulnerabilitiesDetecting.detectingVul(ServiceApiList.allApi)
+
 }

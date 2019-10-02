@@ -15,9 +15,9 @@ import java.io.File
 
 fun runAnalysis() {
     LogNow.show("Start to run JGREAnalyzer:")
-    quickAnalysis()
-//    runIPCExtractor()
-//    runDetecting()
+//    quickAnalysis()
+    runIPCExtractor()
+    runDetecting()
 }
 
 open class Main {

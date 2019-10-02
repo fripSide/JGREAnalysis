@@ -244,8 +244,11 @@ class CallGraphAnalysis:
 			self.call_chains[start] = find
 
 	def __walk_call_graph(self, start, path):
+		focusTag = "android_os_BinderProxy_linkToDeath"
+		# if start != focusTag:
+		# 	return
 		call_set = self.graph.get_call_set(start)
-		# print("__walk_call_graph", start)
+		# print("__walk_call_graph", start, call_set)
 		for call in call_set:
 			simple_name = call.simple_name
 			cur_path = path.copy()
@@ -266,7 +269,7 @@ class CallGraphAnalysis:
 		items = []
 		for k, item in self.call_chains.items():
 			chains = " -> ".join([e.simple_name for e in item])
-			items.append("{}->{}".format(k, chains))
+			items.append("{}: {}".format(k, chains))
 			logging.info("{}->{}".format(k, chains))
 		with open(save_path, "w") as fp:
 			fp.write("\n".join(items))
@@ -277,8 +280,8 @@ def process_jni_dir(work_dir):
 
 	all_files = os.listdir(work_dir)
 	cpp_files = [os.path.join(work_dir, f) for f in filter(lambda v: v.endswith("cpp"), all_files)]
-	# for cpp in cpp_files:
-	# 	call_graph.add_file(cpp, HEADERS)
+	for cpp in cpp_files:
+		call_graph.add_file(cpp)
 
 	# jni_map = parse_jni_in_framework()
 	# jni_methods = jni_map.keys()
