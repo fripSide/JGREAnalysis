@@ -17,7 +17,9 @@ cd JavaAnalysis
 mvn package
 ```
 
-Documents for Python Analyzer [link](NativeAnalysis/Readme.md).
+Documents for Python Analyzer [link](NativeAnalysis).
+
+Automatical dynamic verification for vulnerabilities [link](https://github.com/fripSide/ServiceApiAutoTest).
 
 ### Usage 
 Java Analyzer:
@@ -34,6 +36,6 @@ cd NativeAnalysis
 python main.py -p path_to_aosp [-c path_to_compile_db]
 ```
 
-Change different AOSP Jar:
-We have extracted many versions of Android framework.jar from Android emulator and real devices.
+Change different AOSP Jar:  
+We have extracted many versions of Android framework.jar from Android emulator and real devices.  
 https://github.com/fripSide/AndroidApiExtract
